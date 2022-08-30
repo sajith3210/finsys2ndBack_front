@@ -23139,7 +23139,7 @@ def main_sign_in():
                         val = (u_id[0],)
                         fbcursor.execute(sql,val)
                         c_id = fbcursor.fetchone()
-                        print(txname,des,c_id)
+                        # print(txname,des,c_id)
                         sql="INSERT INTO app1_addtax1(taxname,description,cid_id) VALUES (%s,%s,%s)" #ADDING VALUE INT APP1_ADDTAX1 TABLE
                         val=(txname,des,c_id[0])
                         fbcursor.execute(sql,val)
@@ -23246,6 +23246,30 @@ def main_sign_in():
 
                     my_tree.grid(row=0,column=1)
                     my_tree2.grid(row=1,column=1)
+
+                    # backend 
+                    def save_record_pav():
+                        en=enter_txt_entry.get()
+                        am=amt_entry.get()
+                        me=memo_entry.get('1.0','end')
+                        paydt=payment_date_entry.get()
+
+                        sql = 'select * from auth_user where username=%s'
+                        val = (nm_ent.get(),)
+                        fbcursor.execute(sql,val)
+                        u_id = fbcursor.fetchone()
+
+                        sql = 'select * from app1_company where id_id=%s'
+                        val = (u_id[0],)
+                        fbcursor.execute(sql,val)
+                        c_id = fbcursor.fetchone()
+                        # print(txname,des,c_id)
+                        sql="INSERT INTO app1_recordpay(textname,paymentdate,recordamount,recordmemo,cid_id) VALUES (%s,%s,%s,%s,%s)" #ADDING VALUE INT APP1_ADDTAX1 TABLE
+                        val=(en,am,me,paydt,c_id[0])
+                        fbcursor.execute(sql,val)
+                        finsysdb.commit()
+                        messagebox.showinfo("Added","Added successfully")
+                    # front end 
                     def rcdpay():
                         print("function work") 
                         gst_canvas.pack_forget()
@@ -23359,6 +23383,7 @@ def main_sign_in():
                         price_val_lbl_place=new_canvas4.create_window(0, 0, anchor="nw", window=price_val_lbl, tag=("price_val_lbl"))
 
                         enter_txt_lbl=Label(new_canvas4, text="Enter text",bg="#213b52", fg="White", anchor="nw",font=('Calibri 15 '))
+                        global enter_txt_entry
                         enter_txt_entry=Entry(new_canvas4,width=100,)
                         enter_txt_lbl_place=new_canvas4.create_window(0, 0, anchor="nw", window=enter_txt_lbl, tag=("enter_txt_lbl"))
                         enter_txt_entry_place=new_canvas4.create_window(0, 0, anchor="nw", window=enter_txt_entry, tag=("enter_txt_entry"))
@@ -23369,15 +23394,17 @@ def main_sign_in():
 
                         amt_lbl=Label(new_canvas4, text="Amount",bg="#213b52", fg="White", anchor="nw",font=('Calibri 15'))
                         amt_lbl_place=new_canvas4.create_window(0, 0, anchor="nw", window=amt_lbl, tag=("amt_lbl"))
+                        global amt_entry
                         amt_entry=Entry(new_canvas4,width=100,)
                         amt_entry_place=new_canvas4.create_window(0, 0, anchor="nw", window=amt_entry, tag=("amt_entry"))
 
                         memo_lbl=Label(new_canvas4, text="Memo",bg="#213b52", fg="White", anchor="nw",font=('Calibri 15'))  
                         memo_lbl_place=new_canvas4.create_window(0, 0, anchor="nw", window=memo_lbl, tag=("memo_lbl"))
+                        global memo_entry 
                         memo_entry=scrolledtext.ScrolledText(new_canvas4, width = 73, height = 4)
                         memo_entry_place=new_canvas4.create_window(0, 0, anchor="nw", window=memo_entry, tag=("memo_entry"))
 
-                        submit_frm_btn=Button(new_canvas4,text="Submit Form",bg="#673ab7",fg='white',width=88,height=2)
+                        submit_frm_btn=Button(new_canvas4,text="Submit Form",bg="#673ab7",fg='white',width=88,height=2,command=save_record_pav)
                         submit_frm_btn_place=new_canvas4.create_window(0, 0, anchor="nw", window=submit_frm_btn, tag=("submit_frm_btn"))
 
                         # image 
@@ -23387,7 +23414,7 @@ def main_sign_in():
                         img_label = Label(new_canvas4, image=photo,)
                         img_label.photo = photo
                         img_lbl_entry_place=new_canvas4.create_window(0, 0, anchor="nw", window=img_label, tag=("img_label"))
-
+                        global payment_date_entry 
                         payment_date_entry=DateEntry(new_canvas4,selectmode='day')
                         payment_date_entry_place=new_canvas4.create_window(0, 0, anchor="nw", window=payment_date_entry, tag=("payment_date_entry"))
 
@@ -23585,6 +23612,9 @@ def main_sign_in():
 
                     # New category tab add tax button function 
                     def addtxpg():
+                        global txname,descri_var
+                        txname=StringVar()
+                        descri_var=StringVar()
                         new_canvas.pack_forget()
                         sr_Scroll.pack_forget()
                         new_canvas2 = Canvas(newfr,height=700,bg="#2f516f",scrollregion=(0,0,700,1200))
@@ -23602,7 +23632,7 @@ def main_sign_in():
                         tax_nme_lbl=Label(new_canvas2, text="Tax Name",bg="#213b52", fg="White", anchor="nw",font=('Calibri 14 bold'))
                         tax_nme_lbl_place=new_canvas2.create_window(0, 0, anchor="nw", window=tax_nme_lbl, tag=("tax_nme_lbl"))
 
-                        tax_nme_entry=Entry(new_canvas2,width=30,font=('Calibri 14 '))
+                        tax_nme_entry=Entry(new_canvas2,width=30,textvariable=txname , font=('Calibri 14 '))
                         tax_nme_entry_place=new_canvas2.create_window(0, 0, anchor="nw", window=tax_nme_entry, tag=("tax_nme_entry"))
 
                         description_lbl=Label(new_canvas2, text="Description",bg="#213b52", fg="White", anchor="nw",font=('Calibri 14 bold'))
@@ -23610,8 +23640,8 @@ def main_sign_in():
 
                         description_lbl_entry=scrolledtext.ScrolledText(new_canvas2, width = 35, height = 4)
                         description_lbl_entry_place=new_canvas2.create_window(0, 0, anchor="nw", window=description_lbl_entry, tag=("description_lbl_entry"))
-                        
-                        save_btn=Button(new_canvas2,text="Save",bg="#213b52",fg='white',width=25,)
+                        descri_var= description_lbl_entry                     
+                        save_btn=Button(new_canvas2,text="Save",bg="#213b52",fg='white',width=25,command=savetax)
                         save_btn_place=new_canvas2.create_window(0, 0, anchor="nw", window=save_btn, tag=("save_btn"))
 
                         # img_tax=ImageTk.PhotoImage(Image.open("TAX.PNG"))
@@ -23623,8 +23653,35 @@ def main_sign_in():
                         img_label = Label(new_canvas2, image=photo,)
                         img_label.photo = photo
                         img_lbl_entry_place=new_canvas2.create_window(0, 0, anchor="nw", window=img_label, tag=("img_label"))
+
+
+                     #Add tax page backend start
+                    def savetax():
+                        print("Save start")
+                        txnm=txname.get()
+                        des=descri_var.get('1.0','end')
+                        
+                        sql = 'select * from auth_user where username=%s'
+                        val = (nm_ent.get(),)
+                        fbcursor.execute(sql,val)
+                        u_id = fbcursor.fetchone()
+
+                        sql = 'select * from app1_company where id_id=%s'
+                        val = (u_id[0],)
+                        fbcursor.execute(sql,val)
+                        c_id = fbcursor.fetchone()
+                        # print(txname,des,c_id)
+                        sql="INSERT INTO app1_addtax1(taxname,description,cid_id) VALUES (%s,%s,%s)" #ADDING VALUE INT APP1_ADDTAX1 TABLE
+                        val=(txnm,des,c_id[0])
+                        fbcursor.execute(sql,val)
+                        finsysdb.commit()
+                        messagebox.showinfo("Added","Added successfully")
+
                     # add tax button 
                     addtxbutton2=Button(new_canvas,text="Add tax",bg="#213b52",fg='white',width=25,command=addtxpg)
+
+
+                    
                     
                     # tAX TABLE   
                     tax_treeview=ttk.Treeview(new_canvas,columns=(1,2,3),)
