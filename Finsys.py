@@ -23129,12 +23129,22 @@ def main_sign_in():
                     def saveaddtx():
                         txname=taxname.get()
                         des=description_lbl_entry.get('1.0','end')
-                        # cid="select  * from from app1_company where cid=6"
-                        val=(txname,des,)
-                        sql="INSERT INTO app1_addtax1(taxname,description) VALUES (%s,%s)" #ADDING VALUE INT APP1_ADDTAX1 TABLE
+                        
+                        sql = 'select * from auth_user where username=%s'
+                        val = (nm_ent.get(),)
+                        fbcursor.execute(sql,val)
+                        u_id = fbcursor.fetchone()
+
+                        sql = 'select * from app1_company where id_id=%s'
+                        val = (u_id[0],)
+                        fbcursor.execute(sql,val)
+                        c_id = fbcursor.fetchone()
+                        print(txname,des,c_id)
+                        sql="INSERT INTO app1_addtax1(taxname,description,cid_id) VALUES (%s,%s,%s)" #ADDING VALUE INT APP1_ADDTAX1 TABLE
+                        val=(txname,des,c_id[0])
                         fbcursor.execute(sql,val)
                         finsysdb.commit()
-                        messagebox.showinfo("Added successfully")
+                        messagebox.showinfo("Added","Added successfully")
 
                     #Addtx button
                     addtxbtn=Button(gst_canvas,text="Add tax",bg="#213b52",fg='white',width=10,command=addtx)
