@@ -23145,7 +23145,7 @@ def main_sign_in():
                         fbcursor.execute(sql,val)
                         finsysdb.commit()
                         messagebox.showinfo("Added","Added successfully")
-
+                        
                     #Addtx button
                     addtxbtn=Button(gst_canvas,text="Add tax",bg="#213b52",fg='white',width=10,command=addtx)
                     win_inv1 = gst_canvas.create_window(0, 0, anchor="nw", window=gslb1, tag=("gslb1"))
@@ -23593,24 +23593,15 @@ def main_sign_in():
                         dcanvas.coords("save_btn",dwidth/2.3,dheight/1.2,)
                         dcanvas.coords("img_label",dwidth/26,dheight/2.5,)
                     #333333333333333333333333333333333333333333333333333333333333333333333333333333333333333{Accounting}
-
-
-
-                    new_canvas = Canvas(newfr,height=700,bg="#2f516f",scrollregion=(0,0,700,1200))
-                    sr_Scroll = Scrollbar(newfr,orient=VERTICAL)
-                    sr_Scroll.pack(fill=Y,side="right")
-                    sr_Scroll.config(command=new_canvas.yview)
-                    new_canvas.bind("<Configure>", responsive_wid)
-                    new_canvas.config(yscrollcommand=sr_Scroll.set)
-                    new_canvas.pack(fill=X)
-                    
-                    new_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("tax_bg_polygen_pr"),smooth=True,)
-                    tax_lbl=Label(new_canvas, text="TAX",bg="#213b52", fg="White", anchor="nw",font=('Calibri 25 bold'))
-                    tax_lbl_place=new_canvas.create_window(0, 0, anchor="nw", window=tax_lbl, tag=("tax_lbl"))
-
-                    new_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("tax_bg_polygen_pr2"),smooth=True,)
-
+                    def displayaddtax():
+                        for row in addtaxtablefetch():
+                            tax_treeview.insert("",END,values=row)
                     # New category tab add tax button function 
+                    def addtaxtablefetch():
+                        fbcursor.execute("select * from app1_addtax1")
+                        rows=fbcursor.fetchall()
+                        return rows
+
                     def addtxpg():
                         global txname,descri_var
                         txname=StringVar()
@@ -23677,13 +23668,25 @@ def main_sign_in():
                         finsysdb.commit()
                         messagebox.showinfo("Added","Added successfully")
 
+                    
+                    new_canvas = Canvas(newfr,height=700,bg="#2f516f",scrollregion=(0,0,700,1200))
+                    sr_Scroll = Scrollbar(newfr,orient=VERTICAL)
+                    sr_Scroll.pack(fill=Y,side="right")
+                    sr_Scroll.config(command=new_canvas.yview)
+                    new_canvas.bind("<Configure>", responsive_wid)
+                    new_canvas.config(yscrollcommand=sr_Scroll.set)
+                    new_canvas.pack(fill=X)
+                    
+                    new_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("tax_bg_polygen_pr"),smooth=True,)
+                    tax_lbl=Label(new_canvas, text="TAX",bg="#213b52", fg="White", anchor="nw",font=('Calibri 25 bold'))
+                    tax_lbl_place=new_canvas.create_window(0, 0, anchor="nw", window=tax_lbl, tag=("tax_lbl"))
+
+                    new_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("tax_bg_polygen_pr2"),smooth=True,)
                     # add tax button 
                     addtxbutton2=Button(new_canvas,text="Add tax",bg="#213b52",fg='white',width=25,command=addtxpg)
 
-
-                    
-                    
                     # tAX TABLE   
+                    # tax_treeview.tag_configure("treecolor",foreground="white",background="#2f516f")
                     tax_treeview=ttk.Treeview(new_canvas,columns=(1,2,3),)
                     
                     # format column  
@@ -23699,6 +23702,11 @@ def main_sign_in():
                 
                     tax_treeview_place=new_canvas.create_window(0, 0, anchor="nw", window=tax_treeview, tag=("tax_treeview"))
                     addtxbutton2_place=new_canvas.create_window(0, 0, anchor="nw", window=addtxbutton2, tag=("addtxbutton2"))
+                    displayaddtax()
+                    # new category add tax treeview table 
+
+
+                    
 
                     #333333333333333333333333333333333333333333333333333333333333333333333333333333333333333{Accounting}
                     tab_account = ttk.Notebook(tab8)
