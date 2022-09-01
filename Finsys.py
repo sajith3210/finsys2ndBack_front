@@ -23125,6 +23125,7 @@ def main_sign_in():
                         img_label.photo = photo
                         img_lbl_entry_place=new_canvas3.create_window(0, 0, anchor="nw", window=img_label, tag=("img_label"))
 
+                    
                     #Add tax page backend start
                     def saveaddtx():
                         txname=taxname.get()
@@ -23144,6 +23145,7 @@ def main_sign_in():
                         val=(txname,des,c_id[0])
                         fbcursor.execute(sql,val)
                         finsysdb.commit()
+                        
                         messagebox.showinfo("Added","Added successfully")
                         
                     #Addtx button
