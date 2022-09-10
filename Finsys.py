@@ -27965,9 +27965,9 @@ win_inv1 = lf_signup.create_window(0, 0, anchor="nw", window=img, tag=("img"))
 lft_lab=Label(lf_signup, text="New here ?",font=('Calibri 20 bold'), fg="white", bg="#213b52")
 win_inv1 = lf_signup.create_window(0, 0, anchor="nw", window=lft_lab, tag=("lft_lab"))
 lft_lab2=Label(lf_signup, text="Join here to start a business with FinsYs!",font=('Calibri 16 bold'), fg="white", bg="#213b52")
-win_inv1 = lf_signup.create_window(0, 0, anchor="nw", window=lft_lab2, tag=("lft_lab2"))
+win_inv1 = lf_signup.create_window(0, 0, anchor="nw", window=lft_lab2, tag=("lft_lab2")) 
 
 btn2 = Button(main_frame_signin, text = 'Sign Up', command = func_sign_up, bg="white", fg="black",borderwidth = 3,height=1,width=10)
 win_inv1 = lf_signup.create_window(0, 0, anchor="nw", window=btn2, tag=("btn2"))
 
-root.mainloop()
+root.mainloop() #s
