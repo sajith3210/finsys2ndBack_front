@@ -23720,6 +23720,132 @@ def main_sign_in():
                 
                 
                     tab_account.pack(expand = 1, fill ="both")
+                    #AccountTab responsivie
+                    def responsive_wid(event):
+                        dwidth = event.width
+                        dheight = event.height
+                        dcanvas = event.widget
+
+                    
+                        r1 = 25
+                        x1 = dwidth/63
+                        x2 = dwidth/1.021
+                        y1 = dheight/13
+                        y2 = dheight/5            #acc_polygen_pr
+
+                        dcanvas.coords("acc_polygen_pr",x1 +r1,y1,
+                        x1 + r1,y1,
+                        x2 - r1,y1,
+                        x2 - r1,y1,     
+                        x2,y1,     
+                        #--------------------
+                        x2,y1 + r1,     
+                        x2,y1 + r1,     
+                        x2,y2 - r1,     
+                        x2,y2 - r1,     
+                        x2,y2,
+                        #--------------------
+                        x2 - r1,y2,     
+                        x2 - r1,y2,     
+                        x1 + r1,y2,
+                        x1 + r1,y2,
+                        x1,y2,
+                        #--------------------
+                        x1,y2 - r1,
+                        x1,y2 - r1,
+                        x1,y1 + r1,
+                        x1,y1 + r1,
+                        x1,y1,
+                        )                    
+                        dcanvas.coords("acc_llb",dwidth/2.8,dheight/11,)
+                        
+
+                        #acc_polygen_pr 2
+                        r1 = 25
+                        x1 = dwidth/63
+                        x2 = dwidth/1.021
+                        y1 = dheight/4
+                        y2 = dheight/0.59            
+
+                        dcanvas.coords("acc_polygen_pr2",x1 +r1,y1,
+                        x1 + r1,y1,
+                        x2 - r1,y1,
+                        x2 - r1,y1,     
+                        x2,y1,     
+                        #--------------------
+                        x2,y1 + r1,     
+                        x2,y1 + r1,     
+                        x2,y2 - r1,     
+                        x2,y2 - r1,     
+                        x2,y2,
+                        #--------------------
+                        x2 - r1,y2,     
+                        x2 - r1,y2,     
+                        x1 + r1,y2,
+                        x1 + r1,y2,
+                        x1,y2,
+                        #--------------------
+                        x1,y2 - r1,
+                        x1,y2 - r1,
+                        x1,y1 + r1,
+                        x1,y1 + r1,
+                        x1,y1,
+                        )
+                        dcanvas.coords("acc_filter_entry",dwidth/17,dheight/3.84,)
+                        dcanvas.coords("run_rpt_btn",dwidth/1.30,dheight/3.84,)
+                        dcanvas.coords("newt_btn",dwidth/1.20,dheight/3.84,)
+                        dcanvas.coords("opt_men",dwidth/1.10,dheight/3.84,)
+                        dcanvas.coords("acc_treeview",dwidth/17,dheight/3,)
+                    #accou Frame start 
+                    accou_fr=Frame(tab8_1,width=1366,height=768,bg="#2f516f")
+                    accou_fr.pack(fill=X)
+                    acc_canvas = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
+                    acc_sr_Scroll = Scrollbar(accou_fr,orient=VERTICAL)
+                    acc_sr_Scroll.pack(fill=Y,side="right")
+                    acc_sr_Scroll.config(command=acc_canvas.yview)
+                    acc_canvas.bind("<Configure>", responsive_wid)
+                    acc_canvas.config(yscrollcommand=acc_sr_Scroll.set)
+                    acc_canvas.pack(fill=X)
+                    acc_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("acc_polygen_pr"),smooth=True,)
+                    acc_llb=Label(acc_canvas, text="CHART OF ACCOUNTS",bg="#213b52", fg="White", anchor="nw",font=('Calibri 16 bold'))
+                    acc_llb_place = acc_canvas.create_window(0, 0, anchor="nw", window=acc_llb, tag=("acc_llb"))
+
+                    acc_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("acc_polygen_pr2"),smooth=True,)
+                    acc_filter_entry=Entry(acc_canvas,bg="#213b52",fg="white",font=('Calibri 9'))
+                    acc_filter_entry.insert(0,"Filter by name")
+                    acc_filter_entry_place=acc_canvas.create_window(0, 0, anchor="nw", window=acc_filter_entry, tag=("acc_filter_entry"))
+                    run_rpt_btn=Button(acc_canvas,bg="#213b52",text="Run Report",fg="white",width=12,)
+                    run_rpt_place=acc_canvas.create_window(0, 0, anchor="nw", window=run_rpt_btn, tag=("run_rpt_btn"))
+                    newt_btn=Button(acc_canvas,bg="#213b52",text="new",fg="white",width=12,)
+                    newt_btn_place=acc_canvas.create_window(0, 0, anchor="nw", window=newt_btn, tag=("newt_btn"))
+                    OptionList=['import']
+                    variable = StringVar()
+                    variable.set(OptionList[0])
+                    opt_men = OptionMenu(acc_canvas,variable, *OptionList)
+                    opt_men.config(bg="#213b52")
+                    opt_men_place=acc_canvas.create_window(0, 0, anchor="nw", window=opt_men, tag=("opt_men"))
+
+                    acc_treeview=ttk.Treeview(acc_canvas,columns=(1,2,3,4,5,6,7),)
+                    
+                    # format column  
+                    acc_treeview.column("#0",width=0,stretch=NO)
+                    acc_treeview.column("#1",anchor=CENTER,width=165)
+                    acc_treeview.column('#2',anchor=CENTER,width=165)
+                    acc_treeview.column('#3',anchor=CENTER,width=165)
+                    acc_treeview.column('#4',anchor=CENTER,width=165)
+                    acc_treeview.column('#5',anchor=CENTER,width=165)
+                    acc_treeview.column('#6',anchor=CENTER,width=165)
+                    acc_treeview.column('#7',anchor=CENTER,width=165)
+                    # format heading 
+                    acc_treeview.heading("#0",text='',anchor=CENTER)
+                    acc_treeview.heading('1',text='NAME')
+                    acc_treeview.heading('2',text='TYPE')
+                    acc_treeview.heading('3',text='DETAIL TYPE')
+                    acc_treeview.heading('4',text='TAX RATE')
+                    acc_treeview.heading('5',text='FINSYS BALANCE')
+                    acc_treeview.heading('6',text='BANK BALANCE')
+                    acc_treeview.heading('7',text='ACTION')
+                    acc_treeview_place=acc_canvas.create_window(0, 0, anchor="nw", window=acc_treeview, tag=("acc_treeview"))
                     #33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333{Cash Management}
                     tab_cash = ttk.Notebook(tab10)
                     
