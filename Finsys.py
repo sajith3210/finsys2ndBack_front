@@ -23796,7 +23796,60 @@ def main_sign_in():
                         dcanvas.coords("newt_btn",dwidth/1.20,dheight/3.84,)
                         dcanvas.coords("opt_men",dwidth/1.10,dheight/3.84,)
                         dcanvas.coords("acc_treeview",dwidth/17,dheight/3,)
-                    #accou Frame start 
+
+                    # Balance sheet page run report 
+                    def rnrpt():
+                        def responsive_wid(event):
+                            dwidth = event.width
+                            dheight = event.height
+                            dcanvas = event.widget
+
+                            r1 = 25
+                            x1 = dwidth/63
+                            x2 = dwidth/1.021
+                            y1 = dheight/13
+                            y2 = dheight/5            
+
+                            dcanvas.coords("bsheet_polygen_pr",x1 +r1,y1,
+                            x1 + r1,y1,
+                            x2 - r1,y1,
+                            x2 - r1,y1,     
+                            x2,y1,     
+                            #--------------------
+                            x2,y1 + r1,     
+                            x2,y1 + r1,     
+                            x2,y2 - r1,     
+                            x2,y2 - r1,     
+                            x2,y2,
+                            #--------------------
+                            x2 - r1,y2,     
+                            x2 - r1,y2,     
+                            x1 + r1,y2,
+                            x1 + r1,y2,
+                            x1,y2,
+                            #--------------------
+                            x1,y2 - r1,
+                            x1,y2 - r1,
+                            x1,y1 + r1,
+                            x1,y1 + r1,
+                            x1,y1,
+                            )                    
+                            dcanvas.coords("bsheet_llb",dwidth/2.8,dheight/11,)
+
+                        # acc_canvas forget widget 
+                        acc_canvas.pack_forget()
+                        acc_sr_Scroll.pack_forget()
+                        acc_canvas2 = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
+                        acc_sr_Scroll2 = Scrollbar(accou_fr,orient=VERTICAL)
+                        acc_sr_Scroll2.pack(fill=Y,side="right")
+                        acc_sr_Scroll2.config(command=acc_canvas2.yview)
+                        acc_canvas2.bind("<Configure>", responsive_wid)
+                        acc_canvas2.config(yscrollcommand=acc_sr_Scroll2.set)
+                        acc_canvas2.pack(fill=X)
+                        acc_canvas2.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("bsheet_polygen_pr"),smooth=True,)
+                        bsheet_llb=Label(acc_canvas2, text="CHART OF ACCOUNTS",bg="#213b52", fg="White", anchor="nw",font=('Calibri 16 bold'))
+                        bsheet_llb_place = acc_canvas2.create_window(0, 0, anchor="nw", window=bsheet_llb, tag=("bsheet_llb"))
+                
                     accou_fr=Frame(tab8_1,width=1366,height=768,bg="#2f516f")
                     accou_fr.pack(fill=X)
                     acc_canvas = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
@@ -23814,7 +23867,7 @@ def main_sign_in():
                     acc_filter_entry=Entry(acc_canvas,bg="#213b52",fg="white",font=('Calibri 9'))
                     acc_filter_entry.insert(0,"Filter by name")
                     acc_filter_entry_place=acc_canvas.create_window(0, 0, anchor="nw", window=acc_filter_entry, tag=("acc_filter_entry"))
-                    run_rpt_btn=Button(acc_canvas,bg="#213b52",text="Run Report",fg="white",width=12,)
+                    run_rpt_btn=Button(acc_canvas,bg="#213b52",text="Run Report",fg="white",width=12,command=rnrpt)
                     run_rpt_place=acc_canvas.create_window(0, 0, anchor="nw", window=run_rpt_btn, tag=("run_rpt_btn"))
                     newt_btn=Button(acc_canvas,bg="#213b52",text="new",fg="white",width=12,)
                     newt_btn_place=acc_canvas.create_window(0, 0, anchor="nw", window=newt_btn, tag=("newt_btn"))
