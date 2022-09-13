@@ -24032,6 +24032,8 @@ def main_sign_in():
                         dcanvas.coords("open_st_lbl",dwidth/2.75,dheight/3,)
                         dcanvas.coords("which_acct_lbl",dwidth/4,dheight/2.60,)
                         dcanvas.coords("Account_lbl",dwidth/4,dheight/2.30,)
+                        dcanvas.coords("Account_men",dwidth/4,dheight/1.97,)
+                        dcanvas.coords("ad_follow_info_lbl",dwidth/4,dheight/1.74,)
                     #Reconciled_tab_canvas
                     rcon_canvas = Canvas(recon_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
                     rcon_sr_Scroll = Scrollbar(recon_fr,orient=VERTICAL)
@@ -24051,6 +24053,26 @@ def main_sign_in():
                     which_acct_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=which_acct_lbl, tag=("which_acct_lbl"))
                     Account_lbl=Label(rcon_canvas, text="Account",bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
                     Account_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=Account_lbl, tag=("Account_lbl"))
+
+                    Account_List=['Deferred CGST','Deferred GST Input Credit','Deferred IGST','Deferred Krishi Kalyan Cess Input Credit',
+                    'Deferred Service Tax Input Credit','Deferred SGST','Deferred VAT Input Credit','GST Refund','Inventory Asset',
+                    'Paid Insurance','Service Tax Refund','TDS Receivable','Uncategorised Asset','Accumulated Depreciation','Buildings and Improvements',
+                    'Furniture and Equipments','Land','Leasehold Improvements','Vehicles','CGST Payable','CST Payable','CST Suspense',
+                    'GST Payable','GST Suspense','IGST Payable','Input CGST','Input CGST Tax RCM','Input IGST','Input IGST Tax RCM',
+                    'Input Krishi Kalyan Cess','Input Krishi Kalyan Cess RCM','Input Service Tax','Input Service Tax RCM','Input SGST','Input SGST Tax RCM',
+                    'Input VAT 14 %','Input VAT 4%','Input VAT 5%','Krishi Kalyan Cess Payable','Krishi Kalyan Cess Suspense','Output CGST','Output CGST Tax RCM',
+                    'Output CST 2%','Output IGST','Output IGST Tax RCM','Output Krishi Kalyan Cess','Output Krishi Kalyan Cess RCM','Output Service Tax','Output Service Tax RCM','Output SGST','Output SGST Tax RCM','Output VAT 14%','Output VAT 4%','Output VAT 5%',
+                    'Service Tax Payable','Service Tax Suspense','SGST Payable','SGST Suspense','Swachh Barath Cess Payable','Swachh Barath Cess Suspense',
+                    'TDS Payable','VAT Payable','VAT Suspense',
+                    ]
+                    Account_variable = StringVar()
+                    Account_variable.set(Account_List[0])
+                    Account_men = OptionMenu(rcon_canvas,Account_variable, *Account_List)
+                    Account_men.config(bg="#213b52",width=30,fg='white')
+                    Account_men_place=rcon_canvas.create_window(0, 0, anchor="nw", window=Account_men, tag=("Account_men"))
+
+                    ad_follow_info_lbl=Label(rcon_canvas, text="Add the following information",bg="#213b52", fg="White", anchor="nw",font=('Calibri 16 bold'))
+                    ad_follow_info_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=ad_follow_info_lbl, tag=("ad_follow_info_lbl"))
                     #33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333{Cash Management}
                     tab_cash = ttk.Notebook(tab10)
                     
