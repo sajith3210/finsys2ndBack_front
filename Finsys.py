@@ -23717,9 +23717,14 @@ def main_sign_in():
 
                     tab_account.add(tab8_1,compound = LEFT, text ='Chart Of Accounts')
                     tab_account.add(tab8_2,compound = LEFT, text ='Reconcile')
-                
-                
                     tab_account.pack(expand = 1, fill ="both")
+                    global accou_fr
+                    #Accounts_tab_frame
+                    accou_fr=Frame(tab8_1,width=1366,height=768,bg="#2f516f")
+                    accou_fr.pack(fill=X)
+                    #Reconsile_tab_frame
+                    recon_fr=Frame(tab8_2,width=1366,height=768,bg="#2f516f")
+                    recon_fr.pack(fill=X)
                     #AccountTab responsivie
                     def responsive_wid(event):
                         dwidth = event.width
@@ -23797,6 +23802,7 @@ def main_sign_in():
                         dcanvas.coords("opt_men",dwidth/1.10,dheight/3.84,)
                         dcanvas.coords("acc_treeview",dwidth/17,dheight/3,)
 
+                    
                     # Balance sheet page run report 
                     def rnrpt():
                         def responsive_wid(event):
@@ -23875,6 +23881,7 @@ def main_sign_in():
                         # acc_canvas forget widget 
                         acc_canvas.pack_forget()
                         acc_sr_Scroll.pack_forget()
+                        global acc_canvas2
                         acc_canvas2 = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
                         acc_sr_Scroll2 = Scrollbar(accou_fr,orient=VERTICAL)
                         acc_sr_Scroll2.pack(fill=Y,side="right")
@@ -23896,12 +23903,13 @@ def main_sign_in():
                         opt_men2_place=acc_canvas2.create_window(0, 0, anchor="nw", window=opt_men2, tag=("opt_men2"))
                         run_rpt_btn=Button(acc_canvas2,bg="#213b52",text="Run Report",fg="white",width=15,)
                         run_rpt_place=acc_canvas2.create_window(0, 0, anchor="nw", window=run_rpt_btn, tag=("run_rpt_btn"))
-                        back_btn=Button(acc_canvas2,bg="#213b52",text="Back",fg="white",width=15,)
+                        def bsheet_back():
+                            accou_fr.pack_forget()
+                            accou_fr=Frame(tab8_1,width=1366,height=768,bg="#2f516f")
+                        back_btn=Button(acc_canvas2,bg="#213b52",text="Back",fg="white",width=15,command=bsheet_back)
                         back_btn_place=acc_canvas2.create_window(0, 0, anchor="nw", window=back_btn, tag=("back_btn"))
-
-
-                    accou_fr=Frame(tab8_1,width=1366,height=768,bg="#2f516f")
-                    accou_fr.pack(fill=X)
+                    
+                    #Accouts_tab_canvas
                     acc_canvas = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
                     acc_sr_Scroll = Scrollbar(accou_fr,orient=VERTICAL)
                     acc_sr_Scroll.pack(fill=Y,side="right")
@@ -23949,6 +23957,100 @@ def main_sign_in():
                     acc_treeview.heading('6',text='BANK BALANCE')
                     acc_treeview.heading('7',text='ACTION')
                     acc_treeview_place=acc_canvas.create_window(0, 0, anchor="nw", window=acc_treeview, tag=("acc_treeview"))
+
+                     #Reconciled_Tab_responsivie
+                    def responsive_wid(event):
+                        dwidth = event.width
+                        dheight = event.height
+                        dcanvas = event.widget
+
+                    
+                        r1 = 25
+                        x1 = dwidth/63
+                        x2 = dwidth/1.021
+                        y1 = dheight/13
+                        y2 = dheight/5            #rcn_polygen_pr
+
+                        dcanvas.coords("rcn_polygen_pr",x1 +r1,y1,
+                        x1 + r1,y1,
+                        x2 - r1,y1,
+                        x2 - r1,y1,     
+                        x2,y1,     
+                        #--------------------
+                        x2,y1 + r1,     
+                        x2,y1 + r1,     
+                        x2,y2 - r1,     
+                        x2,y2 - r1,     
+                        x2,y2,
+                        #--------------------
+                        x2 - r1,y2,     
+                        x2 - r1,y2,     
+                        x1 + r1,y2,
+                        x1 + r1,y2,
+                        x1,y2,
+                        #--------------------
+                        x1,y2 - r1,
+                        x1,y2 - r1,
+                        x1,y1 + r1,
+                        x1,y1 + r1,
+                        x1,y1,
+                        )                    
+                        dcanvas.coords("rcon_lbl",dwidth/2.8,dheight/11,)
+                        
+
+                         #rcn_polygen_pr_2
+                        r1 = 25
+                        x1 = dwidth/63
+                        x2 = dwidth/1.021
+                        y1 = dheight/4
+                        y2 = dheight/0.59            
+
+                        dcanvas.coords("rcn_polygen_pr2",x1 +r1,y1,
+                        x1 + r1,y1,
+                        x2 - r1,y1,
+                        x2 - r1,y1,     
+                        x2,y1,     
+                        #--------------------
+                        x2,y1 + r1,     
+                        x2,y1 + r1,     
+                        x2,y2 - r1,     
+                        x2,y2 - r1,     
+                        x2,y2,
+                        #--------------------
+                        x2 - r1,y2,     
+                        x2 - r1,y2,     
+                        x1 + r1,y2,
+                        x1 + r1,y2,
+                        x1,y2,
+                        #--------------------
+                        x1,y2 - r1,
+                        x1,y2 - r1,
+                        x1,y1 + r1,
+                        x1,y1 + r1,
+                        x1,y1,
+                        )
+                        dcanvas.coords("open_st_lbl",dwidth/2.75,dheight/3,)
+                        dcanvas.coords("which_acct_lbl",dwidth/4,dheight/2.60,)
+                        dcanvas.coords("Account_lbl",dwidth/4,dheight/2.30,)
+                    #Reconciled_tab_canvas
+                    rcon_canvas = Canvas(recon_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
+                    rcon_sr_Scroll = Scrollbar(recon_fr,orient=VERTICAL)
+                    rcon_sr_Scroll.pack(fill=Y,side="right")
+                    rcon_sr_Scroll.config(command=rcon_canvas.yview)
+                    rcon_canvas.bind("<Configure>", responsive_wid)
+                    rcon_canvas.config(yscrollcommand=rcon_sr_Scroll.set)
+                    rcon_canvas.pack(fill=X)
+                    rcon_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("rcn_polygen_pr"),smooth=True,)
+                    
+                    rcon_lbl=Label(rcon_canvas, text="RECONCILED",bg="#213b52", fg="White", anchor="nw",font=('Calibri 16 bold'))
+                    rcon_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=rcon_lbl, tag=("rcon_lbl"))
+                    rcon_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("rcn_polygen_pr2"),smooth=True,)
+                    open_st_lbl=Label(rcon_canvas, text="Open your statement and we'll get started.",bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
+                    open_st_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=open_st_lbl, tag=("open_st_lbl"))
+                    which_acct_lbl=Label(rcon_canvas, text="Which account do you want to reconcile?",bg="#213b52", fg="White", anchor="nw",font=('Calibri 15 bold'))
+                    which_acct_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=which_acct_lbl, tag=("which_acct_lbl"))
+                    Account_lbl=Label(rcon_canvas, text="Account",bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
+                    Account_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=Account_lbl, tag=("Account_lbl"))
                     #33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333{Cash Management}
                     tab_cash = ttk.Notebook(tab10)
                     
