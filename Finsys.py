@@ -23878,11 +23878,50 @@ def main_sign_in():
                             dcanvas.coords("opt_men2",dwidth/12,dheight/3.36,)  
                             dcanvas.coords("run_rpt_btn",dwidth/1.30,dheight/2,)  
                             dcanvas.coords("back_btn",dwidth/1.15,dheight/2,)  
+                             
+
+                            # bsheet_polygen_pr3  start 
+                            r1 = 25
+                            x1 = dwidth/63
+                            x2 = dwidth/1.021
+                            y1 = dheight/0.30
+                            y2 = dheight/1.70
+
+                            dcanvas.coords("bsheet_polygen_pr3",x1 +r1,y1,
+                            x1 + r1,y1,
+                            x2 - r1,y1,
+                            x2 - r1,y1,     
+                            x2,y1,     
+                            #--------------------
+                            x2,y1 + r1,     
+                            x2,y1 + r1,     
+                            x2,y2 - r1,     
+                            x2,y2 - r1,     
+                            x2,y2,
+                            #--------------------
+                            x2 - r1,y2,     
+                            x2 - r1,y2,     
+                            x1 + r1,y2,
+                            x1 + r1,y2,
+                            x1,y2,
+                            #--------------------
+                            x1,y2 - r1,
+                            x1,y2 - r1,
+                            x1,y1 + r1,
+                            x1,y1 + r1,
+                            x1,y1,
+                            ) 
+                            dcanvas.coords("acc_canvas3",dwidth/20,dheight/1.65,) 
+                            dcanvas.coords("total_lbl",dwidth/2,dheight/1.25,) 
+
+
+
+                            dcanvas.coords("bsheetline1",dwidth/21,dheight/0.50,dwidth/1.055,dheight/0.50,)
                         # acc_canvas forget widget 
                         acc_canvas.pack_forget()
                         acc_sr_Scroll.pack_forget()
                         global acc_canvas2
-                        acc_canvas2 = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
+                        acc_canvas2 = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,3000))
                         acc_sr_Scroll2 = Scrollbar(accou_fr,orient=VERTICAL)
                         acc_sr_Scroll2.pack(fill=Y,side="right")
                         acc_sr_Scroll2.config(command=acc_canvas2.yview)
@@ -23903,14 +23942,18 @@ def main_sign_in():
                         opt_men2_place=acc_canvas2.create_window(0, 0, anchor="nw", window=opt_men2, tag=("opt_men2"))
                         run_rpt_btn=Button(acc_canvas2,bg="#213b52",text="Run Report",fg="white",width=15,)
                         run_rpt_place=acc_canvas2.create_window(0, 0, anchor="nw", window=run_rpt_btn, tag=("run_rpt_btn"))
-
-                        acc_canvas2.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("bsheet_polygen_pr3"),smooth=True,)
                         def bsheet_back():
                             accou_fr.pack_forget()
                             accou_fr=Frame(tab8_1,width=1366,height=768,bg="#2f516f")
                         back_btn=Button(acc_canvas2,bg="#213b52",text="Back",fg="white",width=15,command=bsheet_back)
                         back_btn_place=acc_canvas2.create_window(0, 0, anchor="nw", window=back_btn, tag=("back_btn"))
-                    
+                        acc_canvas2.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("bsheet_polygen_pr3"),smooth=True,) #213b52
+                        acc_canvas3= Canvas(accou_fr,height=1600,width=1200, bg="white",)
+                        acc_canvas3_place=acc_canvas2.create_window(0, 0, anchor="nw", window=acc_canvas3, tag=("acc_canvas3"))
+                        acc_canvas2.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline1"))
+                        total_lbl=Label(acc_canvas3, text="Total",bg="#213b52", fg="White", anchor="nw",font=('Calibri 10'))
+                        total_lbl_place=acc_canvas2.create_window(0, 0, anchor="nw", window=total_lbl, tag=("total_lbl"))
+                        
                     #Accouts_tab_canvas
                     acc_canvas = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
                     acc_sr_Scroll = Scrollbar(accou_fr,orient=VERTICAL)
