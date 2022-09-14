@@ -23964,81 +23964,99 @@ def main_sign_in():
                         dheight = event.height
                         dcanvas = event.widget
 
-                    
-                        r1 = 25
-                        x1 = dwidth/63
-                        x2 = dwidth/1.021
-                        y1 = dheight/13
-                        y2 = dheight/5            #rcn_polygen_pr
+                        try:
+                            r1 = 25
+                            x1 = dwidth/63
+                            x2 = dwidth/1.021
+                            y1 = dheight/13
+                            y2 = dheight/5            #rcn_polygen_pr
 
-                        dcanvas.coords("rcn_polygen_pr",x1 +r1,y1,
-                        x1 + r1,y1,
-                        x2 - r1,y1,
-                        x2 - r1,y1,     
-                        x2,y1,     
-                        #--------------------
-                        x2,y1 + r1,     
-                        x2,y1 + r1,     
-                        x2,y2 - r1,     
-                        x2,y2 - r1,     
-                        x2,y2,
-                        #--------------------
-                        x2 - r1,y2,     
-                        x2 - r1,y2,     
-                        x1 + r1,y2,
-                        x1 + r1,y2,
-                        x1,y2,
-                        #--------------------
-                        x1,y2 - r1,
-                        x1,y2 - r1,
-                        x1,y1 + r1,
-                        x1,y1 + r1,
-                        x1,y1,
-                        )                    
-                        dcanvas.coords("rcon_lbl",dwidth/2.8,dheight/11,)
-                        
+                            dcanvas.coords("rcn_polygen_pr",x1 +r1,y1,
+                            x1 + r1,y1,
+                            x2 - r1,y1,
+                            x2 - r1,y1,     
+                            x2,y1,     
+                            #--------------------
+                            x2,y1 + r1,     
+                            x2,y1 + r1,     
+                            x2,y2 - r1,     
+                            x2,y2 - r1,     
+                            x2,y2,
+                            #--------------------
+                            x2 - r1,y2,     
+                            x2 - r1,y2,     
+                            x1 + r1,y2,
+                            x1 + r1,y2,
+                            x1,y2,
+                            #--------------------
+                            x1,y2 - r1,
+                            x1,y2 - r1,
+                            x1,y1 + r1,
+                            x1,y1 + r1,
+                            x1,y1,
+                            )                    
+                            dcanvas.coords("rcon_lbl",dwidth/2.8,dheight/11,)
+                            
 
-                         #rcn_polygen_pr_2
-                        r1 = 25
-                        x1 = dwidth/63
-                        x2 = dwidth/1.021
-                        y1 = dheight/4
-                        y2 = dheight/0.59            
+                            #rcn_polygen_pr_2
+                            r1 = 25
+                            x1 = dwidth/63
+                            x2 = dwidth/1.021
+                            y1 = dheight/4
+                            y2 = dheight/0.59            
 
-                        dcanvas.coords("rcn_polygen_pr2",x1 +r1,y1,
-                        x1 + r1,y1,
-                        x2 - r1,y1,
-                        x2 - r1,y1,     
-                        x2,y1,     
-                        #--------------------
-                        x2,y1 + r1,     
-                        x2,y1 + r1,     
-                        x2,y2 - r1,     
-                        x2,y2 - r1,     
-                        x2,y2,
-                        #--------------------
-                        x2 - r1,y2,     
-                        x2 - r1,y2,     
-                        x1 + r1,y2,
-                        x1 + r1,y2,
-                        x1,y2,
-                        #--------------------
-                        x1,y2 - r1,
-                        x1,y2 - r1,
-                        x1,y1 + r1,
-                        x1,y1 + r1,
-                        x1,y1,
-                        )
-                        dcanvas.coords("open_st_lbl",dwidth/2.75,dheight/3,)
-                        dcanvas.coords("which_acct_lbl",dwidth/4,dheight/2.60,)
-                        dcanvas.coords("Account_lbl",dwidth/4,dheight/2.30,)
-                        dcanvas.coords("Account_men",dwidth/4,dheight/1.97,)
-                        dcanvas.coords("ad_follow_info_lbl",dwidth/4,dheight/1.74,)
-                        dcanvas.coords("beg_bal_lbl",dwidth/4,dheight/1.60,)
-                        dcanvas.coords("end_bal_lbl",dwidth/2.65,dheight/1.60,)
-                        dcanvas.coords("end_date_lbl",dwidth/2,dheight/1.60,)
-                        dcanvas.coords("beg_bal_entry",dwidth/4,dheight/1.40,)
-                        dcanvas.coords("end_bal_entry",dwidth/2.65,dheight/1.40,)
+                            dcanvas.coords("rcn_polygen_pr2",x1 +r1,y1,
+                            x1 + r1,y1,
+                            x2 - r1,y1,
+                            x2 - r1,y1,     
+                            x2,y1,     
+                            #--------------------
+                            x2,y1 + r1,     
+                            x2,y1 + r1,     
+                            x2,y2 - r1,     
+                            x2,y2 - r1,     
+                            x2,y2,
+                            #--------------------
+                            x2 - r1,y2,     
+                            x2 - r1,y2,     
+                            x1 + r1,y2,
+                            x1 + r1,y2,
+                            x1,y2,
+                            #--------------------
+                            x1,y2 - r1,
+                            x1,y2 - r1,
+                            x1,y1 + r1,
+                            x1,y1 + r1,
+                            x1,y1,
+                            )
+                            dcanvas.coords("open_st_lbl",dwidth/2.75,dheight/3,)
+                            dcanvas.coords("which_acct_lbl",dwidth/4,dheight/2.60,)
+                            dcanvas.coords("Account_lbl",dwidth/4,dheight/2.30,)
+                            dcanvas.coords("Account_men",dwidth/4,dheight/1.97,)
+                            dcanvas.coords("ad_follow_info_lbl",dwidth/4,dheight/1.74,)
+                            dcanvas.coords("beg_bal_lbl",dwidth/4,dheight/1.60,)
+                            dcanvas.coords("end_bal_lbl",dwidth/2.65,dheight/1.60,)
+                            dcanvas.coords("end_date_lbl",dwidth/2,dheight/1.60,) 
+                            dcanvas.coords("beg_bal_entry",dwidth/4,dheight/1.40,)
+                            dcanvas.coords("end_bal_entry",dwidth/2.65,dheight/1.40,)
+                            
+                            dcanvas.coords("enter_the_servi_lbl",dwidth/4,dheight/1.20,)
+                            dcanvas.coords("date_lbl",dwidth/4,dheight/1.10,)
+                            
+                            dcanvas.coords("servise_chr_lbl",dwidth/2.65,dheight/1.10,)
+                            dcanvas.coords("expence_ac_lbl",dwidth/2,dheight/1.10,)
+                            
+                            dcanvas.coords("servise_chrg_entry",dwidth/2.65,dheight/1,)
+                            
+                            dcanvas.coords("exp_account_men",dwidth/2,dheight/1,)
+                            dcanvas.coords("strt_rec_btn",dwidth/2.65,dheight/0.90,)
+                        except:
+                            pass
+                        try:
+                            dcanvas.coords("end_date_entry",dwidth/2,dheight/1.40,)
+                            dcanvas.coords("date_lbl_entry",dwidth/4,dheight/1,)
+                        except:
+                            pass
                     #Reconciled_tab_canvas
                     rcon_canvas = Canvas(recon_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
                     rcon_sr_Scroll = Scrollbar(recon_fr,orient=VERTICAL)
@@ -24088,6 +24106,42 @@ def main_sign_in():
                     beg_bal_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=beg_bal_entry, tag=("beg_bal_entry"))
                     end_bal_entry=Entry(rcon_canvas,font=('Calibri 8'))
                     end_bal_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=end_bal_entry, tag=("end_bal_entry"))
+                    enter_the_servi_lbl=Label(rcon_canvas, text="Enter the service charge or interest earned, if necessary",bg="#213b52", fg="White", anchor="nw",font=('Calibri 16 bold'))
+                    enter_the_servi_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=enter_the_servi_lbl, tag=("enter_the_servi_lbl"))
+                    date_lbl=Label(rcon_canvas, text="Date",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
+                    date_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=date_lbl, tag=("date_lbl"))
+                    servise_chr_lbl=Label(rcon_canvas, text="Servise Charge",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
+                    servise_chr_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=servise_chr_lbl, tag=("servise_chr_lbl"))
+                    expence_ac_lbl=Label(rcon_canvas, text="Expense Account",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
+                    expence_ac_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=expence_ac_lbl, tag=("expence_ac_lbl"))
+                    servise_chrg_entry=Entry(rcon_canvas,font=('Calibri 8'))
+                    servise_chrg_place=rcon_canvas.create_window(0, 0, anchor="nw", window=servise_chrg_entry, tag=("servise_chrg_entry"))
+                    
+                    exp_account_list=['Advertising/Promotional','Bank Charges','Business Licenses and Permits','Charitable Contributions','Computer and Internet Expense',
+                    'Continuing Education','Depreciation Expense','Dues and Subscriptions','Housekeeping Charges','Insurance Expense','Insurance Expense-General Liability Insurance',
+                    'Insurance Expense-Health Insurance','Insurance Expense-Professional Liability','Interest Expense','Meals and Entertainment','Office Supplies',
+                    'Postage ang Delivery','Printing and Reproduction','Professional Fees','Purchases','Rent Expense','Repair and Maintenance','Small Tools and Equipments','Swachh Bharath Cess Expense',
+                    'Taxes-Property','Telephone Expense','Travel Expense','Uncategorised Expenses','Utilities','Ask My Accountant','CGST write-off','GST write-off','IGST write-off','Miscelleneous Expense',
+                    'Political Contribution','Reconcilation Discrepancies','SGST write-off','Tax write-off','Vehicle Expenses','Deferred GST Input Credit','Deferred IGST','Deferred Krishi Kalyan Cess Input Cedit',
+                    'Deferred Service Tax Input Credit','Deferred SGST','Deferred VAT Input Credit','GST Refund','Inventory Asset','Krishi Kalyan Cess Refund','Prepaid Insurance','Service Tax Refund','TDS Receivable','Uncategorised Asset','Accumulated Depreciation',
+                    'Buildings and Improvements','Furniture and Equipments','Land','Leasehold Improvements','Vehicles','CGST Payable','CST Payable','CST Suspense','GST Payable','GST Suspense','IGST Payable','Input CGST','Input CGST Tax RCM','Input IGST','Input IGST Tax RCM',
+                    'Input Krishi Kalyan Cess','Input Krishi Kalyan Cess RCM','Input Service Tax','Input Service Tax RCM','Input SGST','Input SGST Tax RCM','Input VAT','Input VAT 14%','Input VAT 4%','Input VAT 5%','Krishi Kalyan Cess Payable','Krishi Kalyan Cess Suspense',
+                    'Output CGST','Output CGST Tax RCM','Output CST 2%','Output IGST','Output IGST Tax RCM','Output Krishi Kalyan Cess','Output Krishi Kalyan Cess RCM','Output Service Tax','Output Service Tax RCM','Output SGST','Output VAT 14%','Output VAT 4%','Output VAT 5%',
+                    'Service Tax Payable','Service Tax Suspense','SGST Payable','Swachh Bharat Cess Payable','Swachh Bharat Cess Suspense','TDS Payable','VAT Payable','VAT Suspense','Opening Balance Equity','Retained Earnings','Billable Expense Income','Consulting Income','Products Sales','Sales',
+                    'Sales-Hardware','Sales-Software','Sales-Support and Maintenance','Sales Discounts','Sales of Product Income','Uncategorised Income','Cost of Sales','Equipments Rental for Jobs','Freight and Shipping Cost','Merchant Account Fees','Purchase-Hardware for Resale','Purchase-Software for Resale',
+                    'Sub-contracted Services','Tools and Craft Supplies','Finance Charge Income','Insurance Proceeds Received','Interest Income','Proceeds from Sale of Asset','Shipping and Delivery Income',
+                    ]
+                    exp_account_variable = StringVar()
+                    exp_account_variable.set(exp_account_list[0])
+                    exp_account_men=OptionMenu(rcon_canvas,exp_account_variable, *exp_account_list)
+                    exp_account_men.config(bg="#213b52",width=28,fg='white')
+                    exp_account_men_place=rcon_canvas.create_window(0, 0, anchor="nw", window=exp_account_men, tag=("exp_account_men"))
+                    strt_rec_btn=Button(rcon_canvas,bg="#213b52",text="Start Reconciling",fg="white",width=15,command='')
+                    strt_rec_btn_place=rcon_canvas.create_window(0, 0, anchor="nw", window=strt_rec_btn, tag=("strt_rec_btn"))
+                    end_date_entry=DateEntry(rcon_canvas,selectmode='day')
+                    end_date_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=end_date_entry, tag=("end_date_entry"))
+                    date_lbl_entry=DateEntry(rcon_canvas,selectmode='day')
+                    date_lbl_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=date_lbl_entry, tag=("date_lbl_entry"))
                     #33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333{Cash Management}
                     tab_cash = ttk.Notebook(tab10)
                     
