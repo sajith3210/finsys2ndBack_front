@@ -23903,6 +23903,8 @@ def main_sign_in():
                         opt_men2_place=acc_canvas2.create_window(0, 0, anchor="nw", window=opt_men2, tag=("opt_men2"))
                         run_rpt_btn=Button(acc_canvas2,bg="#213b52",text="Run Report",fg="white",width=15,)
                         run_rpt_place=acc_canvas2.create_window(0, 0, anchor="nw", window=run_rpt_btn, tag=("run_rpt_btn"))
+
+                        acc_canvas2.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("bsheet_polygen_pr3"),smooth=True,)
                         def bsheet_back():
                             accou_fr.pack_forget()
                             accou_fr=Frame(tab8_1,width=1366,height=768,bg="#2f516f")
@@ -23997,6 +23999,7 @@ def main_sign_in():
                             )                    
                             dcanvas.coords("rcon_lbl",dwidth/2.8,dheight/11,)
                             
+                            
 
                             #rcn_polygen_pr_2
                             r1 = 25
@@ -24057,6 +24060,126 @@ def main_sign_in():
                             dcanvas.coords("date_lbl_entry",dwidth/4,dheight/1,)
                         except:
                             pass
+                    # start reconcling front end 
+                    def start_reconcling():
+                        def responsive_wid(event):
+                            dwidth = event.width
+                            dheight = event.height
+                            dcanvas = event.widget
+                            r1 = 25
+                            x1 = dwidth/63
+                            x2 = dwidth/1.021
+                            y1 = dheight/13
+                            y2 = dheight/2.70            #rcn_polygen_pr
+
+                            dcanvas.coords("strt_recon_polygen_pr",x1 +r1,y1,
+                            x1 + r1,y1,
+                            x2 - r1,y1,
+                            x2 - r1,y1,     
+                            x2,y1,     
+                            #--------------------
+                            x2,y1 + r1,     
+                            x2,y1 + r1,     
+                            x2,y2 - r1,     
+                            x2,y2 - r1,     
+                            x2,y2,
+                            #--------------------
+                            x2 - r1,y2,     
+                            x2 - r1,y2,     
+                            x1 + r1,y2,
+                            x1 + r1,y2,
+                            x1,y2,
+                            #--------------------
+                            x1,y2 - r1,
+                            x1,y2 - r1,
+                            x1,y1 + r1,
+                            x1,y1 + r1,
+                            x1,y1,
+                            )
+                            dcanvas.coords("rcon_lbl2",dwidth/2.8,dheight/11,)                    
+                            dcanvas.coords("def_cgst_lbl",dwidth/3,dheight/7,)                    
+                            dcanvas.coords("statemnt_end_lbl",dwidth/2.8,dheight/4.60,)                    
+                            dcanvas.coords("display_date_lbl",dwidth/2.6,dheight/4,)                    
+                            dcanvas.coords("edit_info_btn",dwidth/2,dheight/4,)                    
+                            dcanvas.coords("save_for_later_btn",dwidth/1.70,dheight/4,) 
+                            
+
+                            r1 = 25
+                            x1 = dwidth/63
+                            x2 = dwidth/1.021
+                            y1 = dheight/0.80
+                            y2 = dheight/1.90           #rcn_polygen_pr
+
+                            dcanvas.coords("strt_recon_polygen_pr2",x1 +r1,y1,
+                            x1 + r1,y1,
+                            x2 - r1,y1,
+                            x2 - r1,y1,     
+                            x2,y1,     
+                            #--------------------
+                            x2,y1 + r1,     
+                            x2,y1 + r1,     
+                            x2,y2 - r1,     
+                            x2,y2 - r1,     
+                            x2,y2,
+                            #--------------------
+                            x2 - r1,y2,     
+                            x2 - r1,y2,     
+                            x1 + r1,y2,
+                            x1 + r1,y2,
+                            x1,y2,
+                            #--------------------
+                            x1,y2 - r1,
+                            x1,y2 - r1,
+                            x1,y1 + r1,
+                            x1,y1 + r1,
+                            x1,y1,
+                            ) 
+                            dcanvas.coords("recon_treeview",dwidth/22,dheight/1.60,)                   
+                        rcon_canvas.pack_forget()
+                        rcon_sr_Scroll.pack_forget()
+                        strt_rcon_canvas = Canvas(recon_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
+                        strt_rcon_Scroll = Scrollbar(recon_fr,orient=VERTICAL)
+                        strt_rcon_Scroll.pack(fill=Y,side="right")
+                        strt_rcon_Scroll.config(command=strt_rcon_canvas.yview)
+                        strt_rcon_canvas.bind("<Configure>", responsive_wid)
+                        strt_rcon_canvas.config(yscrollcommand=strt_rcon_Scroll.set)
+                        strt_rcon_canvas.pack(fill=X)
+                        strt_rcon_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("strt_recon_polygen_pr"),smooth=True,)
+                        rcon_lbl2=Label(strt_rcon_canvas, text="RECONCILED",bg="#213b52", fg="White", anchor="nw",font=('Calibri 16 bold'))
+                        rcon_lbl2_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=rcon_lbl2, tag=("rcon_lbl2"))
+                        def_cgst_lbl=Label(strt_rcon_canvas, text="Deferred CGST",bg="#213b52", fg="White", anchor="nw",font=('Calibri 23 bold'))
+                        def_cgst_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=def_cgst_lbl, tag=("def_cgst_lbl"))
+                        statemnt_end_lbl=Label(strt_rcon_canvas, text="Statement ending date",bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
+                        statemnt_end_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=statemnt_end_lbl, tag=("statemnt_end_lbl"))
+                        display_date_lbl=Label(strt_rcon_canvas, text="2022-09-01",bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
+                        display_date_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=display_date_lbl, tag=("display_date_lbl"))
+                        edit_info_btn=Button(strt_rcon_canvas,bg="#213b52",text="Edit info",fg="white",width=15,)
+                        edit_info_btn_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=edit_info_btn, tag=("edit_info_btn"))
+                        save_for_later_btn=Button(strt_rcon_canvas,bg="#213b52",text="Save for later",fg="white",width=15,)
+                        save_for_later_btn_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=save_for_later_btn, tag=("save_for_later_btn"))
+                        strt_rcon_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("strt_recon_polygen_pr2"),smooth=True,)  #213b52"
+                        recon_treeview=ttk.Treeview(strt_rcon_canvas,columns=(1,2,3,4,5,6,7,8),)
+                        # format column  
+                        recon_treeview.column("#0",width=0,stretch=NO)
+                        recon_treeview.column("#1",anchor=CENTER,width=150)
+                        recon_treeview.column('#2',anchor=CENTER,width=150)
+                        recon_treeview.column('#3',anchor=CENTER,width=150)
+                        recon_treeview.column('#4',anchor=CENTER,width=150)
+                        recon_treeview.column('#5',anchor=CENTER,width=150)
+                        recon_treeview.column('#6',anchor=CENTER,width=150)
+                        recon_treeview.column('#7',anchor=CENTER,width=150)
+                        recon_treeview.column('#8',anchor=CENTER,width=150)
+                        # format heading 
+                        recon_treeview.heading("#0",text='',anchor=CENTER)
+                        recon_treeview.heading('1',text='DATE')
+                        recon_treeview.heading('2',text='TYPE')
+                        recon_treeview.heading('3',text='REF NO')
+                        recon_treeview.heading('4',text='ACCOUNT')
+                        recon_treeview.heading('5',text='PAYEE')
+                        recon_treeview.heading('6',text='MEMO')
+                        recon_treeview.heading('7',text='DEPOSIT (INR)')
+                        recon_treeview.heading('8',text='PAYMENT (INR)')
+                        recon_treeview=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=recon_treeview, tag=("recon_treeview"))
                     #Reconciled_tab_canvas
                     rcon_canvas = Canvas(recon_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
                     rcon_sr_Scroll = Scrollbar(recon_fr,orient=VERTICAL)
@@ -24136,7 +24259,7 @@ def main_sign_in():
                     exp_account_men=OptionMenu(rcon_canvas,exp_account_variable, *exp_account_list)
                     exp_account_men.config(bg="#213b52",width=28,fg='white')
                     exp_account_men_place=rcon_canvas.create_window(0, 0, anchor="nw", window=exp_account_men, tag=("exp_account_men"))
-                    strt_rec_btn=Button(rcon_canvas,bg="#213b52",text="Start Reconciling",fg="white",width=15,command='')
+                    strt_rec_btn=Button(rcon_canvas,bg="#213b52",text="Start Reconciling",fg="white",width=15,command=start_reconcling)
                     strt_rec_btn_place=rcon_canvas.create_window(0, 0, anchor="nw", window=strt_rec_btn, tag=("strt_rec_btn"))
                     end_date_entry=DateEntry(rcon_canvas,selectmode='day')
                     end_date_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=end_date_entry, tag=("end_date_entry"))
