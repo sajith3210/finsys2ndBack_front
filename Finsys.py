@@ -24034,6 +24034,11 @@ def main_sign_in():
                         dcanvas.coords("Account_lbl",dwidth/4,dheight/2.30,)
                         dcanvas.coords("Account_men",dwidth/4,dheight/1.97,)
                         dcanvas.coords("ad_follow_info_lbl",dwidth/4,dheight/1.74,)
+                        dcanvas.coords("beg_bal_lbl",dwidth/4,dheight/1.60,)
+                        dcanvas.coords("end_bal_lbl",dwidth/2.65,dheight/1.60,)
+                        dcanvas.coords("end_date_lbl",dwidth/2,dheight/1.60,)
+                        dcanvas.coords("beg_bal_entry",dwidth/4,dheight/1.40,)
+                        dcanvas.coords("end_bal_entry",dwidth/2.65,dheight/1.40,)
                     #Reconciled_tab_canvas
                     rcon_canvas = Canvas(recon_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
                     rcon_sr_Scroll = Scrollbar(recon_fr,orient=VERTICAL)
@@ -24073,6 +24078,16 @@ def main_sign_in():
 
                     ad_follow_info_lbl=Label(rcon_canvas, text="Add the following information",bg="#213b52", fg="White", anchor="nw",font=('Calibri 16 bold'))
                     ad_follow_info_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=ad_follow_info_lbl, tag=("ad_follow_info_lbl"))
+                    beg_bal_lbl=Label(rcon_canvas, text="Beginning balance*",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
+                    beg_bal_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=beg_bal_lbl, tag=("beg_bal_lbl"))
+                    end_bal_lbl=Label(rcon_canvas, text="Ending balance*",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
+                    end_bal_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=end_bal_lbl, tag=("end_bal_lbl"))
+                    end_date_lbl=Label(rcon_canvas, text="Ending date*",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
+                    end_date_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=end_date_lbl, tag=("end_date_lbl"))
+                    beg_bal_entry=Entry(rcon_canvas,font=('Calibri 8'))
+                    beg_bal_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=beg_bal_entry, tag=("beg_bal_entry"))
+                    end_bal_entry=Entry(rcon_canvas,font=('Calibri 8'))
+                    end_bal_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=end_bal_entry, tag=("end_bal_entry"))
                     #33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333{Cash Management}
                     tab_cash = ttk.Notebook(tab10)
                     
