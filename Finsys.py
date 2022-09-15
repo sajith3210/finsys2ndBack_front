@@ -23912,11 +23912,11 @@ def main_sign_in():
                             x1,y1,
                             ) 
                             dcanvas.coords("acc_canvas3",dwidth/20,dheight/1.65,) 
-                            dcanvas.coords("total_lbl",dwidth/2,dheight/1.25,) 
+                            
 
 
 
-                            dcanvas.coords("bsheetline1",dwidth/21,dheight/0.50,dwidth/1.055,dheight/0.50,)
+                            
                         # acc_canvas forget widget 
                         acc_canvas.pack_forget()
                         acc_sr_Scroll.pack_forget()
@@ -23948,12 +23948,108 @@ def main_sign_in():
                         back_btn=Button(acc_canvas2,bg="#213b52",text="Back",fg="white",width=15,command=bsheet_back)
                         back_btn_place=acc_canvas2.create_window(0, 0, anchor="nw", window=back_btn, tag=("back_btn"))
                         acc_canvas2.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("bsheet_polygen_pr3"),smooth=True,) #213b52
+
+
                         acc_canvas3= Canvas(accou_fr,height=1600,width=1200, bg="white",)
                         acc_canvas3_place=acc_canvas2.create_window(0, 0, anchor="nw", window=acc_canvas3, tag=("acc_canvas3"))
-                        acc_canvas2.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline1"))
-                        total_lbl=Label(acc_canvas3, text="Total",bg="#213b52", fg="White", anchor="nw",font=('Calibri 10'))
-                        total_lbl_place=acc_canvas2.create_window(0, 0, anchor="nw", window=total_lbl, tag=("total_lbl"))
+                        def responsive_wid(event):
+                            dwidth = event.width
+                            dheight = event.height
+                            dcanvas = event.widget
+
+                            r1 = 25
+                            x1 = dwidth/63
+                            x2 = dwidth/1.021
+                            y1 = dheight/13
+                            y2 = dheight/5            
+
+                            dcanvas.coords("bsheetline1",dwidth/21,dheight/7,dwidth/1.055,dheight/7,)
+                            dcanvas.coords("bsheetline2",dwidth/21,dheight/6.10,dwidth/1.055,dheight/6.10,)
+                            dcanvas.coords("total_lbl",dwidth/1.20,dheight/6.8,) 
+                            dcanvas.coords("asset_lbl",dwidth/10,dheight/5.20,) 
+                            dcanvas.coords("current_asset_lbl",dwidth/9.60,dheight/4.60,)  
+                            dcanvas.coords("bank_lbl",dwidth/9,dheight/4.20,) 
+                            dcanvas.coords("account_reci_lbl",dwidth/9,dheight/3.93,) 
+                            dcanvas.coords("bsheetline3",dwidth/21,dheight/3.73,dwidth/1.055,dheight/3.73,)
+                            dcanvas.coords("bsheetline4",dwidth/21,dheight/3.43,dwidth/1.055,dheight/3.43,)
+                            dcanvas.coords("total_account_reci_lbl",dwidth/9,dheight/3.61,)
+                            dcanvas.coords("bsheetline5",dwidth/21,dheight/3.13,dwidth/1.055,dheight/3.13,)
+                            dcanvas.coords("total_current_asset_lbl",dwidth/9,dheight/3.30,)
+                            dcanvas.coords("bsheetline6",dwidth/21,dheight/2.83,dwidth/1.055,dheight/2.83,)
+                            dcanvas.coords("liability_eq_lbl",dwidth/10,dheight/2.53,)
+                            dcanvas.coords("bsheetline7",dwidth/21,dheight/2.73,dwidth/1.055,dheight/2.73,)
+                            dcanvas.coords("total_asset_lbl",dwidth/10,dheight/3.11,)
+                            dcanvas.coords("current_liability_lbl",dwidth/9.60,dheight/2.33,)
+                            dcanvas.coords("account_payb_lbl",dwidth/9,dheight/2.13,) 
+                            dcanvas.coords("bsheetline8",dwidth/21,dheight/2.03,dwidth/1.055,dheight/2.03,)
+                            dcanvas.coords("bsheetline9",dwidth/21,dheight/1.93,dwidth/1.055,dheight/1.93,)
+                            dcanvas.coords("total_account_payb_lbl",dwidth/9,dheight/1.98,)
+                            dcanvas.coords("bsheetline10",dwidth/21,dheight/1.83,dwidth/1.055,dheight/1.83,) 
+                            
+                            dcanvas.coords("total_current_liabi_lbl",dwidth/9.60,dheight/1.88,)
+                            dcanvas.coords("equity_lbl",dwidth/9.60,dheight/1.78,)
+                            dcanvas.coords("profit_for_yr_lbl",dwidth/9,dheight/1.68,)
+                            dcanvas.coords("bsheetline11",dwidth/21,dheight/1.60,dwidth/1.055,dheight/1.60,) 
+                            dcanvas.coords("bsheetline12",dwidth/21,dheight/1.52,dwidth/1.055,dheight/1.52,) 
+                            dcanvas.coords("total_equity_lbl",dwidth/9.60,dheight/1.56,)
+                            dcanvas.coords("total_liabilities_eqity_lbl",dwidth/9.60,dheight/1.49,)
+                        acc_sr_Scroll3 = Scrollbar(accou_fr,orient=VERTICAL)
+                        acc_sr_Scroll3.pack(fill=Y,side="right")
+                        acc_sr_Scroll3.config(command=acc_canvas3.yview)
+                        acc_canvas3.bind("<Configure>", responsive_wid)
+                        acc_canvas3.config(yscrollcommand=acc_sr_Scroll3.set)
                         
+                        acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline1"))
+                        acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline2"))
+                        total_lbl=Label(acc_canvas3, text="Total", fg="black", anchor="nw",font=('Calibri 10'))
+                        total_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_lbl, tag=("total_lbl"))
+                        asset_lbl=Label(acc_canvas3, text="Assets", fg="black", anchor="nw",font=('Calibri 10 '))
+                        asset_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=asset_lbl, tag=("asset_lbl"))
+                        current_asset_lbl=Label(acc_canvas3, text="Current Assets", fg="black", anchor="nw",font=('Calibri 10 '))
+                        current_asset_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=current_asset_lbl, tag=("current_asset_lbl"))
+
+                        bank_lbl=Label(acc_canvas3, text="Bank", fg="black", anchor="nw",font=('Calibri 10 '))
+                        bank_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=bank_lbl, tag=("bank_lbl"))
+
+                        account_reci_lbl=Label(acc_canvas3, text="Account Receivable (Debtors)", fg="black", anchor="nw",font=('Calibri 10 '))
+                        account_reci_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=account_reci_lbl, tag=("account_reci_lbl"))
+                        acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline3"))                        
+                        acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline4")) 
+                        total_account_reci_lbl=Label(acc_canvas3, text="Total Account Receivable (Debtors)", fg="black", anchor="nw",font=('Calibri 10 '))
+                        total_account_reci_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_account_reci_lbl, tag=("total_account_reci_lbl")) 
+                        acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline5"))
+                        total_current_asset_lbl=Label(acc_canvas3, text="Total Current Asset", fg="black", anchor="nw",font=('Calibri 10 '))
+                        total_current_asset_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_current_asset_lbl, tag=("total_current_asset_lbl"))  
+                        acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline6")) 
+                        total_asset_lbl=Label(acc_canvas3, text="Total  Assets", fg="black", anchor="nw",font=('Calibri 10 '))
+                        total_asset_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_asset_lbl, tag=("total_asset_lbl"))    
+                        acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline7")) 
+                         
+                        liability_eq_lbl=Label(acc_canvas3, text="Liabilities and Equity", fg="black", anchor="nw",font=('Calibri 10 '))
+                        liability_eq_lb_place=acc_canvas3.create_window(0, 0, anchor="nw", window=liability_eq_lbl, tag=("liability_eq_lbl"))
+
+                        current_liability_lbl=Label(acc_canvas3, text="Current Liabilities", fg="black", anchor="nw",font=('Calibri 10 '))
+                        current_liability_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=current_liability_lbl, tag=("current_liability_lbl"))  
+                        account_payb_lbl=Label(acc_canvas3, text="Accounts Payable(Creditors)", fg="black", anchor="nw",font=('Calibri 10 '))
+                        account_payb_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=account_payb_lbl, tag=("account_payb_lbl"))  
+                        acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline8"))         
+                        acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline9"))
+                        total_account_payb_lbl=Label(acc_canvas3, text="Total Account Payable(Creditors)", fg="black", anchor="nw",font=('Calibri 10 '))
+                        total_account_pay_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_account_payb_lbl, tag=("total_account_payb_lbl")) 
+                        acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline10"))  
+                          
+                        total_current_liabi_lbl=Label(acc_canvas3, text="Total Current Liabilities", fg="black", anchor="nw",font=('Calibri 10 '))
+                        total_current_liabi_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_current_liabi_lbl, tag=("total_current_liabi_lbl")) 
+                        equity_lbl=Label(acc_canvas3, text="Equity", fg="black", anchor="nw",font=('Calibri 10 '))
+                        equity_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=equity_lbl, tag=("equity_lbl"))  
+                        profit_for_yr_lbl=Label(acc_canvas3, text="Profit for the year", fg="black", anchor="nw",font=('Calibri 10 '))
+                        profit_for_yr_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=profit_for_yr_lbl, tag=("profit_for_yr_lbl")) 
+                        acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline11"))  
+                        acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline12")) 
+                        total_equity_lbl=Label(acc_canvas3, text="Total Equity", fg="black", anchor="nw",font=('Calibri 10 '))
+                        total_equity_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_equity_lbl, tag=("total_equity_lbl")) 
+                        total_liabilities_eqity_lbl=Label(acc_canvas3, text="Total Liabilities and Equity", fg="black", anchor="nw",font=('Calibri 10 '))
+                        total_liabilities_eqity_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_liabilities_eqity_lbl, tag=("total_liabilities_eqity_lbl")) 
                     #Accouts_tab_canvas
                     acc_canvas = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
                     acc_sr_Scroll = Scrollbar(accou_fr,orient=VERTICAL)
