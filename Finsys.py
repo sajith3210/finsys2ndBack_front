@@ -23912,10 +23912,7 @@ def main_sign_in():
                             x1,y1,
                             ) 
                             dcanvas.coords("acc_canvas3",dwidth/20,dheight/1.65,) 
-                            
-
-
-
+                    
                             
                         # acc_canvas forget widget 
                         acc_canvas.pack_forget()
@@ -24073,13 +24070,29 @@ def main_sign_in():
                     OptionList=['import']
                     variable = StringVar()
                     variable.set(OptionList[0])
+
                     opt_men = OptionMenu(acc_canvas,variable, *OptionList)
                     opt_men.config(bg="#213b52")
                     opt_men_place=acc_canvas.create_window(0, 0, anchor="nw", window=opt_men, tag=("opt_men"))
-
+                    
+                    def displayaccounttab():
+                        for row in accounttablefetch():
+                            # acc_treeview.insert("",END,values=row)
+                            # acc_treeview.insert(parent='', index='end',text='', values=(row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
+                            pass
+                    # New category tab add tax button function 
+                    def accounttablefetch():
+                        p=fbcursor.execute("select * from app1_accounts1")
+                        
+                        rows=fbcursor.fetchall()
+                        print(rows)
+                        return rows
+                    
+                    displayaccounttab()
                     acc_treeview=ttk.Treeview(acc_canvas,columns=(1,2,3,4,5,6,7),)
                     
                     # format column  
+                    
                     acc_treeview.column("#0",width=0,stretch=NO)
                     acc_treeview.column("#1",anchor=CENTER,width=165)
                     acc_treeview.column('#2',anchor=CENTER,width=165)
@@ -24097,8 +24110,9 @@ def main_sign_in():
                     acc_treeview.heading('5',text='FINSYS BALANCE')
                     acc_treeview.heading('6',text='BANK BALANCE')
                     acc_treeview.heading('7',text='ACTION')
+                    # my_tree.insert(parent='',index='end',iid=0,text='',values=('','','','','','','open'))
                     acc_treeview_place=acc_canvas.create_window(0, 0, anchor="nw", window=acc_treeview, tag=("acc_treeview"))
-
+                    
                      #Reconciled_Tab_responsivie
                     def responsive_wid(event):
                         dwidth = event.width
