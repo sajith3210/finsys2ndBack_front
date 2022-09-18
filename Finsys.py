@@ -24047,6 +24047,21 @@ def main_sign_in():
                         total_equity_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_equity_lbl, tag=("total_equity_lbl")) 
                         total_liabilities_eqity_lbl=Label(acc_canvas3, text="Total Liabilities and Equity", fg="black", anchor="nw",font=('Calibri 10 '))
                         total_liabilities_eqity_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_liabilities_eqity_lbl, tag=("total_liabilities_eqity_lbl")) 
+                    
+                    def displayaccounttab():
+                        for row in accounttablefetch():
+                            # acc_treeview.insert("",END,values=row)
+                            acc_treeview.insert(parent='', index='end',iid=row,text='', values=(row[3],row[1],row[2],'',row[7],''))
+                            
+                           
+                        
+                    # New category tab add tax button function 
+                    def accounttablefetch():
+                        p=fbcursor.execute("select * from app1_accounts1")
+                        
+                        rows=fbcursor.fetchall()
+                        print(rows)
+                        return rows
                     #Accouts_tab_canvas
                     acc_canvas = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
                     acc_sr_Scroll = Scrollbar(accou_fr,orient=VERTICAL)
@@ -24075,32 +24090,21 @@ def main_sign_in():
                     opt_men.config(bg="#213b52")
                     opt_men_place=acc_canvas.create_window(0, 0, anchor="nw", window=opt_men, tag=("opt_men"))
                     
-                    def displayaccounttab():
-                        for row in accounttablefetch():
-                            # acc_treeview.insert("",END,values=row)
-                            # acc_treeview.insert(parent='', index='end',text='', values=(row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
-                            pass
-                    # New category tab add tax button function 
-                    def accounttablefetch():
-                        p=fbcursor.execute("select * from app1_accounts1")
-                        
-                        rows=fbcursor.fetchall()
-                        print(rows)
-                        return rows
-                    
-                    displayaccounttab()
-                    acc_treeview=ttk.Treeview(acc_canvas,columns=(1,2,3,4,5,6,7),)
+                  
+                    acc_treeview_scroll.pack(side=RIGHT,fill=Y)
+
+                    acc_treeview=ttk.Treeview(acc_canvas,columns=(1,2,3,4,5,6,),)
                     
                     # format column  
                     
                     acc_treeview.column("#0",width=0,stretch=NO)
-                    acc_treeview.column("#1",anchor=CENTER,width=165)
-                    acc_treeview.column('#2',anchor=CENTER,width=165)
-                    acc_treeview.column('#3',anchor=CENTER,width=165)
-                    acc_treeview.column('#4',anchor=CENTER,width=165)
-                    acc_treeview.column('#5',anchor=CENTER,width=165)
-                    acc_treeview.column('#6',anchor=CENTER,width=165)
-                    acc_treeview.column('#7',anchor=CENTER,width=165)
+                    acc_treeview.column("#1",anchor=CENTER,width=200)
+                    acc_treeview.column('#2',anchor=CENTER,width=200)
+                    acc_treeview.column('#3',anchor=CENTER,width=200)
+                    acc_treeview.column('#4',anchor=CENTER,width=200)
+                    acc_treeview.column('#5',anchor=CENTER,width=200)
+                    acc_treeview.column('#6',anchor=CENTER,width=200)
+                    # acc_treeview.column('#7',anchor=CENTER,width=165)
                     # format heading 
                     acc_treeview.heading("#0",text='',anchor=CENTER)
                     acc_treeview.heading('1',text='NAME')
@@ -24109,10 +24113,10 @@ def main_sign_in():
                     acc_treeview.heading('4',text='TAX RATE')
                     acc_treeview.heading('5',text='FINSYS BALANCE')
                     acc_treeview.heading('6',text='BANK BALANCE')
-                    acc_treeview.heading('7',text='ACTION')
+                    # acc_treeview.heading('7',text='ACTION')
                     # my_tree.insert(parent='',index='end',iid=0,text='',values=('','','','','','','open'))
                     acc_treeview_place=acc_canvas.create_window(0, 0, anchor="nw", window=acc_treeview, tag=("acc_treeview"))
-                    
+                    displayaccounttab()
                      #Reconciled_Tab_responsivie
                     def responsive_wid(event):
                         dwidth = event.width
@@ -28667,5 +28671,6 @@ win_inv1 = lf_signup.create_window(0, 0, anchor="nw", window=lft_lab2, tag=("lft
 
 btn2 = Button(main_frame_signin, text = 'Sign Up', command = func_sign_up, bg="white", fg="black",borderwidth = 3,height=1,width=10)
 win_inv1 = lf_signup.create_window(0, 0, anchor="nw", window=btn2, tag=("btn2"))
+
 
 root.mainloop() #s
