@@ -23797,6 +23797,7 @@ def main_sign_in():
                         x1,y1,
                         )
                         dcanvas.coords("acc_filter_entry",dwidth/17,dheight/3.84,)
+                        dcanvas.coords("edit_rnrpt_combo",dwidth/1.70,dheight/3.84,)
                         dcanvas.coords("run_rpt_btn",dwidth/1.30,dheight/3.84,)
                         dcanvas.coords("newt_btn",dwidth/1.20,dheight/3.84,)
                         dcanvas.coords("opt_men",dwidth/1.10,dheight/3.84,)
@@ -24089,11 +24090,70 @@ def main_sign_in():
                     opt_men = OptionMenu(acc_canvas,variable, *OptionList)
                     opt_men.config(bg="#213b52")
                     opt_men_place=acc_canvas.create_window(0, 0, anchor="nw", window=opt_men, tag=("opt_men"))
-                    
-                  
-                    acc_treeview_scroll.pack(side=RIGHT,fill=Y)
 
-                    acc_treeview=ttk.Treeview(acc_canvas,columns=(1,2,3,4,5,6,),)
+                    # combobox_select_edit_and_runreport 
+                    def edit_rnrpt(event):
+                        if edit_rnrpt_combo.get()=="Edit":
+                            print("dropdown work")
+                            acc_canvas.pack_forget()
+                            acc_sr_Scroll.pack_forget()
+                            def responsive_wid(event):
+                                dwidth = event.width
+                                dheight = event.height
+                                dcanvas = event.widget
+
+                                r1 = 25
+                                x1 = dwidth/63
+                                x2 = dwidth/1.021
+                                y1 = dheight/1
+                                y2 = dheight/5            #edit_rnrtpt_polygen_pr
+
+                                dcanvas.coords("edit_rnrtpt_polygen_pr",x1 +r1,y1,
+                                x1 + r1,y1,
+                                x2 - r1,y1,
+                                x2 - r1,y1,     
+                                x2,y1,     
+                                #--------------------
+                                x2,y1 + r1,     
+                                x2,y1 + r1,     
+                                x2,y2 - r1,     
+                                x2,y2 - r1,     
+                                x2,y2,
+                                #--------------------
+                                x2 - r1,y2,     
+                                x2 - r1,y2,     
+                                x1 + r1,y2,
+                                x1 + r1,y2,
+                                x1,y2,
+                                #--------------------
+                                x1,y2 - r1,
+                                x1,y2 - r1,
+                                x1,y1 + r1,
+                                x1,y1 + r1,
+                                x1,y1,
+                                )                    
+                                dcanvas.coords("acc_typ_lbl",dwidth/13,dheight/4.10,)
+                            global acc_canvas4
+                            acc_canvas4 = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,3000))
+                            acc_sr_Scroll4 = Scrollbar(accou_fr,orient=VERTICAL)
+                            acc_sr_Scroll4.pack(fill=Y,side="right")
+                            acc_sr_Scroll4.config(command=acc_canvas4.yview)
+                            acc_canvas4.bind("<Configure>", responsive_wid)
+                            acc_canvas4.config(yscrollcommand=acc_sr_Scroll4.set)
+                            acc_canvas4.pack(fill=X)
+                            acc_canvas4.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("edit_rnrtpt_polygen_pr"),smooth=True,)
+                            acc_typ_lbl=Label(acc_canvas4,text="Account Type",fg='white',bg="#386491")
+                            acc_typ_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=acc_typ_lbl, tag=("acc_typ_lbl"))
+
+
+                    edit_rnrpt_combo=ttk.Combobox(acc_canvas,font=('arial 10'),background="#213b52",foreground='white')
+                    edit_rnrpt_combo['values']=('Edit','Make Inactive','Run Report')
+                    edit_rnrpt_combo.current(0)
+                    
+                    edit_rnrpt_combo.bind("<<ComboboxSelected>>",edit_rnrpt)
+                    edit_menn_place=acc_canvas.create_window(0, 0, anchor="nw", window=edit_rnrpt_combo, tag=("edit_rnrpt_combo"))
+
+                    acc_treeview=ttk.Treeview(acc_canvas,height=300,columns=(1,2,3,4,5,6,),)
                     
                     # format column  
                     
