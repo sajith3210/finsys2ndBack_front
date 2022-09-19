@@ -24138,7 +24138,16 @@ def main_sign_in():
                                 dcanvas.coords("det_typ_lbl_entry",dwidth/13,dheight/2.80,)
                                 dcanvas.coords("edit_pg_scroll",dwidth/13,dheight/2.40,)
                                 dcanvas.coords("updatee_btn",dwidth/13,dheight/1.40,)
-                                dcanvas.coords("name_lbl",dwidth/2.55,dheight/4.10,)
+                                dcanvas.coords("name_lbl",dwidth/2,dheight/4.10,)
+                                dcanvas.coords("name_lbl_entry",dwidth/2,dheight/3.50,)
+                                dcanvas.coords("description_lbl",dwidth/2,dheight/3,)
+                                dcanvas.coords("description_lbl_entry",dwidth/2,dheight/2.70,)
+                                dcanvas.coords("sub_ac_lbl",dwidth/2,dheight/2.20,)
+                                dcanvas.coords("sub_Account_men",dwidth/2,dheight/2)
+                                dcanvas.coords("def_tax_code_lbl",dwidth/2,dheight/1.60)
+                                dcanvas.coords("defcode_men",dwidth/2,dheight/1.50)
+                                dcanvas.coords("Balance_lbl",dwidth/2,dheight/1.30)
+                                dcanvas.coords("Balance_lbl_entry",dwidth/2,dheight/1.20)
                             global acc_canvas4
                             acc_canvas4 = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,3000))
                             acc_sr_Scroll4 = Scrollbar(accou_fr,orient=VERTICAL)
@@ -24154,19 +24163,57 @@ def main_sign_in():
                             acc_typ_lbl_entry_place=acc_canvas4.create_window(0, 0, anchor="nw",width=500,height=25, window=acc_typ_lbl_entry, tag=("acc_typ_lbl_entry"))
                             det_typ_lbl=Label(acc_canvas4,text="*Detail Type",fg='white',bg="#213b52")
                             det_typ_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=det_typ_lbl, tag=("det_typ_lbl"))
-
                             det_typ_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",)
                             det_typ_lbl_entry_place=acc_canvas4.create_window(0, 0, anchor="nw",width=500,height=25, window=det_typ_lbl_entry, tag=("det_typ_lbl_entry"))
 
                             edit_pg_scroll=scrolledtext.ScrolledText(acc_canvas4,width=64,height=10,bg="#213b52",fg='white')
                             edit_pg_scroll_place = acc_canvas4.create_window(0, 0, anchor="nw",  window=edit_pg_scroll,tags=('edit_pg_scroll'))
                             edit_pg_scroll.insert(1.0,'Use Cash and Cash Equivalents to track cash or assets that can be converted into cash immediately. For example, marketable securities and Treasury bills.')
-                            
                             updatee_btn=Button(acc_canvas4,text='Update',fg='white',bg="#213b52",)
                             update_btn_place=acc_canvas4.create_window(0, 0, anchor="nw", window=updatee_btn, tag=("updatee_btn"))
-
                             name_lbl=Label(acc_canvas4,text="*Name",fg='white',bg="#213b52")
-                            acc_typ_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=name_lbl, tag=("name_lbl"))
+                            name_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=name_lbl, tag=("name_lbl"))
+                            name_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",)
+                            name_lbl_entry_place=acc_canvas4.create_window(0, 0, anchor="nw",width=500,height=25, window=name_lbl_entry, tag=("name_lbl_entry"))
+                            description_lbl=Label(acc_canvas4,text="Description",fg='white',bg="#213b52")
+                            description_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=description_lbl, tag=("description_lbl"))
+                            description_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",)
+                            description_lbl_entry_place=acc_canvas4.create_window(0, 0, anchor="nw",width=500,height=25, window=description_lbl_entry, tag=("description_lbl_entry"))
+                            sub_ac_lbl=Label(acc_canvas4,text="Sub-account",fg='white',bg="#213b52")
+                            sub_ac_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=sub_ac_lbl, tag=("sub_ac_lbl"))
+
+                            Account_List=['','Deferred CGST','Deferred GST Input Credit','Deferred IGST','Deferred Krishi Kalyan Cess Input Credit',
+                                'Deferred Service Tax Input Credit','Deferred SGST','Deferred VAT Input Credit','GST Refund','Inventory Asset',
+                                'Paid Insurance','Service Tax Refund','TDS Receivable','Uncategorised Asset','Accumulated Depreciation','Buildings and Improvements',
+                                'Furniture and Equipments','Land','Leasehold Improvements','Vehicles','CGST Payable','CST Payable','CST Suspense',
+                                'GST Payable','GST Suspense','IGST Payable','Input CGST','Input CGST Tax RCM','Input IGST','Input IGST Tax RCM',
+                                'Input Krishi Kalyan Cess','Input Krishi Kalyan Cess RCM','Input Service Tax','Input Service Tax RCM','Input SGST','Input SGST Tax RCM',
+                                'Input VAT 14 %','Input VAT 4%','Input VAT 5%','Krishi Kalyan Cess Payable','Krishi Kalyan Cess Suspense','Output CGST','Output CGST Tax RCM',
+                                'Output CST 2%','Output IGST','Output IGST Tax RCM','Output Krishi Kalyan Cess','Output Krishi Kalyan Cess RCM','Output Service Tax','Output Service Tax RCM','Output SGST','Output SGST Tax RCM','Output VAT 14%','Output VAT 4%','Output VAT 5%',
+                                'Service Tax Payable','Service Tax Suspense','SGST Payable','SGST Suspense','Swachh Barath Cess Payable','Swachh Barath Cess Suspense',
+                                'TDS Payable','VAT Payable','VAT Suspense',
+                                 ]
+                            sub_Account_variable = StringVar()
+                            sub_Account_variable.set(Account_List[0])
+                            sub_Account_men = OptionMenu(acc_canvas4,sub_Account_variable, *Account_List)
+                            sub_Account_men.config(bg="#213b52",width=30,fg='white')
+                            Account_men_place=acc_canvas4.create_window(0, 0, anchor="nw", window=sub_Account_men, tag=("sub_Account_men"))
+                            def_tax_code_lbl=Label(acc_canvas4,text="Default Tax Code",fg='white',bg="#213b52")
+                            def_tax_code_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=def_tax_code_lbl, tag=("def_tax_code_lbl"))
+                            def_code_List=['0% IGST','18.0% IGST','14.00% ST','0% IGST','Out of Scope','0% GST','14.5% ST','14.0% VAT','6.0% IGST','28.0% IGST',
+                            '15.0% ST','28.0% GST','12.0% GST','18.0% GST','3.0% GST','0.2% IGST','5.0% GST','6.0% GST','0.2% GST','Exempt IGST',
+                            '3.0% IGST','4.0% VAT','5.0% IGST','12.36% ST','5.0% VAT','Exempt GST','12.0% IGST','2.0% CST',
+                            ]
+                            defcode_variable = StringVar()
+                            defcode_variable.set(def_code_List[0])
+                            defcode_men = OptionMenu(acc_canvas4,defcode_variable, *def_code_List)
+                            defcode_men.config(bg="#213b52",width=30,fg='white')
+                            defcode_men_place=acc_canvas4.create_window(0, 0, anchor="nw", window=defcode_men, tag=("defcode_men"))
+                            Balance_lbl=Label(acc_canvas4,text="Balance",fg='white',bg="#213b52")
+                            Balance_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=Balance_lbl, tag=("Balance_lbl"))
+                            Balance_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",)
+                            Balance_lbl_entry_place=acc_canvas4.create_window(0, 0, anchor="nw",width=200,height=25, window=Balance_lbl_entry, tag=("Balance_lbl_entry"))
+
                     edit_rnrpt_combo=ttk.Combobox(acc_canvas,font=('arial 10'),background="#213b52",foreground='white')
                     edit_rnrpt_combo['values']=('Edit','Make Inactive','Run Report')
                     edit_rnrpt_combo.current(0)
