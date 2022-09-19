@@ -24133,6 +24133,12 @@ def main_sign_in():
                                 x1,y1,
                                 )                    
                                 dcanvas.coords("acc_typ_lbl",dwidth/13,dheight/4.10,)
+                                dcanvas.coords("acc_typ_lbl_entry",dwidth/13,dheight/3.55,)
+                                dcanvas.coords("det_typ_lbl",dwidth/13,dheight/3.10,)
+                                dcanvas.coords("det_typ_lbl_entry",dwidth/13,dheight/2.80,)
+                                dcanvas.coords("edit_pg_scroll",dwidth/13,dheight/2.40,)
+                                dcanvas.coords("updatee_btn",dwidth/13,dheight/1.40,)
+                                dcanvas.coords("name_lbl",dwidth/2.55,dheight/4.10,)
                             global acc_canvas4
                             acc_canvas4 = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,3000))
                             acc_sr_Scroll4 = Scrollbar(accou_fr,orient=VERTICAL)
@@ -24142,10 +24148,25 @@ def main_sign_in():
                             acc_canvas4.config(yscrollcommand=acc_sr_Scroll4.set)
                             acc_canvas4.pack(fill=X)
                             acc_canvas4.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("edit_rnrtpt_polygen_pr"),smooth=True,)
-                            acc_typ_lbl=Label(acc_canvas4,text="Account Type",fg='white',bg="#386491")
+                            acc_typ_lbl=Label(acc_canvas4,text="Account Type",fg='white',bg="#213b52")
                             acc_typ_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=acc_typ_lbl, tag=("acc_typ_lbl"))
+                            acc_typ_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",)
+                            acc_typ_lbl_entry_place=acc_canvas4.create_window(0, 0, anchor="nw",width=500,height=25, window=acc_typ_lbl_entry, tag=("acc_typ_lbl_entry"))
+                            det_typ_lbl=Label(acc_canvas4,text="*Detail Type",fg='white',bg="#213b52")
+                            det_typ_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=det_typ_lbl, tag=("det_typ_lbl"))
 
+                            det_typ_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",)
+                            det_typ_lbl_entry_place=acc_canvas4.create_window(0, 0, anchor="nw",width=500,height=25, window=det_typ_lbl_entry, tag=("det_typ_lbl_entry"))
 
+                            edit_pg_scroll=scrolledtext.ScrolledText(acc_canvas4,width=64,height=10,bg="#213b52",fg='white')
+                            edit_pg_scroll_place = acc_canvas4.create_window(0, 0, anchor="nw",  window=edit_pg_scroll,tags=('edit_pg_scroll'))
+                            edit_pg_scroll.insert(1.0,'Use Cash and Cash Equivalents to track cash or assets that can be converted into cash immediately. For example, marketable securities and Treasury bills.')
+                            
+                            updatee_btn=Button(acc_canvas4,text='Update',fg='white',bg="#213b52",)
+                            update_btn_place=acc_canvas4.create_window(0, 0, anchor="nw", window=updatee_btn, tag=("updatee_btn"))
+
+                            name_lbl=Label(acc_canvas4,text="*Name",fg='white',bg="#213b52")
+                            acc_typ_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=name_lbl, tag=("name_lbl"))
                     edit_rnrpt_combo=ttk.Combobox(acc_canvas,font=('arial 10'),background="#213b52",foreground='white')
                     edit_rnrpt_combo['values']=('Edit','Make Inactive','Run Report')
                     edit_rnrpt_combo.current(0)
