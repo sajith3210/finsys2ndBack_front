@@ -24148,6 +24148,31 @@ def main_sign_in():
                                 dcanvas.coords("defcode_men",dwidth/2,dheight/1.50)
                                 dcanvas.coords("Balance_lbl",dwidth/2,dheight/1.30)
                                 dcanvas.coords("Balance_lbl_entry",dwidth/2,dheight/1.20)
+
+                            def update():
+                                acc_typ=acctypvari.get()
+                                det_typ_var=dettypvari.get()
+                                nam_vari=name_vari.get()
+                                de_vari=descri_vari.get()
+                                sb_ac_var=sub_Account_variable.get()
+                                def_var=defcode_variable .get()
+                                ba_var=bal_vari.get()
+                                sql = 'select * from auth_user where username=%s'
+                                val = (nm_ent.get(),)
+                                fbcursor.execute(sql,val)
+                                u_id = fbcursor.fetchone()
+
+                                sql = 'select * from app1_company where id_id=%s'
+                                val = (u_id[0],)
+                                fbcursor.execute(sql,val)
+                                c_id = fbcursor.fetchone()
+                                # print(txname,des,c_id)
+                                sql="update app1_addtax1 set acctype=%s,dettype=%s,name=%s,description=%s,gst=%s,deftaxcode=%s,balance=%s,cid_id)" #ADDING VALUE INT APP1_ADDTAX1 TABLE
+                                val=(acc_typ,det_typ_var,nam_vari,de_vari,sb_ac_var,def_var,ba_var,c_id[0])
+                                fbcursor.execute(sql,val)
+                                finsysdb.commit()
+                                messagebox.showinfo("Update","Update successfully")
+
                             global acc_canvas4 , acctypvari,dettypvari,name_vari,descri_vari,sub_Account_variable,defcode_variable, bal_vari
                             acctypvari=StringVar()
                             dettypvari=StringVar()
@@ -24155,6 +24180,7 @@ def main_sign_in():
                             descri_vari=StringVar()
                             bal_vari=StringVar()
 
+                           
                             acc_canvas4 = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,3000))
                             acc_sr_Scroll4 = Scrollbar(accou_fr,orient=VERTICAL)
                             acc_sr_Scroll4.pack(fill=Y,side="right")
@@ -24177,7 +24203,7 @@ def main_sign_in():
                             edit_pg_scroll=scrolledtext.ScrolledText(acc_canvas4,width=64,height=10,bg="#213b52",fg='white')
                             edit_pg_scroll_place = acc_canvas4.create_window(0, 0, anchor="nw",  window=edit_pg_scroll,tags=('edit_pg_scroll'))
                             edit_pg_scroll.insert(1.0,'Use Cash and Cash Equivalents to track cash or assets that can be converted into cash immediately. For example, marketable securities and Treasury bills.')
-                            updatee_btn=Button(acc_canvas4,text='Update',fg='white',bg="#213b52",)
+                            updatee_btn=Button(acc_canvas4,text='Update',fg='white',bg="#213b52",command=update)
                             update_btn_place=acc_canvas4.create_window(0, 0, anchor="nw", window=updatee_btn, tag=("updatee_btn"))
                             name_lbl=Label(acc_canvas4,text="*Name",fg='white',bg="#213b52")
                             name_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=name_lbl, tag=("name_lbl"))
@@ -24186,6 +24212,7 @@ def main_sign_in():
                             name_lbl_entry_place=acc_canvas4.create_window(0, 0, anchor="nw",width=500,height=25, window=name_lbl_entry, tag=("name_lbl_entry"))
                             description_lbl=Label(acc_canvas4,text="Description",fg='white',bg="#213b52")
                             description_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=description_lbl, tag=("description_lbl"))
+                           
                             
                             description_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",textvariable=descri_vari)
                             description_lbl_entry_place=acc_canvas4.create_window(0, 0, anchor="nw",width=500,height=25, window=description_lbl_entry, tag=("description_lbl_entry"))
@@ -24229,7 +24256,7 @@ def main_sign_in():
                             dettypvari.set(det_typ_val)
                             name_vari.set(name_val)
                             bal_vari.set(bal_val)
-
+                            
                     edit_rnrpt_combo=ttk.Combobox(acc_canvas,font=('arial 10'),background="#213b52",foreground='white')
                     edit_rnrpt_combo['values']=('Edit','Make Inactive','Run Report')
                     edit_rnrpt_combo.current(0)
