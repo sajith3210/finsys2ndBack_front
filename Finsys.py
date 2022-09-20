@@ -24148,7 +24148,13 @@ def main_sign_in():
                                 dcanvas.coords("defcode_men",dwidth/2,dheight/1.50)
                                 dcanvas.coords("Balance_lbl",dwidth/2,dheight/1.30)
                                 dcanvas.coords("Balance_lbl_entry",dwidth/2,dheight/1.20)
-                            global acc_canvas4
+                            global acc_canvas4 , acctypvari,dettypvari,name_vari,descri_vari,sub_Account_variable,defcode_variable, bal_vari
+                            acctypvari=StringVar()
+                            dettypvari=StringVar()
+                            name_vari=StringVar()
+                            descri_vari=StringVar()
+                            bal_vari=StringVar()
+
                             acc_canvas4 = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,3000))
                             acc_sr_Scroll4 = Scrollbar(accou_fr,orient=VERTICAL)
                             acc_sr_Scroll4.pack(fill=Y,side="right")
@@ -24159,11 +24165,13 @@ def main_sign_in():
                             acc_canvas4.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("edit_rnrtpt_polygen_pr"),smooth=True,)
                             acc_typ_lbl=Label(acc_canvas4,text="Account Type",fg='white',bg="#213b52")
                             acc_typ_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=acc_typ_lbl, tag=("acc_typ_lbl"))
-                            acc_typ_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",)
+                            acc_typ_val=acc_treeview.item(acc_treeview.focus())["values"][1]
+                            acc_typ_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",textvariable=acctypvari)
                             acc_typ_lbl_entry_place=acc_canvas4.create_window(0, 0, anchor="nw",width=500,height=25, window=acc_typ_lbl_entry, tag=("acc_typ_lbl_entry"))
                             det_typ_lbl=Label(acc_canvas4,text="*Detail Type",fg='white',bg="#213b52")
                             det_typ_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=det_typ_lbl, tag=("det_typ_lbl"))
-                            det_typ_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",)
+                            det_typ_val=acc_treeview.item(acc_treeview.focus())["values"][2]
+                            det_typ_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",textvariable=dettypvari)
                             det_typ_lbl_entry_place=acc_canvas4.create_window(0, 0, anchor="nw",width=500,height=25, window=det_typ_lbl_entry, tag=("det_typ_lbl_entry"))
 
                             edit_pg_scroll=scrolledtext.ScrolledText(acc_canvas4,width=64,height=10,bg="#213b52",fg='white')
@@ -24173,11 +24181,13 @@ def main_sign_in():
                             update_btn_place=acc_canvas4.create_window(0, 0, anchor="nw", window=updatee_btn, tag=("updatee_btn"))
                             name_lbl=Label(acc_canvas4,text="*Name",fg='white',bg="#213b52")
                             name_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=name_lbl, tag=("name_lbl"))
-                            name_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",)
+                            name_val=acc_treeview.item(acc_treeview.focus())["values"][0]
+                            name_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",textvariable=name_vari)
                             name_lbl_entry_place=acc_canvas4.create_window(0, 0, anchor="nw",width=500,height=25, window=name_lbl_entry, tag=("name_lbl_entry"))
                             description_lbl=Label(acc_canvas4,text="Description",fg='white',bg="#213b52")
                             description_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=description_lbl, tag=("description_lbl"))
-                            description_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",)
+                            
+                            description_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",textvariable=descri_vari)
                             description_lbl_entry_place=acc_canvas4.create_window(0, 0, anchor="nw",width=500,height=25, window=description_lbl_entry, tag=("description_lbl_entry"))
                             sub_ac_lbl=Label(acc_canvas4,text="Sub-account",fg='white',bg="#213b52")
                             sub_ac_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=sub_ac_lbl, tag=("sub_ac_lbl"))
@@ -24204,15 +24214,21 @@ def main_sign_in():
                             '15.0% ST','28.0% GST','12.0% GST','18.0% GST','3.0% GST','0.2% IGST','5.0% GST','6.0% GST','0.2% GST','Exempt IGST',
                             '3.0% IGST','4.0% VAT','5.0% IGST','12.36% ST','5.0% VAT','Exempt GST','12.0% IGST','2.0% CST',
                             ]
-                            defcode_variable = StringVar()
+                            defcode_variable = StringVar() 
                             defcode_variable.set(def_code_List[0])
                             defcode_men = OptionMenu(acc_canvas4,defcode_variable, *def_code_List)
                             defcode_men.config(bg="#213b52",width=30,fg='white')
                             defcode_men_place=acc_canvas4.create_window(0, 0, anchor="nw", window=defcode_men, tag=("defcode_men"))
                             Balance_lbl=Label(acc_canvas4,text="Balance",fg='white',bg="#213b52")
                             Balance_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=Balance_lbl, tag=("Balance_lbl"))
-                            Balance_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",)
+                            Balance_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",textvariable=bal_vari)
                             Balance_lbl_entry_place=acc_canvas4.create_window(0, 0, anchor="nw",width=200,height=25, window=Balance_lbl_entry, tag=("Balance_lbl_entry"))
+                            bal_val=acc_treeview.item(acc_treeview.focus())["values"][4]
+
+                            acctypvari.set(acc_typ_val)
+                            dettypvari.set(det_typ_val)
+                            name_vari.set(name_val)
+                            bal_vari.set(bal_val)
 
                     edit_rnrpt_combo=ttk.Combobox(acc_canvas,font=('arial 10'),background="#213b52",foreground='white')
                     edit_rnrpt_combo['values']=('Edit','Make Inactive','Run Report')
