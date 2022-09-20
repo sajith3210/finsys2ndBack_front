@@ -24166,9 +24166,11 @@ def main_sign_in():
                                 val = (u_id[0],)
                                 fbcursor.execute(sql,val)
                                 c_id = fbcursor.fetchone()
+
+                                
                                 # print(txname,des,c_id)
-                                sql="update app1_addtax1 set acctype=%s,dettype=%s,name=%s,description=%s,gst=%s,deftaxcode=%s,balance=%s,cid_id)" #ADDING VALUE INT APP1_ADDTAX1 TABLE
-                                val=(acc_typ,det_typ_var,nam_vari,de_vari,sb_ac_var,def_var,ba_var,c_id[0])
+                                sql="update app1_accounts1 set acctype=%s,detype=%s,name=%s,description=%s,gst=%s,deftaxcode=%s,balance=%s,cid_id=%s where acctype=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
+                                val=(acc_typ,det_typ_var,nam_vari,de_vari,sb_ac_var,def_var,ba_var,c_id[0],acc_typ)
                                 fbcursor.execute(sql,val)
                                 finsysdb.commit()
                                 messagebox.showinfo("Update","Update successfully")
