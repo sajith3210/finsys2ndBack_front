@@ -24392,6 +24392,13 @@ def main_sign_in():
                             pass
                     # start reconcling front end 
                     def start_reconcling():
+                        acc_var=Account_variable.get()
+                        beg_bal_var=beg_bal_varia.get()
+                        end_bal_var=end_bal_varia.get()
+                        ser_chr_var=ser_chrg_vari.get()
+                        exp_ac_var=exp_account_variable.get()
+                        date_var=date_varia.get()
+                        end_dt_var=end_dt_vari.get()
                         def responsive_wid(event):
                             dwidth = event.width
                             dheight = event.height
@@ -24541,6 +24548,13 @@ def main_sign_in():
                     'Service Tax Payable','Service Tax Suspense','SGST Payable','SGST Suspense','Swachh Barath Cess Payable','Swachh Barath Cess Suspense',
                     'TDS Payable','VAT Payable','VAT Suspense',
                     ]
+                    global Account_variable,beg_bal_varia,end_bal_varia,ser_chrg_vari,exp_account_variable,date_varia,end_dt_vari
+                    beg_bal_varia=StringVar()
+                    end_bal_varia=StringVar()
+                    ser_chrg_varia=StringVar()
+                    date_varia=StringVar()
+                    end_dt_varia=StringVar()
+
                     Account_variable = StringVar()
                     Account_variable.set(Account_List[0])
                     Account_men = OptionMenu(rcon_canvas,Account_variable, *Account_List)
@@ -24555,9 +24569,9 @@ def main_sign_in():
                     end_bal_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=end_bal_lbl, tag=("end_bal_lbl"))
                     end_date_lbl=Label(rcon_canvas, text="Ending date*",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
                     end_date_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=end_date_lbl, tag=("end_date_lbl"))
-                    beg_bal_entry=Entry(rcon_canvas,font=('Calibri 8'))
+                    beg_bal_entry=Entry(rcon_canvas,font=('Calibri 8'),textvariable=beg_bal_varia)
                     beg_bal_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=beg_bal_entry, tag=("beg_bal_entry"))
-                    end_bal_entry=Entry(rcon_canvas,font=('Calibri 8'))
+                    end_bal_entry=Entry(rcon_canvas,font=('Calibri 8'),textvariable=end_bal_varia)
                     end_bal_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=end_bal_entry, tag=("end_bal_entry"))
                     enter_the_servi_lbl=Label(rcon_canvas, text="Enter the service charge or interest earned, if necessary",bg="#213b52", fg="White", anchor="nw",font=('Calibri 16 bold'))
                     enter_the_servi_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=enter_the_servi_lbl, tag=("enter_the_servi_lbl"))
@@ -24567,7 +24581,7 @@ def main_sign_in():
                     servise_chr_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=servise_chr_lbl, tag=("servise_chr_lbl"))
                     expence_ac_lbl=Label(rcon_canvas, text="Expense Account",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
                     expence_ac_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=expence_ac_lbl, tag=("expence_ac_lbl"))
-                    servise_chrg_entry=Entry(rcon_canvas,font=('Calibri 8'))
+                    servise_chrg_entry=Entry(rcon_canvas,font=('Calibri 8'),textvariable=ser_chrg_varia)
                     servise_chrg_place=rcon_canvas.create_window(0, 0, anchor="nw", window=servise_chrg_entry, tag=("servise_chrg_entry"))
                     
                     exp_account_list=['Advertising/Promotional','Bank Charges','Business Licenses and Permits','Charitable Contributions','Computer and Internet Expense',
@@ -24591,9 +24605,9 @@ def main_sign_in():
                     exp_account_men_place=rcon_canvas.create_window(0, 0, anchor="nw", window=exp_account_men, tag=("exp_account_men"))
                     strt_rec_btn=Button(rcon_canvas,bg="#213b52",text="Start Reconciling",fg="white",width=15,command=start_reconcling)
                     strt_rec_btn_place=rcon_canvas.create_window(0, 0, anchor="nw", window=strt_rec_btn, tag=("strt_rec_btn"))
-                    end_date_entry=DateEntry(rcon_canvas,selectmode='day')
+                    end_date_entry=DateEntry(rcon_canvas,selectmode='day',textvariable=end_dt_varia)
                     end_date_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=end_date_entry, tag=("end_date_entry"))
-                    date_lbl_entry=DateEntry(rcon_canvas,selectmode='day')
+                    date_lbl_entry=DateEntry(rcon_canvas,selectmode='day',textvariable=date_varia)
                     date_lbl_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=date_lbl_entry, tag=("date_lbl_entry"))
                     #33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333{Cash Management}
                     tab_cash = ttk.Notebook(tab10)
