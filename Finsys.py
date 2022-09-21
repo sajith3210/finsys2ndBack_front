@@ -23720,6 +23720,7 @@ def main_sign_in():
                     tab_account.pack(expand = 1, fill ="both")
                     global accou_fr
                     #Accounts_tab_frame
+                    global accou_fr
                     accou_fr=Frame(tab8_1,width=1366,height=768,bg="#2f516f")
                     accou_fr.pack(fill=X)
                     #Reconsile_tab_frame
@@ -23941,9 +23942,10 @@ def main_sign_in():
                         run_rpt_btn=Button(acc_canvas2,bg="#213b52",text="Run Report",fg="white",width=15,)
                         run_rpt_place=acc_canvas2.create_window(0, 0, anchor="nw", window=run_rpt_btn, tag=("run_rpt_btn"))
                         def bsheet_back():
-                            accou_fr.pack_forget()
-                            accou_fr=Frame(tab8_1,width=1366,height=768,bg="#2f516f")
-                        back_btn=Button(acc_canvas2,bg="#213b52",text="Back",fg="white",width=15,command=bsheet_back)
+                           print("back button start")
+                           acc_canvas2.pack_forget()
+                           acc_canvas.pack(fill=X)
+                        back_btn=Button(acc_canvas2,bg="#213b52",text="←Back",fg="white",width=15,command=bsheet_back)
                         back_btn_place=acc_canvas2.create_window(0, 0, anchor="nw", window=back_btn, tag=("back_btn"))
                         acc_canvas2.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("bsheet_polygen_pr3"),smooth=True,) #213b52
 
@@ -24064,6 +24066,7 @@ def main_sign_in():
                         print(rows)
                         return rows
                     #Accouts_tab_canvas
+                    global acc_canvas
                     acc_canvas = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
                     acc_sr_Scroll = Scrollbar(accou_fr,orient=VERTICAL)
                     acc_sr_Scroll.pack(fill=Y,side="right")
