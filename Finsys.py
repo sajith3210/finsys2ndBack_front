@@ -24378,16 +24378,21 @@ def main_sign_in():
                             
                             dcanvas.coords("servise_chr_lbl",dwidth/2.65,dheight/1.10,)
                             dcanvas.coords("expence_ac_lbl",dwidth/2,dheight/1.10,)
-                            
                             dcanvas.coords("servise_chrg_entry",dwidth/2.65,dheight/1,)
-                            
                             dcanvas.coords("exp_account_men",dwidth/2,dheight/1,)
-                            dcanvas.coords("strt_rec_btn",dwidth/2.65,dheight/0.90,)
+                            dcanvas.coords("strt_rec_btn",dwidth/2.65,dheight/0.67,)
+                            dcanvas.coords("income_date_lbl",dwidth/4,dheight/0.80,)
+                            dcanvas.coords("interest_earn_lbl",dwidth/2.65,dheight/0.80,)
+                            dcanvas.coords("income_ac_lbl",dwidth/2,dheight/0.80,)
+                            dcanvas.coords("interest_earn_lbl_entry",dwidth/2.65,dheight/0.73,)
+                            dcanvas.coords("income_account_men",dwidth/2,dheight/0.73,)
                         except:
                             pass
                         try:
                             dcanvas.coords("end_date_entry",dwidth/2,dheight/1.40,)
                             dcanvas.coords("date_lbl_entry",dwidth/4,dheight/1,)
+                            dcanvas.coords("icome_date_entry",dwidth/4,dheight/0.73,)
+                            
                         except:
                             pass
                     # start reconcling front end 
@@ -24609,6 +24614,24 @@ def main_sign_in():
                     end_date_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=end_date_entry, tag=("end_date_entry"))
                     date_lbl_entry=DateEntry(rcon_canvas,selectmode='day',textvariable=date_varia)
                     date_lbl_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=date_lbl_entry, tag=("date_lbl_entry"))
+                    income_date_lbl=Label(rcon_canvas, text="Date",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
+                    income_date_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=income_date_lbl, tag=("income_date_lbl"))
+                    interest_earn_lbl=Label(rcon_canvas, text="Interest earned",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
+                    interest_earn_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=interest_earn_lbl, tag=("interest_earn_lbl"))
+                    income_ac_lbl=Label(rcon_canvas, text="Interest account",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
+                    income_ac_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=income_ac_lbl, tag=("income_ac_lbl"))
+                    interest_earn_lbl_entry=Entry(rcon_canvas,font=('Calibri 8'),)
+                    interest_earn_lbl_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=interest_earn_lbl_entry, tag=("interest_earn_lbl_entry"))
+                    income_account_list=['Finance Charge Income','Insurance Proceeds Received','Interest Income','Proceeds From Sale of Asset','Shipping and Delivery Income','Billable Expense Income',
+                    'Consulting Income',
+                    ]
+                    income_account_variable = StringVar()
+                    income_account_variable.set(income_account_list[0])
+                    income_account_men=OptionMenu(rcon_canvas,income_account_variable, *income_account_list)
+                    income_account_men.config(bg="#213b52",width=28,fg='white')
+                    income_account_men_place=rcon_canvas.create_window(0, 0, anchor="nw", window=income_account_men, tag=("income_account_men"))
+                    icome_date_entry=DateEntry(rcon_canvas,selectmode='day',textvariable=end_dt_varia)
+                    income_date_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=icome_date_entry, tag=("icome_date_entry"))
                     #33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333{Cash Management}
                     tab_cash = ttk.Notebook(tab10)
                     
