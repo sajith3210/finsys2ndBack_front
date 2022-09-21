@@ -24414,8 +24414,13 @@ def main_sign_in():
                         fbcursor.execute(sql,val)
                         cid=fbcursor.fetchone()
 
-                        sql="INSERT INTO app1_expenseaccount (account,begbal,endbal,enddate,dat,serchar,expacc,cid_id) values(%s,%s,%s,%s,%s,%s,%s,%s)"
-                        val=(acc_var,beg_bal_var,end_bal_var,end_dt_var,date_var,ser_chr_var,exp_ac_var,cid[0])
+                        sql="select accountypeid from app1_accountype where accountname=%s"
+                        val=(acc_var,)
+                        fbcursor.execute(sql,val)
+                        actypid=fbcursor.fetchone()
+
+                        sql="INSERT INTO app1_expenseaccount (account,begbal,endbal,enddate,dat,serchar,expacc,cid_id,expaccountypid_id) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                        val=(acc_var,beg_bal_var,end_bal_var,end_dt_var,date_var,ser_chr_var,exp_ac_var,cid[0],actypid[0])
                         fbcursor.execute(sql,val)
                         finsysdb.commit()
                         def responsive_wid(event):
@@ -24555,18 +24560,29 @@ def main_sign_in():
                     which_acct_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=which_acct_lbl, tag=("which_acct_lbl"))
                     Account_lbl=Label(rcon_canvas, text="Account",bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
                     Account_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=Account_lbl, tag=("Account_lbl"))
-
-                    Account_List=['Deferred CGST','Deferred GST Input Credit','Deferred IGST','Deferred Krishi Kalyan Cess Input Credit',
-                    'Deferred Service Tax Input Credit','Deferred SGST','Deferred VAT Input Credit','GST Refund','Inventory Asset',
-                    'Paid Insurance','Service Tax Refund','TDS Receivable','Uncategorised Asset','Accumulated Depreciation','Buildings and Improvements',
-                    'Furniture and Equipments','Land','Leasehold Improvements','Vehicles','CGST Payable','CST Payable','CST Suspense',
-                    'GST Payable','GST Suspense','IGST Payable','Input CGST','Input CGST Tax RCM','Input IGST','Input IGST Tax RCM',
-                    'Input Krishi Kalyan Cess','Input Krishi Kalyan Cess RCM','Input Service Tax','Input Service Tax RCM','Input SGST','Input SGST Tax RCM',
-                    'Input VAT 14 %','Input VAT 4%','Input VAT 5%','Krishi Kalyan Cess Payable','Krishi Kalyan Cess Suspense','Output CGST','Output CGST Tax RCM',
-                    'Output CST 2%','Output IGST','Output IGST Tax RCM','Output Krishi Kalyan Cess','Output Krishi Kalyan Cess RCM','Output Service Tax','Output Service Tax RCM','Output SGST','Output SGST Tax RCM','Output VAT 14%','Output VAT 4%','Output VAT 5%',
-                    'Service Tax Payable','Service Tax Suspense','SGST Payable','SGST Suspense','Swachh Barath Cess Payable','Swachh Barath Cess Suspense',
-                    'TDS Payable','VAT Payable','VAT Suspense',
-                    ]
+                    ac_sql="select accountname from app1_accountype"
+                    
+                    ex=fbcursor.execute(ac_sql)
+                    
+                    ac=fbcursor.fetchall()
+                    # print('table is',ac)
+                    # alist=ac[1]
+                    Account_List=[]
+                    for x in ac:
+                        for k in x:
+                            Account_List.append(k)
+                            print("acc lst this is",Account_List,)
+                    # Account_List=['Deferred CGST','Deferred GST Input Credit','Deferred IGST','Deferred Krishi Kalyan Cess Input Credit',
+                    # 'Deferred Service Tax Input Credit','Deferred SGST','Deferred VAT Input Credit','GST Refund','Inventory Asset',
+                    # 'Paid Insurance','Service Tax Refund','TDS Receivable','Uncategorised Asset','Accumulated Depreciation','Buildings and Improvements',
+                    # 'Furniture and Equipments','Land','Leasehold Improvements','Vehicles','CGST Payable','CST Payable','CST Suspense',
+                    # 'GST Payable','GST Suspense','IGST Payable','Input CGST','Input CGST Tax RCM','Input IGST','Input IGST Tax RCM',
+                    # 'Input Krishi Kalyan Cess','Input Krishi Kalyan Cess RCM','Input Service Tax','Input Service Tax RCM','Input SGST','Input SGST Tax RCM',
+                    # 'Input VAT 14 %','Input VAT 4%','Input VAT 5%','Krishi Kalyan Cess Payable','Krishi Kalyan Cess Suspense','Output CGST','Output CGST Tax RCM',
+                    # 'Output CST 2%','Output IGST','Output IGST Tax RCM','Output Krishi Kalyan Cess','Output Krishi Kalyan Cess RCM','Output Service Tax','Output Service Tax RCM','Output SGST','Output SGST Tax RCM','Output VAT 14%','Output VAT 4%','Output VAT 5%',
+                    # 'Service Tax Payable','Service Tax Suspense','SGST Payable','SGST Suspense','Swachh Barath Cess Payable','Swachh Barath Cess Suspense',
+                    # 'TDS Payable','VAT Payable','VAT Suspense',
+                    # ]
                     global Account_variable,beg_bal_varia,end_bal_varia,ser_chrg_vari,exp_account_variable,date_varia,end_dt_vari
                     beg_bal_varia=StringVar()
                     end_bal_varia=StringVar()
