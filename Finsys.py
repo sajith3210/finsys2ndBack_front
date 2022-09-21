@@ -24400,10 +24400,24 @@ def main_sign_in():
                         acc_var=Account_variable.get()
                         beg_bal_var=beg_bal_varia.get()
                         end_bal_var=end_bal_varia.get()
-                        ser_chr_var=ser_chrg_vari.get()
+                        ser_chr_var=ser_chrg_varia.get()
                         exp_ac_var=exp_account_variable.get()
                         date_var=date_varia.get()
-                        end_dt_var=end_dt_vari.get()
+                        end_dt_var=end_dt_varia.get()
+                        sql="select * from auth_user where username=%s"
+                        val=(nm_ent.get(),)
+                        fbcursor.execute(sql,val)
+                        u_id=fbcursor.fetchone()
+
+                        sql="select * from app1_company where id_id=%s"
+                        val=(u_id[0],)
+                        fbcursor.execute(sql,val)
+                        cid=fbcursor.fetchone()
+
+                        sql="INSERT INTO app1_expenseaccount (account,begbal,endbal,enddate,dat,serchar,expacc,cid_id) values(%s,%s,%s,%s,%s,%s,%s,%s)"
+                        val=(acc_var,beg_bal_var,end_bal_var,end_dt_var,date_var,ser_chr_var,exp_ac_var,cid[0])
+                        fbcursor.execute(sql,val)
+                        finsysdb.commit()
                         def responsive_wid(event):
                             dwidth = event.width
                             dheight = event.height
