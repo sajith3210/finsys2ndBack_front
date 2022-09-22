@@ -23917,10 +23917,11 @@ def main_sign_in():
                             dcanvas.coords("acc_canvas3",dwidth/20,dheight/1.65,) 
                     
                             
-                        # acc_canvas forget widget 
+                        # acc_canvas forget widget
+                         
                         acc_canvas.pack_forget()
                         acc_sr_Scroll.pack_forget()
-                        global acc_canvas2
+                        global acc_canvas2,acc_sr_Scroll2
                         acc_canvas2 = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,3000))
                         acc_sr_Scroll2 = Scrollbar(accou_fr,orient=VERTICAL)
                         acc_sr_Scroll2.pack(fill=Y,side="right")
@@ -23943,9 +23944,10 @@ def main_sign_in():
                         run_rpt_btn=Button(acc_canvas2,bg="#213b52",text="Run Report",fg="white",width=15,)
                         run_rpt_place=acc_canvas2.create_window(0, 0, anchor="nw", window=run_rpt_btn, tag=("run_rpt_btn"))
                         def bsheet_back():
-                           
                            acc_canvas2.pack_forget()
+                           acc_sr_Scroll2.pack_forget()
                            acc_canvas.pack(fill=X)
+                        #    acc_sr_Scroll.pack(fill=Y,side="right")
                         back_btn=Button(acc_canvas2,bg="#213b52",text="←Back",fg="white",width=15,command=bsheet_back)
                         back_btn_place=acc_canvas2.create_window(0, 0, anchor="nw", window=back_btn, tag=("back_btn"))
                         acc_canvas2.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("bsheet_polygen_pr3"),smooth=True,) #213b52
@@ -24055,19 +24057,20 @@ def main_sign_in():
                     def filter_tb():
                         acc_treeview.delete(*acc_treeview.get_children())
                         fil_val=acc_filter_entry.get()
+                        sq_str='"%{}%"'.format(fil_val)
                         if fil_val=="":
                             displayaccounttab()
                         else:
-                            sql="select * from app1_accounts1 where name Like '%{fil_val}%'"
+                            sql="select * from app1_accounts1 where name Like {}".format(sq_str)
                             # fbcursor.execute("select * from app1_accounts1 where name Like '% %'".format(fil_val))
                             fbcursor.execute(sql)
                             fech=fbcursor.fetchall()
                             print("fech isdf is isi si si si s",fech)
                             for row in fech:
-                                acc_treeview.insert.insert(parent='', index='end',iid=row,text='', values=(row[3],row[1],row[2],row[6],row[7],''))
+                                acc_treeview.insert(parent='', index='end',iid=row,text='', values=(row[3],row[1],row[2],row[6],row[7],''))
 
+                       
                         
-                        acc_treeview
 
                     def displayaccounttab():
                         for row in accounttablefetch():
@@ -24080,6 +24083,161 @@ def main_sign_in():
                         rows=fbcursor.fetchall()
                         print(rows)
                         return rows
+
+                    def new_ac_cret():
+                        acc_canvas.pack_forget()
+                        acc_sr_Scroll.pack_forget()
+                        def responsive_wid(event):
+                            dwidth = event.width
+                            dheight = event.height
+                            dcanvas = event.widget
+
+                            r1 = 25
+                            x1 = dwidth/63
+                            x2 = dwidth/1.021
+                            y1 = dheight/1
+                            y2 = dheight/5            #new_rnrtpt_polygen_pr
+
+                            dcanvas.coords("new_rnrtpt_polygen_pr",x1 +r1,y1,
+                            x1 + r1,y1,
+                            x2 - r1,y1,
+                            x2 - r1,y1,     
+                            x2,y1,     
+                            #--------------------
+                            x2,y1 + r1,     
+                            x2,y1 + r1,     
+                            x2,y2 - r1,     
+                            x2,y2 - r1,     
+                            x2,y2,
+                            #--------------------
+                            x2 - r1,y2,     
+                            x2 - r1,y2,     
+                            x1 + r1,y2,
+                            x1 + r1,y2,
+                            x1,y2,
+                            #--------------------
+                            x1,y2 - r1,
+                            x1,y2 - r1,
+                            x1,y1 + r1,
+                            x1,y1 + r1,
+                            x1,y1,
+                            )                    
+                            dcanvas.coords("acc_typ_lbl",dwidth/13,dheight/4.10,)
+                            dcanvas.coords("acc_typ_lbl_entry",dwidth/13,dheight/3.55,)
+                            dcanvas.coords("det_typ_lbl",dwidth/13,dheight/3.10,)
+                            dcanvas.coords("det_typ_lbl_entry",dwidth/13,dheight/2.80,)
+                            dcanvas.coords("edit_pg_scroll",dwidth/13,dheight/2.40,)
+                            dcanvas.coords("updatee_btn",dwidth/13,dheight/1.40,)
+                            dcanvas.coords("name_lbl",dwidth/2,dheight/4.10,)
+                            dcanvas.coords("name_lbl_entry",dwidth/2,dheight/3.50,)
+                            dcanvas.coords("description_lbl",dwidth/2,dheight/3,)
+                            dcanvas.coords("description_lbl_entry",dwidth/2,dheight/2.70,)
+                            dcanvas.coords("sub_ac_lbl",dwidth/2,dheight/2.20,)
+                            dcanvas.coords("sub_Account_men",dwidth/2,dheight/2)
+                            dcanvas.coords("def_tax_code_lbl",dwidth/2,dheight/1.60)
+                            dcanvas.coords("defcode_men",dwidth/2,dheight/1.50)
+                            dcanvas.coords("Balance_lbl",dwidth/2,dheight/1.30)
+                            dcanvas.coords("Balance_lbl_entry",dwidth/2,dheight/1.20)
+
+                        def update():
+                            acc_typ=acctypvariab.get()
+                            det_typ_var=dettypvariab.get()
+                            nam_vari=name_variab.get()
+                            de_vari=descri_variab.get()
+                            sb_ac_var=sub_Account_variab.get()
+                            def_var=defcode_variab .get()
+                            ba_var=bal_variab.get()
+                            sql = 'select * from auth_user where username=%s'
+                            val = (nm_ent.get(),)
+                            fbcursor.execute(sql,val)
+                            u_id = fbcursor.fetchone()
+
+                            sql = 'select * from app1_company where id_id=%s'
+                            val = (u_id[0],)
+                            fbcursor.execute(sql,val)
+                            c_id = fbcursor.fetchone()
+                            # print(txname,des,c_id)
+                            sql="update app1_accounts1 set acctype=%s,detype=%s,name=%s,description=%s,gst=%s,deftaxcode=%s,balance=%s,cid_id=%s where acctype=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
+                            val=(acc_typ,det_typ_var,nam_vari,de_vari,sb_ac_var,def_var,ba_var,c_id[0],acc_typ)
+                            fbcursor.execute(sql,val)
+                            finsysdb.commit()
+                            messagebox.showinfo("Update","Update successfully")
+                        global acc_canvas5 , acctypvariab,dettypvariab,name_variab,descri_variab,sub_Account_variab,defcode_variab, bal_variab
+                        acctypvariab=StringVar()
+                        dettypvariab=StringVar()
+                        name_variab=StringVar()
+                        descri_variab=StringVar()
+                        bal_variab=StringVar()
+                        acc_canvas5 = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,3000))
+                        acc_sr_Scroll5 = Scrollbar(accou_fr,orient=VERTICAL)
+                        acc_sr_Scroll5.pack(fill=Y,side="right")
+                        acc_sr_Scroll5.config(command=acc_canvas5.yview)
+                        acc_canvas5.bind("<Configure>", responsive_wid)
+                        acc_canvas5.config(yscrollcommand=acc_sr_Scroll5.set)
+                        acc_canvas5.pack(fill=X)
+                        acc_canvas5.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("new_rnrtpt_polygen_pr"),smooth=True,)
+                        acc_typ_lbl=Label(acc_canvas5,text="Account Type",fg='white',bg="#213b52")
+                        acc_typ_lbl_place=acc_canvas5.create_window(0, 0, anchor="nw", window=acc_typ_lbl, tag=("acc_typ_lbl"))
+                        acc_typ_lbl_entry=Entry(acc_canvas5,fg='white',bg="#213b52",textvariable=acctypvariab)
+                        acc_typ_lbl_entry_place=acc_canvas5.create_window(0, 0, anchor="nw",width=500,height=25, window=acc_typ_lbl_entry, tag=("acc_typ_lbl_entry"))
+                        det_typ_lbl=Label(acc_canvas5,text="*Detail Type",fg='white',bg="#213b52")
+                        det_typ_lbl_place=acc_canvas5.create_window(0, 0, anchor="nw", window=det_typ_lbl, tag=("det_typ_lbl"))
+                        
+                        det_typ_lbl_entry=Entry(acc_canvas5,fg='white',bg="#213b52",textvariable=dettypvariab)
+                        det_typ_lbl_entry_place=acc_canvas5.create_window(0, 0, anchor="nw",width=500,height=25, window=det_typ_lbl_entry, tag=("det_typ_lbl_entry"))
+
+                        edit_pg_scroll=scrolledtext.ScrolledText(acc_canvas5,width=64,height=10,bg="#213b52",fg='white')
+                        edit_pg_scroll_place = acc_canvas5.create_window(0, 0, anchor="nw",  window=edit_pg_scroll,tags=('edit_pg_scroll'))
+                        edit_pg_scroll.insert(1.0,'Use Cash and Cash Equivalents to track cash or assets that can be converted into cash immediately. For example, marketable securities and Treasury bills.')
+                        updatee_btn=Button(acc_canvas5,text='Update',fg='white',bg="#213b52",command=update)
+                        update_btn_place=acc_canvas5.create_window(0, 0, anchor="nw", window=updatee_btn, tag=("updatee_btn"))
+                        name_lbl=Label(acc_canvas5,text="*Name",fg='white',bg="#213b52")
+                        name_lbl_place=acc_canvas5.create_window(0, 0, anchor="nw", window=name_lbl, tag=("name_lbl"))
+                        
+                        name_lbl_entry=Entry(acc_canvas5,fg='white',bg="#213b52",textvariable=name_variab)
+                        name_lbl_entry_place=acc_canvas5.create_window(0, 0, anchor="nw",width=500,height=25, window=name_lbl_entry, tag=("name_lbl_entry"))
+                        description_lbl=Label(acc_canvas5,text="Description",fg='white',bg="#213b52")
+                        description_lbl_place=acc_canvas5.create_window(0, 0, anchor="nw", window=description_lbl, tag=("description_lbl"))
+                        
+                        
+                        description_lbl_entry=Entry(acc_canvas5,fg='white',bg="#213b52",textvariable=descri_variab)
+                        description_lbl_entry_place=acc_canvas5.create_window(0, 0, anchor="nw",width=500,height=25, window=description_lbl_entry, tag=("description_lbl_entry"))
+                        sub_ac_lbl=Label(acc_canvas5,text="Sub-account",fg='white',bg="#213b52")
+                        sub_ac_lbl_place=acc_canvas5.create_window(0, 0, anchor="nw", window=sub_ac_lbl, tag=("sub_ac_lbl"))
+
+                        Account_List=['','Deferred CGST','Deferred GST Input Credit','Deferred IGST','Deferred Krishi Kalyan Cess Input Credit',
+                            'Deferred Service Tax Input Credit','Deferred SGST','Deferred VAT Input Credit','GST Refund','Inventory Asset',
+                            'Paid Insurance','Service Tax Refund','TDS Receivable','Uncategorised Asset','Accumulated Depreciation','Buildings and Improvements',
+                            'Furniture and Equipments','Land','Leasehold Improvements','Vehicles','CGST Payable','CST Payable','CST Suspense',
+                            'GST Payable','GST Suspense','IGST Payable','Input CGST','Input CGST Tax RCM','Input IGST','Input IGST Tax RCM',
+                            'Input Krishi Kalyan Cess','Input Krishi Kalyan Cess RCM','Input Service Tax','Input Service Tax RCM','Input SGST','Input SGST Tax RCM',
+                            'Input VAT 14 %','Input VAT 4%','Input VAT 5%','Krishi Kalyan Cess Payable','Krishi Kalyan Cess Suspense','Output CGST','Output CGST Tax RCM',
+                            'Output CST 2%','Output IGST','Output IGST Tax RCM','Output Krishi Kalyan Cess','Output Krishi Kalyan Cess RCM','Output Service Tax','Output Service Tax RCM','Output SGST','Output SGST Tax RCM','Output VAT 14%','Output VAT 4%','Output VAT 5%',
+                            'Service Tax Payable','Service Tax Suspense','SGST Payable','SGST Suspense','Swachh Barath Cess Payable','Swachh Barath Cess Suspense',
+                            'TDS Payable','VAT Payable','VAT Suspense',
+                                ]
+                        sub_Account_variab = StringVar()
+                        sub_Account_variab.set(Account_List[0])
+                        sub_Account_men = OptionMenu(acc_canvas5,sub_Account_variab, *Account_List)
+                        sub_Account_men.config(bg="#213b52",width=30,fg='white')
+                        Account_men_place=acc_canvas5.create_window(0, 0, anchor="nw", window=sub_Account_men, tag=("sub_Account_men"))
+                        def_tax_code_lbl=Label(acc_canvas5,text="Default Tax Code",fg='white',bg="#213b52")
+                        def_tax_code_lbl_place=acc_canvas5.create_window(0, 0, anchor="nw", window=def_tax_code_lbl, tag=("def_tax_code_lbl"))
+                        def_code_List=['0% IGST','18.0% IGST','14.00% ST','0% IGST','Out of Scope','0% GST','14.5% ST','14.0% VAT','6.0% IGST','28.0% IGST',
+                        '15.0% ST','28.0% GST','12.0% GST','18.0% GST','3.0% GST','0.2% IGST','5.0% GST','6.0% GST','0.2% GST','Exempt IGST',
+                        '3.0% IGST','4.0% VAT','5.0% IGST','12.36% ST','5.0% VAT','Exempt GST','12.0% IGST','2.0% CST',
+                        ]
+                        defcode_variab = StringVar() 
+                        defcode_variab.set(def_code_List[0])
+                        defcode_men = OptionMenu(acc_canvas5,defcode_variab, *def_code_List)
+                        defcode_men.config(bg="#213b52",width=30,fg='white')
+                        defcode_men_place=acc_canvas5.create_window(0, 0, anchor="nw", window=defcode_men, tag=("defcode_men"))
+                        Balance_lbl=Label(acc_canvas5,text="Balance",fg='white',bg="#213b52")
+                        Balance_lbl_place=acc_canvas5.create_window(0, 0, anchor="nw", window=Balance_lbl, tag=("Balance_lbl"))
+                        Balance_lbl_entry=Entry(acc_canvas5,fg='white',bg="#213b52",textvariable=bal_variab)
+                        Balance_lbl_entry_place=acc_canvas5.create_window(0, 0, anchor="nw",width=200,height=25, window=Balance_lbl_entry, tag=("Balance_lbl_entry"))
+                            
+
                     #Accouts_tab_canvas
                     global acc_canvas
                     acc_canvas = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
@@ -24101,7 +24259,7 @@ def main_sign_in():
                     acc_filter_button_place=acc_canvas.create_window(0, 0, anchor="nw", window=acc_filter_button, tag=("acc_filter_button"))
                     run_rpt_btn=Button(acc_canvas,bg="#213b52",text="Run Report",fg="white",width=12,command=rnrpt)
                     run_rpt_place=acc_canvas.create_window(0, 0, anchor="nw", window=run_rpt_btn, tag=("run_rpt_btn"))
-                    newt_btn=Button(acc_canvas,bg="#213b52",text="new",fg="white",width=12,)
+                    newt_btn=Button(acc_canvas,bg="#213b52",text="new",fg="white",width=12,command=new_ac_cret)
                     newt_btn_place=acc_canvas.create_window(0, 0, anchor="nw", window=newt_btn, tag=("newt_btn"))
                     OptionList=['import']
                     variable = StringVar()
@@ -24168,7 +24326,6 @@ def main_sign_in():
                                 dcanvas.coords("defcode_men",dwidth/2,dheight/1.50)
                                 dcanvas.coords("Balance_lbl",dwidth/2,dheight/1.30)
                                 dcanvas.coords("Balance_lbl_entry",dwidth/2,dheight/1.20)
-
                             def update():
                                 acc_typ=acctypvari.get()
                                 det_typ_var=dettypvari.get()
@@ -24181,28 +24338,22 @@ def main_sign_in():
                                 val = (nm_ent.get(),)
                                 fbcursor.execute(sql,val)
                                 u_id = fbcursor.fetchone()
-
                                 sql = 'select * from app1_company where id_id=%s'
                                 val = (u_id[0],)
                                 fbcursor.execute(sql,val)
                                 c_id = fbcursor.fetchone()
-
-                                
                                 # print(txname,des,c_id)
                                 sql="update app1_accounts1 set acctype=%s,detype=%s,name=%s,description=%s,gst=%s,deftaxcode=%s,balance=%s,cid_id=%s where acctype=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
                                 val=(acc_typ,det_typ_var,nam_vari,de_vari,sb_ac_var,def_var,ba_var,c_id[0],acc_typ)
                                 fbcursor.execute(sql,val)
                                 finsysdb.commit()
                                 messagebox.showinfo("Update","Update successfully")
-
                             global acc_canvas4 , acctypvari,dettypvari,name_vari,descri_vari,sub_Account_variable,defcode_variable, bal_vari
                             acctypvari=StringVar()
                             dettypvari=StringVar()
                             name_vari=StringVar()
                             descri_vari=StringVar()
                             bal_vari=StringVar()
-
-                           
                             acc_canvas4 = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,3000))
                             acc_sr_Scroll4 = Scrollbar(accou_fr,orient=VERTICAL)
                             acc_sr_Scroll4.pack(fill=Y,side="right")
