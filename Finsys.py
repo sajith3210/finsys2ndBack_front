@@ -24088,58 +24088,67 @@ def main_sign_in():
                         acc_canvas.pack_forget()
                         acc_sr_Scroll.pack_forget()
                         def responsive_wid(event):
-                            dwidth = event.width
-                            dheight = event.height
-                            dcanvas = event.widget
+                            try:
+                                dwidth = event.width
+                                dheight = event.height
+                                dcanvas = event.widget
 
-                            r1 = 25
-                            x1 = dwidth/63
-                            x2 = dwidth/1.021
-                            y1 = dheight/1
-                            y2 = dheight/5            #new_rnrtpt_polygen_pr
+                                r1 = 25
+                                x1 = dwidth/63
+                                x2 = dwidth/1.021
+                                y1 = dheight/1
+                                y2 = dheight/5            #new_rnrtpt_polygen_pr
 
-                            dcanvas.coords("new_rnrtpt_polygen_pr",x1 +r1,y1,
-                            x1 + r1,y1,
-                            x2 - r1,y1,
-                            x2 - r1,y1,     
-                            x2,y1,     
-                            #--------------------
-                            x2,y1 + r1,     
-                            x2,y1 + r1,     
-                            x2,y2 - r1,     
-                            x2,y2 - r1,     
-                            x2,y2,
-                            #--------------------
-                            x2 - r1,y2,     
-                            x2 - r1,y2,     
-                            x1 + r1,y2,
-                            x1 + r1,y2,
-                            x1,y2,
-                            #--------------------
-                            x1,y2 - r1,
-                            x1,y2 - r1,
-                            x1,y1 + r1,
-                            x1,y1 + r1,
-                            x1,y1,
-                            )                    
-                            dcanvas.coords("acc_typ_lbl",dwidth/13,dheight/4.10,)
-                            dcanvas.coords("acc_typ_lbl_entry",dwidth/13,dheight/3.55,)
-                            dcanvas.coords("det_typ_lbl",dwidth/13,dheight/3.10,)
-                            dcanvas.coords("det_typ_lbl_entry",dwidth/13,dheight/2.80,)
-                            dcanvas.coords("edit_pg_scroll",dwidth/13,dheight/2.40,)
-                            dcanvas.coords("updatee_btn",dwidth/13,dheight/1.40,)
-                            dcanvas.coords("name_lbl",dwidth/2,dheight/4.10,)
-                            dcanvas.coords("name_lbl_entry",dwidth/2,dheight/3.50,)
-                            dcanvas.coords("description_lbl",dwidth/2,dheight/3,)
-                            dcanvas.coords("description_lbl_entry",dwidth/2,dheight/2.70,)
-                            dcanvas.coords("sub_ac_lbl",dwidth/2,dheight/2.20,)
-                            dcanvas.coords("sub_Account_men",dwidth/2,dheight/2)
-                            dcanvas.coords("def_tax_code_lbl",dwidth/2,dheight/1.60)
-                            dcanvas.coords("defcode_men",dwidth/2,dheight/1.50)
-                            dcanvas.coords("Balance_lbl",dwidth/2,dheight/1.30)
-                            dcanvas.coords("Balance_lbl_entry",dwidth/2,dheight/1.20)
-
-                        def update():
+                                dcanvas.coords("new_rnrtpt_polygen_pr",x1 +r1,y1,
+                                x1 + r1,y1,
+                                x2 - r1,y1,
+                                x2 - r1,y1,     
+                                x2,y1,     
+                                #--------------------
+                                x2,y1 + r1,     
+                                x2,y1 + r1,     
+                                x2,y2 - r1,     
+                                x2,y2 - r1,     
+                                x2,y2,
+                                #--------------------
+                                x2 - r1,y2,     
+                                x2 - r1,y2,     
+                                x1 + r1,y2,
+                                x1 + r1,y2,
+                                x1,y2,
+                                #--------------------
+                                x1,y2 - r1,
+                                x1,y2 - r1,
+                                x1,y1 + r1,
+                                x1,y1 + r1,
+                                x1,y1,
+                                )                    
+                                dcanvas.coords("acc_typ_lbl",dwidth/13,dheight/4.10,)
+                                dcanvas.coords("acc_typ_lbl_entry",dwidth/13,dheight/3.55,)
+                                dcanvas.coords("det_typ_lbl",dwidth/13,dheight/3.10,)
+                                dcanvas.coords("det_typ_lbl_entry",dwidth/13,dheight/2.80,)
+                                dcanvas.coords("edit_pg_scroll",dwidth/13,dheight/2.40,)
+                                dcanvas.coords("save_btn",dwidth/13,dheight/1.40,)
+                                dcanvas.coords("back_btn",dwidth/8,dheight/1.40,)
+                                dcanvas.coords("name_lbl",dwidth/2,dheight/4.10,)
+                                dcanvas.coords("name_lbl_entry",dwidth/2,dheight/3.50,)
+                                dcanvas.coords("description_lbl",dwidth/2,dheight/3,)
+                                dcanvas.coords("description_lbl_entry",dwidth/2,dheight/2.70,)
+                                dcanvas.coords("sub_ac_lbl",dwidth/2,dheight/2.20,)
+                                dcanvas.coords("sub_Account_men",dwidth/2,dheight/2)
+                                dcanvas.coords("def_tax_code_lbl",dwidth/2,dheight/1.60)
+                                dcanvas.coords("defcode_men",dwidth/2,dheight/1.50)
+                                dcanvas.coords("Balance_lbl",dwidth/2,dheight/1.30)
+                                dcanvas.coords("Balance_lbl_entry",dwidth/2,dheight/1.20)
+                                
+                                dcanvas.coords("as_of_lbl",dwidth/1.45,dheight/1.30)
+                            except:
+                                pass
+                            try:
+                                dcanvas.coords("as_of_date_entry",dwidth/1.45,dheight/1.20)
+                            except:
+                                pass 
+                        def save():
                             acc_typ=acctypvariab.get()
                             det_typ_var=dettypvariab.get()
                             nam_vari=name_variab.get()
@@ -24147,6 +24156,7 @@ def main_sign_in():
                             sb_ac_var=sub_Account_variab.get()
                             def_var=defcode_variab .get()
                             ba_var=bal_variab.get()
+                            as_of_date_variab=bal_variab.get()
                             sql = 'select * from auth_user where username=%s'
                             val = (nm_ent.get(),)
                             fbcursor.execute(sql,val)
@@ -24157,17 +24167,18 @@ def main_sign_in():
                             fbcursor.execute(sql,val)
                             c_id = fbcursor.fetchone()
                             # print(txname,des,c_id)
-                            sql="update app1_accounts1 set acctype=%s,detype=%s,name=%s,description=%s,gst=%s,deftaxcode=%s,balance=%s,cid_id=%s where acctype=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
-                            val=(acc_typ,det_typ_var,nam_vari,de_vari,sb_ac_var,def_var,ba_var,c_id[0],acc_typ)
+                            sql="INSERT INTO app1_accounts1 (acctype,detype,name,description,gst,deftaxcode,balance,asof,cid_id) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)" #ADDING VALUE 
+                            val=(acc_typ,det_typ_var,nam_vari,de_vari,sb_ac_var,def_var,ba_var,as_of_date_variab,c_id[0])
                             fbcursor.execute(sql,val)
                             finsysdb.commit()
-                            messagebox.showinfo("Update","Update successfully")
-                        global acc_canvas5 , acctypvariab,dettypvariab,name_variab,descri_variab,sub_Account_variab,defcode_variab, bal_variab
+                            messagebox.showinfo("Save","Save successfully")
+                        global acc_canvas5 , acctypvariab,dettypvariab,name_variab,descri_variab,sub_Account_variab,defcode_variab, bal_variab,as_of_date_variab
                         acctypvariab=StringVar()
                         dettypvariab=StringVar()
                         name_variab=StringVar()
                         descri_variab=StringVar()
                         bal_variab=StringVar()
+                        as_of_date_variab=StringVar()
                         acc_canvas5 = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,3000))
                         acc_sr_Scroll5 = Scrollbar(accou_fr,orient=VERTICAL)
                         acc_sr_Scroll5.pack(fill=Y,side="right")
@@ -24189,8 +24200,10 @@ def main_sign_in():
                         edit_pg_scroll=scrolledtext.ScrolledText(acc_canvas5,width=64,height=10,bg="#213b52",fg='white')
                         edit_pg_scroll_place = acc_canvas5.create_window(0, 0, anchor="nw",  window=edit_pg_scroll,tags=('edit_pg_scroll'))
                         edit_pg_scroll.insert(1.0,'Use Cash and Cash Equivalents to track cash or assets that can be converted into cash immediately. For example, marketable securities and Treasury bills.')
-                        updatee_btn=Button(acc_canvas5,text='Update',fg='white',bg="#213b52",command=update)
-                        update_btn_place=acc_canvas5.create_window(0, 0, anchor="nw", window=updatee_btn, tag=("updatee_btn"))
+                        save_btn=Button(acc_canvas5,text='Save',fg='white',bg="#213b52",command=save)
+                        save_btn_place=acc_canvas5.create_window(0, 0, anchor="nw", window=save_btn, tag=("save_btn"))
+                        back_btn=Button(acc_canvas5,text='Update',fg='white',bg="#213b52",)
+                        back_btn_place=acc_canvas5.create_window(0, 0, anchor="nw", window=back_btn, tag=("back_btn"))
                         name_lbl=Label(acc_canvas5,text="*Name",fg='white',bg="#213b52")
                         name_lbl_place=acc_canvas5.create_window(0, 0, anchor="nw", window=name_lbl, tag=("name_lbl"))
                         
@@ -24236,8 +24249,11 @@ def main_sign_in():
                         Balance_lbl_place=acc_canvas5.create_window(0, 0, anchor="nw", window=Balance_lbl, tag=("Balance_lbl"))
                         Balance_lbl_entry=Entry(acc_canvas5,fg='white',bg="#213b52",textvariable=bal_variab)
                         Balance_lbl_entry_place=acc_canvas5.create_window(0, 0, anchor="nw",width=200,height=25, window=Balance_lbl_entry, tag=("Balance_lbl_entry"))
-                            
 
+                        as_of_lbl=Label(acc_canvas5,text="as of",fg='white',bg="#213b52")
+                        as_of_lbl_place=acc_canvas5.create_window(0, 0, anchor="nw", window=as_of_lbl, tag=("as_of_lbl"))    
+                        as_of_date_entry=DateEntry(acc_canvas5,selectmode='day',textvariable=as_of_date_variab)
+                        as_of_date_entry_place=acc_canvas5.create_window(0, 0, anchor="nw", window=as_of_date_entry, tag=("as_of_date_entry"))
                     #Accouts_tab_canvas
                     global acc_canvas
                     acc_canvas = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
