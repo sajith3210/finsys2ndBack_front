@@ -23798,6 +23798,7 @@ def main_sign_in():
                         x1,y1,
                         )
                         dcanvas.coords("acc_filter_entry",dwidth/17,dheight/3.84,)
+                        dcanvas.coords("acc_filter_button",dwidth/5.50,dheight/3.84,)
                         dcanvas.coords("edit_rnrpt_combo",dwidth/1.70,dheight/3.84,)
                         dcanvas.coords("run_rpt_btn",dwidth/1.30,dheight/3.84,)
                         dcanvas.coords("newt_btn",dwidth/1.20,dheight/3.84,)
@@ -23942,7 +23943,7 @@ def main_sign_in():
                         run_rpt_btn=Button(acc_canvas2,bg="#213b52",text="Run Report",fg="white",width=15,)
                         run_rpt_place=acc_canvas2.create_window(0, 0, anchor="nw", window=run_rpt_btn, tag=("run_rpt_btn"))
                         def bsheet_back():
-                           print("back button start")
+                           
                            acc_canvas2.pack_forget()
                            acc_canvas.pack(fill=X)
                         back_btn=Button(acc_canvas2,bg="#213b52",text="←Back",fg="white",width=15,command=bsheet_back)
@@ -24051,17 +24052,31 @@ def main_sign_in():
                         total_liabilities_eqity_lbl=Label(acc_canvas3, text="Total Liabilities and Equity", fg="black", anchor="nw",font=('Calibri 10 '))
                         total_liabilities_eqity_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_liabilities_eqity_lbl, tag=("total_liabilities_eqity_lbl")) 
                     
+                    def filter_tb():
+                        acc_treeview.delete(*acc_treeview.get_children())
+                        fil_val=acc_filter_entry.get()
+                        if fil_val=="":
+                            displayaccounttab()
+                        else:
+                            sql="select * from app1_accounts1 where name Like '%{fil_val}%'"
+                            # fbcursor.execute("select * from app1_accounts1 where name Like '% %'".format(fil_val))
+                            fbcursor.execute(sql)
+                            fech=fbcursor.fetchall()
+                            print("fech isdf is isi si si si s",fech)
+                            for row in fech:
+                                acc_treeview.insert.insert(parent='', index='end',iid=row,text='', values=(row[3],row[1],row[2],row[6],row[7],''))
+
+                        
+                        acc_treeview
+
                     def displayaccounttab():
                         for row in accounttablefetch():
                             # acc_treeview.insert("",END,values=row)
-                            acc_treeview.insert(parent='', index='end',iid=row,text='', values=(row[3],row[1],row[2],'',row[7],''))
+                            acc_treeview.insert(parent='', index='end',iid=row,text='', values=(row[3],row[1],row[2],row[6],row[7],''))
                             
-                           
-                        
                     # New category tab add tax button function 
                     def accounttablefetch():
                         p=fbcursor.execute("select * from app1_accounts1")
-                        
                         rows=fbcursor.fetchall()
                         print(rows)
                         return rows
@@ -24082,6 +24097,8 @@ def main_sign_in():
                     acc_filter_entry=Entry(acc_canvas,bg="#213b52",fg="white",font=('Calibri 9'))
                     acc_filter_entry.insert(0,"Filter by name")
                     acc_filter_entry_place=acc_canvas.create_window(0, 0, anchor="nw", window=acc_filter_entry, tag=("acc_filter_entry"))
+                    acc_filter_button=Button(acc_canvas,text="filter",width=13, bg="#213b52",fg="white",font=('Calibri 9'),command=filter_tb)
+                    acc_filter_button_place=acc_canvas.create_window(0, 0, anchor="nw", window=acc_filter_button, tag=("acc_filter_button"))
                     run_rpt_btn=Button(acc_canvas,bg="#213b52",text="Run Report",fg="white",width=12,command=rnrpt)
                     run_rpt_place=acc_canvas.create_window(0, 0, anchor="nw", window=run_rpt_btn, tag=("run_rpt_btn"))
                     newt_btn=Button(acc_canvas,bg="#213b52",text="new",fg="white",width=12,)
@@ -24292,6 +24309,7 @@ def main_sign_in():
                     # acc_treeview.heading('7',text='ACTION')
                     # my_tree.insert(parent='',index='end',iid=0,text='',values=('','','','','','','open'))
                     acc_treeview_place=acc_canvas.create_window(0, 0, anchor="nw", window=acc_treeview, tag=("acc_treeview"))
+                    
                     displayaccounttab()
                      #Reconciled_Tab_responsivie
                     def responsive_wid(event):
@@ -24574,18 +24592,7 @@ def main_sign_in():
                     for x in ac:
                         for k in x:
                             Account_List.append(k)
-                            print("acc lst this is",Account_List,)
-                    # Account_List=['Deferred CGST','Deferred GST Input Credit','Deferred IGST','Deferred Krishi Kalyan Cess Input Credit',
-                    # 'Deferred Service Tax Input Credit','Deferred SGST','Deferred VAT Input Credit','GST Refund','Inventory Asset',
-                    # 'Paid Insurance','Service Tax Refund','TDS Receivable','Uncategorised Asset','Accumulated Depreciation','Buildings and Improvements',
-                    # 'Furniture and Equipments','Land','Leasehold Improvements','Vehicles','CGST Payable','CST Payable','CST Suspense',
-                    # 'GST Payable','GST Suspense','IGST Payable','Input CGST','Input CGST Tax RCM','Input IGST','Input IGST Tax RCM',
-                    # 'Input Krishi Kalyan Cess','Input Krishi Kalyan Cess RCM','Input Service Tax','Input Service Tax RCM','Input SGST','Input SGST Tax RCM',
-                    # 'Input VAT 14 %','Input VAT 4%','Input VAT 5%','Krishi Kalyan Cess Payable','Krishi Kalyan Cess Suspense','Output CGST','Output CGST Tax RCM',
-                    # 'Output CST 2%','Output IGST','Output IGST Tax RCM','Output Krishi Kalyan Cess','Output Krishi Kalyan Cess RCM','Output Service Tax','Output Service Tax RCM','Output SGST','Output SGST Tax RCM','Output VAT 14%','Output VAT 4%','Output VAT 5%',
-                    # 'Service Tax Payable','Service Tax Suspense','SGST Payable','SGST Suspense','Swachh Barath Cess Payable','Swachh Barath Cess Suspense',
-                    # 'TDS Payable','VAT Payable','VAT Suspense',
-                    # ]
+                            
                     global Account_variable,beg_bal_varia,end_bal_varia,ser_chrg_vari,exp_account_variable,date_varia,end_dt_vari
                     beg_bal_varia=StringVar()
                     end_bal_varia=StringVar()
@@ -24608,9 +24615,9 @@ def main_sign_in():
                     end_date_lbl=Label(rcon_canvas, text="Ending date*",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
                     end_date_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=end_date_lbl, tag=("end_date_lbl"))
                     beg_bal_entry=Entry(rcon_canvas,font=('Calibri 8'),textvariable=beg_bal_varia)
-                    beg_bal_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=beg_bal_entry, tag=("beg_bal_entry"))
+                    beg_bal_entry_place=rcon_canvas.create_window(0, 0, anchor="nw",width=130 , window=beg_bal_entry, tag=("beg_bal_entry"))
                     end_bal_entry=Entry(rcon_canvas,font=('Calibri 8'),textvariable=end_bal_varia)
-                    end_bal_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=end_bal_entry, tag=("end_bal_entry"))
+                    end_bal_entry_place=rcon_canvas.create_window(0, 0, anchor="nw",width=130 , window=end_bal_entry, tag=("end_bal_entry"))
                     enter_the_servi_lbl=Label(rcon_canvas, text="Enter the service charge or interest earned, if necessary",bg="#213b52", fg="White", anchor="nw",font=('Calibri 16 bold'))
                     enter_the_servi_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=enter_the_servi_lbl, tag=("enter_the_servi_lbl"))
                     date_lbl=Label(rcon_canvas, text="Date",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
@@ -24620,7 +24627,7 @@ def main_sign_in():
                     expence_ac_lbl=Label(rcon_canvas, text="Expense Account",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
                     expence_ac_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=expence_ac_lbl, tag=("expence_ac_lbl"))
                     servise_chrg_entry=Entry(rcon_canvas,font=('Calibri 8'),textvariable=ser_chrg_varia)
-                    servise_chrg_place=rcon_canvas.create_window(0, 0, anchor="nw", window=servise_chrg_entry, tag=("servise_chrg_entry"))
+                    servise_chrg_place=rcon_canvas.create_window(0, 0, anchor="nw",width=130 , window=servise_chrg_entry, tag=("servise_chrg_entry"))
                     
                     exp_account_list=['Advertising/Promotional','Bank Charges','Business Licenses and Permits','Charitable Contributions','Computer and Internet Expense',
                     'Continuing Education','Depreciation Expense','Dues and Subscriptions','Housekeeping Charges','Insurance Expense','Insurance Expense-General Liability Insurance',
@@ -24650,7 +24657,7 @@ def main_sign_in():
                     income_date_lbl=Label(rcon_canvas, text="Date",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
                     income_date_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=income_date_lbl, tag=("income_date_lbl"))
                     interest_earn_lbl=Label(rcon_canvas, text="Interest earned",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
-                    interest_earn_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=interest_earn_lbl, tag=("interest_earn_lbl"))
+                    interest_earn_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw",width=130 , window=interest_earn_lbl, tag=("interest_earn_lbl"))
                     income_ac_lbl=Label(rcon_canvas, text="Interest account",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
                     income_ac_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=income_ac_lbl, tag=("income_ac_lbl"))
                     interest_earn_lbl_entry=Entry(rcon_canvas,font=('Calibri 8'),)
