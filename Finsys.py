@@ -24592,6 +24592,10 @@ def main_sign_in():
                         exp_ac_var=exp_account_variable.get()
                         date_var=date_varia.get()
                         end_dt_var=end_dt_varia.get()
+                        # income table variable 
+                        interest_ear_var=int_ear_varia.get()
+                        incom_ac_date_var=incom_ac_date_varia.get()
+                        income_acc_var=income_account_variable.get()
                         sql="select * from auth_user where username=%s"
                         val=(nm_ent.get(),)
                         fbcursor.execute(sql,val)
@@ -24609,6 +24613,15 @@ def main_sign_in():
 
                         sql="INSERT INTO app1_expenseaccount (account,begbal,endbal,enddate,dat,serchar,expacc,cid_id,expaccountypid_id) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                         val=(acc_var,beg_bal_var,end_bal_var,end_dt_var,date_var,ser_chr_var,exp_ac_var,cid[0],actypid[0])
+                        fbcursor.execute(sql,val)
+                        finsysdb.commit()
+
+                        sql="select *from app1_expenseaccount ORDER BY expenseid DESC LIMIT 1"
+                        fbcursor.execute(sql)
+                        exp_id=fbcursor.fetchone()
+                       
+                        sql="INSERT INTO app1_incomeaccount (dat1,intear,incacc,cid_id,expenceincomeid_id) values (%s,%s,%s,%s,%s)"
+                        val=(incom_ac_date_var,interest_ear_var,income_acc_var,cid[0],exp_id[0])
                         fbcursor.execute(sql,val)
                         finsysdb.commit()
                         def responsive_wid(event):
@@ -24760,12 +24773,15 @@ def main_sign_in():
                         for k in x:
                             Account_List.append(k)
                             
-                    global Account_variable,beg_bal_varia,end_bal_varia,ser_chrg_vari,exp_account_variable,date_varia,end_dt_vari
+                    global Account_variable,beg_bal_varia,end_bal_varia,ser_chrg_varia,exp_account_variable,date_varia,end_dt_vari, int_ear_varia,incom_ac_date_varia,income_account_variable
                     beg_bal_varia=StringVar()
                     end_bal_varia=StringVar()
                     ser_chrg_varia=StringVar()
                     date_varia=StringVar()
                     end_dt_varia=StringVar()
+                    end_dt_varia=StringVar()
+                    int_ear_varia=StringVar()
+                    incom_ac_date_varia=StringVar()
 
                     Account_variable = StringVar()
                     Account_variable.set(Account_List[0])
@@ -24827,7 +24843,7 @@ def main_sign_in():
                     interest_earn_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw",width=130 , window=interest_earn_lbl, tag=("interest_earn_lbl"))
                     income_ac_lbl=Label(rcon_canvas, text="Interest account",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
                     income_ac_lbl_place=rcon_canvas.create_window(0, 0, anchor="nw", window=income_ac_lbl, tag=("income_ac_lbl"))
-                    interest_earn_lbl_entry=Entry(rcon_canvas,font=('Calibri 8'),)
+                    interest_earn_lbl_entry=Entry(rcon_canvas,font=('Calibri 8'),textvariable=int_ear_varia)
                     interest_earn_lbl_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=interest_earn_lbl_entry, tag=("interest_earn_lbl_entry"))
                     income_account_list=['Finance Charge Income','Insurance Proceeds Received','Interest Income','Proceeds From Sale of Asset','Shipping and Delivery Income','Billable Expense Income',
                     'Consulting Income',
@@ -24837,7 +24853,7 @@ def main_sign_in():
                     income_account_men=OptionMenu(rcon_canvas,income_account_variable, *income_account_list)
                     income_account_men.config(bg="#213b52",width=28,fg='white')
                     income_account_men_place=rcon_canvas.create_window(0, 0, anchor="nw", window=income_account_men, tag=("income_account_men"))
-                    icome_date_entry=DateEntry(rcon_canvas,selectmode='day',textvariable=end_dt_varia)
+                    icome_date_entry=DateEntry(rcon_canvas,selectmode='day',textvariable=incom_ac_date_varia)
                     income_date_entry_place=rcon_canvas.create_window(0, 0, anchor="nw", window=icome_date_entry, tag=("icome_date_entry"))
                     #33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333{Cash Management}
                     tab_cash = ttk.Notebook(tab10)
