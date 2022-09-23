@@ -24659,7 +24659,7 @@ def main_sign_in():
                             x1,y1,
                             )
                             dcanvas.coords("rcon_lbl2",dwidth/2.8,dheight/11,)                    
-                            dcanvas.coords("def_cgst_lbl",dwidth/3,dheight/7,)                    
+                            dcanvas.coords("Acc_display_lbl",dwidth/3,dheight/7,)                    
                             dcanvas.coords("statemnt_end_lbl",dwidth/2.8,dheight/4.60,)                    
                             dcanvas.coords("display_date_lbl",dwidth/2.6,dheight/4,)                    
                             dcanvas.coords("edit_info_btn",dwidth/2,dheight/4,)                    
@@ -24709,11 +24709,11 @@ def main_sign_in():
                         strt_rcon_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("strt_recon_polygen_pr"),smooth=True,)
                         rcon_lbl2=Label(strt_rcon_canvas, text="RECONCILED",bg="#213b52", fg="White", anchor="nw",font=('Calibri 16 bold'))
                         rcon_lbl2_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=rcon_lbl2, tag=("rcon_lbl2"))
-                        def_cgst_lbl=Label(strt_rcon_canvas, text="Deferred CGST",bg="#213b52", fg="White", anchor="nw",font=('Calibri 23 bold'))
-                        def_cgst_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=def_cgst_lbl, tag=("def_cgst_lbl"))
+                        Acc_display_lbl=Label(strt_rcon_canvas, text=acc_var,bg="#213b52", fg="White", anchor="nw",font=('Calibri 23 bold'))
+                        Acc_display_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=Acc_display_lbl, tag=("Acc_display_lbl"))
                         statemnt_end_lbl=Label(strt_rcon_canvas, text="Statement ending date",bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
                         statemnt_end_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=statemnt_end_lbl, tag=("statemnt_end_lbl"))
-                        display_date_lbl=Label(strt_rcon_canvas, text="2022-09-01",bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
+                        display_date_lbl=Label(strt_rcon_canvas, text=end_dt_var,bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
                         display_date_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=display_date_lbl, tag=("display_date_lbl"))
                         edit_info_btn=Button(strt_rcon_canvas,bg="#213b52",text="Edit info",fg="white",width=15,)
                         edit_info_btn_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=edit_info_btn, tag=("edit_info_btn"))
@@ -24741,6 +24741,10 @@ def main_sign_in():
                         recon_treeview.heading('6',text='MEMO')
                         recon_treeview.heading('7',text='DEPOSIT (INR)')
                         recon_treeview.heading('8',text='PAYMENT (INR)')
+                        for i in range(0,1):
+                            recon_treeview.insert(parent='',index='end',iid=0,text='',values=(date_var,'Journal','',exp_ac_var,'','Service Charge','',ser_chr_var))
+                            recon_treeview.insert(parent='',index='end',iid=1,text='',values=(incom_ac_date_var,'Deposit','',income_acc_var,'','Interest Earned',interest_ear_var,''))
+
                         recon_treeview=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=recon_treeview, tag=("recon_treeview"))
                     #Reconciled_tab_canvas
                     rcon_canvas = Canvas(recon_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
