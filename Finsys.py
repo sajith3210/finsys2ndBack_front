@@ -24609,21 +24609,28 @@ def main_sign_in():
                         sql="select accountypeid from app1_accountype where accountname=%s"
                         val=(acc_var,)
                         fbcursor.execute(sql,val)
-                        actypid=fbcursor.fetchone()
+                        global actypid
+                        actypid=fbcursor.fetchone() ##Account type variable fetch specific row 
 
                         sql="INSERT INTO app1_expenseaccount (account,begbal,endbal,enddate,dat,serchar,expacc,cid_id,expaccountypid_id) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                         val=(acc_var,beg_bal_var,end_bal_var,end_dt_var,date_var,ser_chr_var,exp_ac_var,cid[0],actypid[0])
                         fbcursor.execute(sql,val)
+                        # expense_account_id_fetch=fbcursor.fetchone()
                         finsysdb.commit()
 
-                        sql="select *from app1_expenseaccount ORDER BY expenseid DESC LIMIT 1"
+                        sql="select *from app1_expenseaccount ORDER BY expenseid DESC LIMIT 1" #Expense account last row fetch
                         fbcursor.execute(sql)
-                        exp_id=fbcursor.fetchone()
+                        global exp_id
+                        exp_id=fbcursor.fetchone() #Last row fetch variable Expense table
                        
                         sql="INSERT INTO app1_incomeaccount (dat1,intear,incacc,cid_id,expenceincomeid_id) values (%s,%s,%s,%s,%s)"
                         val=(incom_ac_date_var,interest_ear_var,income_acc_var,cid[0],exp_id[0])
                         fbcursor.execute(sql,val)
                         finsysdb.commit()
+                        sql="select *from app1_incomeaccount ORDER BY incomeid DESC LIMIT 1"
+                        fbcursor.execute(sql)
+                        global incom_id
+                        incom_id=fbcursor.fetchone()  #Last row fetch variable income table
                         def responsive_wid(event):
                             dwidth = event.width
                             dheight = event.height
@@ -24717,7 +24724,10 @@ def main_sign_in():
                         display_date_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=display_date_lbl, tag=("display_date_lbl"))
 
                         def edit_reconcile_statement():
-                            print("edit_reconcile_statement start")
+                            # edit_inc_exp= recon_treeview.item(recon_treeview.focus())["values"][1]
+                            # edit_incc_expp= recon_treeview.item(recon_treeview.focus())["values"][3]
+                            # print("Expese income table are",edit_incc_expp)
+                            # print("edit_reconcile_statement start")
                             def responsive_wid(event):
                                 dwidth = event.width
                                 dheight = event.height
@@ -24788,7 +24798,37 @@ def main_sign_in():
                                     
                                 except:
                                     pass
+                            
+                            # Edit_info_backend  
+                            def update_reconsile():
                                 
+                                begining_balance_va=str({}).format(beg_bal_entry.get())
+                                ending_balance_va=str({}).format(end_bal_entry.get())
+                                servise_charge_va=str({}).format(servise_chrg_entry.get())
+                                interest_earn_va=str({}).format(interest_earn_lbl_entry.get()) #This variable is textobject variable other global variable get from edit info page 
+                                
+
+                                sql="select * from auth_user where username=%s"
+                                val=(nm_ent.get(),)
+                                fbcursor.execute(sql,val)
+                                u_id=fbcursor.fetchone()
+
+                                sql="select * from app1_company where id_id=%s"
+                                val=(u_id[0],)
+                                fbcursor.execute(sql,val)
+                                cid=fbcursor.fetchone()
+
+                                sql="update app1_expenseaccount set account=%s,begbal=%s,endbal=%s,enddate=%s,dat=%s,serchar=%s,expacc=%s,cid_id=%s,expaccountypid_id=%s where expenseid=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
+                                val=(Accnt_variable,begining_balance_va,ending_balance_va,end_dt_variable,date_variable,servise_charge_va,exp_acc_variable,cid[0],actypid[0],exp_id[0])
+                                fbcursor.execute(sql,val)
+                                finsysdb.commit()
+
+                                sql="update app1_incomeaccount set dat1=%s,intear=%s,incacc=%s,cid_id=%s,expenceincomeid_id=%s, where incomeid=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
+                                val=(incom_ac_date_variable,interest_earn_va,income_acc_variable,cid[0],exp_id[0],incom_id[0])
+                                fbcursor.execute(sql,val)
+                                finsysdb.commit()
+                                messagebox.showinfo("Update","Update successfully")
+
                             strt_rcon_canvas.pack_forget()
                             strt_rcon_Scroll.pack_forget()
                             edit_recon_canvas = Canvas(recon_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
@@ -24798,6 +24838,7 @@ def main_sign_in():
                             edit_recon_canvas.bind("<Configure>", responsive_wid)
                             edit_recon_canvas.config(yscrollcommand=edit_recon_scroll.set)
                             edit_recon_canvas.pack(fill=X)
+                            
                             edit_recon_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("rcn_polygen_pr"),smooth=True,)
                             
                             edit_recon_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("rcn_polygen_pr2"),smooth=True,)
@@ -24824,11 +24865,11 @@ def main_sign_in():
                             # servise_chrg_variable=servise_chrg_entry.get()
                             date_variable=StringVar()
                             end_dt_variable=StringVar()
+                           
                             # end_dt_varia=StringVar()
                             # interest_ear_variable=interest_earn_lbl_entry.get()
                             incom_ac_date_variable=StringVar()
                             Accnt_variable = StringVar()
-
                             Accnt_variable.set(Account_List[0])
                             Account_men = OptionMenu(edit_recon_canvas,Accnt_variable, *Account_List)
                             Account_men.config(bg="#213b52",width=30,fg='white')
@@ -24881,7 +24922,7 @@ def main_sign_in():
                             exp_account_men=OptionMenu(edit_recon_canvas,exp_acc_variable, *exp_account_list)
                             exp_account_men.config(bg="#213b52",width=28,fg='white')
                             exp_account_men_place=edit_recon_canvas.create_window(0, 0, anchor="nw", window=exp_account_men, tag=("exp_account_men"))
-                            strt_rec_btn=Button(edit_recon_canvas,bg="#213b52",text="Save",fg="white",width=15,command='')
+                            strt_rec_btn=Button(edit_recon_canvas,bg="#213b52",text="Save",fg="white",width=15,command=update_reconsile)
                             strt_rec_btn_place=edit_recon_canvas.create_window(0, 0, anchor="nw", window=strt_rec_btn, tag=("strt_rec_btn"))
                             end_date_entry=DateEntry(edit_recon_canvas,selectmode='day',textvariable=end_dt_variable)
                             end_date_entry_place=edit_recon_canvas.create_window(0, 0, anchor="nw", window=end_date_entry, tag=("end_date_entry"))
@@ -24913,6 +24954,8 @@ def main_sign_in():
                         save_for_later_btn=Button(strt_rcon_canvas,bg="#213b52",text="Save for later",fg="white",width=15,)
                         save_for_later_btn_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=save_for_later_btn, tag=("save_for_later_btn"))
                         strt_rcon_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("strt_recon_polygen_pr2"),smooth=True,)  #213b52"
+
+                        global recon_treeview 
                         recon_treeview=ttk.Treeview(strt_rcon_canvas,columns=(1,2,3,4,5,6,7,8),)
                         # format column  
                         recon_treeview.column("#0",width=0,stretch=NO)

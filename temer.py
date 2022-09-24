@@ -193,3 +193,46 @@ def edit_reconcile_statement():
                     income_account_men_place=edit_recon_scroll.create_window(0, 0, anchor="nw", window=income_account_men, tag=("income_account_men"))
                     icome_date_entry=DateEntry(edit_recon_scroll,selectmode='day',textvariable=incom_ac_date_variable)
                     income_date_entry_place=edit_recon_scroll.create_window(0, 0, anchor="nw", window=icome_date_entry, tag=("icome_date_entry")) 
+
+
+
+global Accnt_variable,
+begining_balance_va=beg_bal_entry.get(),
+ending_balance_va=end_bal_entry.get(),
+servise_charge_va=servise_chrg_entry.get(),
+exp_acc_variable,
+date_variable
+end_dt_variable
+interest_earn_va=interest_earn_lbl_entry.get()
+incom_ac_date_variable,
+income_acc_variable
+
+exp_id    #Last row fetch variable Expense table
+incom_id   #Last row fetch variable income table
+actypid    #Account type variable fetch specific row 
+
+sql="select * from auth_user where username=%s"
+val=(nm_ent.get(),)
+fbcursor.execute(sql,val)
+u_id=fbcursor.fetchone()
+
+sql="select * from app1_company where id_id=%s"
+val=(u_id[0],)
+fbcursor.execute(sql,val)
+cid=fbcursor.fetchone()
+
+sql="update app1_expenseaccount set account=%s,begbal=%s,endbal=%s,enddate=%s,dat=%s,serchar=%s,expacc=%s,cid_id=%s,expaccountypid_id=%s where expenseid=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
+val=(Accnt_variable,begining_balance_va,ending_balance_va,end_dt_variable,date_variable,servise_charge_va,exp_acc_variable,c_id[0],acc_typ,exp_id)
+fbcursor.execute(sql,val)
+finsysdb.commit()
+
+
+sql="update app1_incomeaccount set dat1=%s,intear=%s,incacc=%s,cid_id=%s,expenceincomeid_id=%s, where incomeid=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
+val=(incom_ac_date_variable,interest_earn_va,income_acc_variable,c_id[0],exp_id[0],incom_id)
+fbcursor.execute(sql,val)
+finsysdb.commit()
+messagebox.showinfo("Update","Update successfully")
+
+sql="update app1_expenseaccount set cid_id=%s,expaccountypid_id=%s , account=%s,begbal=%s,endbal=%s,enddate=%s,dat=%s,serchar=%s,expacc=%s, where expenseid=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
+val=(cid[0],actypid[0],Accnt_variable,begining_balance_va,ending_balance_va,end_dt_variable,date_variable,servise_charge_va,exp_acc_variable,exp_id[0])
+val=()
