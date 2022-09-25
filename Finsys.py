@@ -54,6 +54,7 @@ from forex_python.converter import CurrencyRates
 
 import datetime
 import re
+from io import StringIO
 
 finsysdb = mysql.connector.connect(
     host="localhost", user="root", password="", database="newfinsys", port="3306"
@@ -23945,6 +23946,7 @@ def main_sign_in():
                         run_rpt_place=acc_canvas2.create_window(0, 0, anchor="nw", window=run_rpt_btn, tag=("run_rpt_btn"))
                         def bsheet_back():
                            acc_canvas2.pack_forget()
+                           acc_sr_Scroll3.pack_forget()
                            acc_sr_Scroll2.pack_forget()
                            acc_canvas.pack(fill=X)
                         #    acc_sr_Scroll.pack(fill=Y,side="right")
@@ -23953,19 +23955,48 @@ def main_sign_in():
                         acc_canvas2.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("bsheet_polygen_pr3"),smooth=True,) #213b52
 
 
-                        acc_canvas3= Canvas(accou_fr,height=1600,width=1200, bg="white",)
+                        acc_canvas3= Canvas(acc_canvas2,height=1600,width=1200, bg="white",)
                         acc_canvas3_place=acc_canvas2.create_window(0, 0, anchor="nw", window=acc_canvas3, tag=("acc_canvas3"))
+                        
+
+                        # acc_canvas3 responsive function 
                         def responsive_wid(event):
                             dwidth = event.width
                             dheight = event.height
                             dcanvas = event.widget
 
-                            r1 = 25
+                            r1 = 0
                             x1 = dwidth/63
                             x2 = dwidth/1.021
-                            y1 = dheight/13
-                            y2 = dheight/5            
+                            y1 = dheight/145  
+                            y2 = dheight/12           
 
+                            dcanvas.coords("bsheet_polygen_pr4",x1 +r1,y1,
+                            x1 + r1,y1,
+                            x2 - r1,y1,
+                            x2 - r1,y1,     
+                            x2,y1,     
+                            #--------------------
+                            x2,y1 + r1,     
+                            x2,y1 + r1,     
+                            x2,y2 - r1,     
+                            x2,y2 - r1,     
+                            x2,y2,
+                            #--------------------
+                            x2 - r1,y2,     
+                            x2 - r1,y2,     
+                            x1 + r1,y2,
+                            x1 + r1,y2,
+                            x1,y2,
+                            #--------------------
+                            x1,y2 - r1,
+                            x1,y2 - r1,
+                            x1,y1 + r1,
+                            x1,y1 + r1,
+                            x1,y1,
+                            )      
+                            dcanvas.coords("company_name_lbl",dwidth/3,dheight/23,)
+                            dcanvas.coords("logo_label",dwidth/10,dheight/17,)
                             dcanvas.coords("bsheetline1",dwidth/21,dheight/7,dwidth/1.055,dheight/7,)
                             dcanvas.coords("bsheetline2",dwidth/21,dheight/6.10,dwidth/1.055,dheight/6.10,)
                             dcanvas.coords("total_lbl",dwidth/1.20,dheight/6.8,) 
@@ -23996,11 +24027,34 @@ def main_sign_in():
                             dcanvas.coords("bsheetline12",dwidth/21,dheight/1.52,dwidth/1.055,dheight/1.52,) 
                             dcanvas.coords("total_equity_lbl",dwidth/9.60,dheight/1.56,)
                             dcanvas.coords("total_liabilities_eqity_lbl",dwidth/9.60,dheight/1.49,)
+
+
                         acc_sr_Scroll3 = Scrollbar(accou_fr,orient=VERTICAL)
                         acc_sr_Scroll3.pack(fill=Y,side="right")
-                        acc_sr_Scroll3.config(command=acc_canvas3.yview)
-                        acc_canvas3.bind("<Configure>", responsive_wid)
+                        acc_sr_Scroll3.config(command=acc_canvas3.yview) 
                         acc_canvas3.config(yscrollcommand=acc_sr_Scroll3.set)
+                        acc_canvas3.bind("<Configure>", responsive_wid)
+
+                        sql = 'select * from auth_user where username=%s'
+                        val = (nm_ent.get(),)
+                        fbcursor.execute(sql,val)
+                        u_id = fbcursor.fetchone()
+
+                        sql = 'select * from app1_company where id_id=%s'
+                        val = (u_id[0],)
+                        fbcursor.execute(sql,val)
+                        c_id = fbcursor.fetchone()
+
+                        acc_canvas3.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("bsheet_polygen_pr4"),smooth=True,) #213b52
+                        company_name_lbl=Label(acc_canvas3, text=c_id[1],bg='#213b52', fg="white", anchor="nw",font=('Calibri 21 bold'))
+                        company_name_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=company_name_lbl, tag=("company_name_lbl"))
+                        data = StringIO(c_id[8]).read()
+                        company_logo=Image.open(data)
+                        resize=company_logo.resize((84,84),Image.ANTIALIAS)
+                        photo = ImageTk.PhotoImage(resize)
+                        logo_label = Label(acc_canvas3, image=photo,)
+                        logo_label.photo = photo
+                        logo_label_place=acc_canvas3.create_window(0, 0, anchor="nw", window=logo_label, tag=("logo_label"))
                         
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline1"))
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline2"))
@@ -24053,7 +24107,8 @@ def main_sign_in():
                         total_equity_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_equity_lbl, tag=("total_equity_lbl")) 
                         total_liabilities_eqity_lbl=Label(acc_canvas3, text="Total Liabilities and Equity", fg="black", anchor="nw",font=('Calibri 10 '))
                         total_liabilities_eqity_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_liabilities_eqity_lbl, tag=("total_liabilities_eqity_lbl")) 
-                    
+
+                        acc_canvas3
                     def filter_tb():
                         acc_treeview.delete(*acc_treeview.get_children())
                         fil_val=acc_filter_entry.get()
@@ -24806,8 +24861,12 @@ def main_sign_in():
                                 ending_balance_va=str({}).format(end_bal_entry.get())
                                 servise_charge_va=str({}).format(servise_chrg_entry.get())
                                 interest_earn_va=str({}).format(interest_earn_lbl_entry.get()) #This variable is textobject variable other global variable get from edit info page 
+                                print("begining balance is jkj ads akjd",begining_balance_va)
+                                print("The data type beg bal",type(begining_balance_va))
+                                print("ENDING balance is jkj ads akjd",ending_balance_va)
+                                print("servise_charge_va",servise_charge_va)
+                                print("interest_earn_va",interest_earn_va)
                                 
-
                                 sql="select * from auth_user where username=%s"
                                 val=(nm_ent.get(),)
                                 fbcursor.execute(sql,val)
@@ -24818,14 +24877,15 @@ def main_sign_in():
                                 fbcursor.execute(sql,val)
                                 cid=fbcursor.fetchone()
 
+                                print("Print company id is ",cid[0],"Acct type id is ",actypid[0],"Expense id is",exp_id[0])
                                 sql="update app1_expenseaccount set account=%s,begbal=%s,endbal=%s,enddate=%s,dat=%s,serchar=%s,expacc=%s,cid_id=%s,expaccountypid_id=%s where expenseid=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
                                 val=(Accnt_variable,begining_balance_va,ending_balance_va,end_dt_variable,date_variable,servise_charge_va,exp_acc_variable,cid[0],actypid[0],exp_id[0])
-                                fbcursor.execute(sql,val)
+                                fbcursor.executemany(sql,val)
                                 finsysdb.commit()
 
                                 sql="update app1_incomeaccount set dat1=%s,intear=%s,incacc=%s,cid_id=%s,expenceincomeid_id=%s, where incomeid=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
                                 val=(incom_ac_date_variable,interest_earn_va,income_acc_variable,cid[0],exp_id[0],incom_id[0])
-                                fbcursor.execute(sql,val)
+                                fbcursor.executemany(sql,val)
                                 finsysdb.commit()
                                 messagebox.showinfo("Update","Update successfully")
 
