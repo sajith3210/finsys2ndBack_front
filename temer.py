@@ -236,3 +236,16 @@ messagebox.showinfo("Update","Update successfully")
 sql="update app1_expenseaccount set cid_id=%s,expaccountypid_id=%s , account=%s,begbal=%s,endbal=%s,enddate=%s,dat=%s,serchar=%s,expacc=%s, where expenseid=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
 val=(cid[0],actypid[0],Accnt_variable,begining_balance_va,ending_balance_va,end_dt_variable,date_variable,servise_charge_va,exp_acc_variable,exp_id[0])
 val=()
+
+start reconciling
+dcanvas.coords("back_btn",dwidth/13,dheight/1.20,)
+edit_rnrpt_back
+
+acc_treeview.delete(*acc_treeview.get_children())
+displayaccounttab()
+
+
+rcon_canvas.pack_forget()
+rcon_sr_Scroll.pack_forget()
+strt_rcon_canvas = Canvas(recon_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
+strt_rcon_Scroll = Scrollbar(recon_fr,orient=VERTICAL)

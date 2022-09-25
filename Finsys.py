@@ -24136,7 +24136,7 @@ def main_sign_in():
                     def accounttablefetch():
                         p=fbcursor.execute("select * from app1_accounts1")
                         rows=fbcursor.fetchall()
-                        print(rows)
+                        # print(rows)
                         return rows
 
                     def new_ac_cret():
@@ -24342,6 +24342,11 @@ def main_sign_in():
 
                     # combobox_select_edit_and_runreport 
                     def edit_rnrpt(event):
+                        def edit_rnrpt_back():
+                           acc_canvas4.pack_forget()
+                           acc_sr_Scroll4.pack_forget()
+                           
+                           acc_canvas.pack(fill=X)
                         if edit_rnrpt_combo.get()=="Edit":
                             print("dropdown work")
                             acc_canvas.pack_forget()
@@ -24387,6 +24392,7 @@ def main_sign_in():
                                 dcanvas.coords("det_typ_lbl_entry",dwidth/13,dheight/2.80,)
                                 dcanvas.coords("edit_pg_scroll",dwidth/13,dheight/2.40,)
                                 dcanvas.coords("updatee_btn",dwidth/13,dheight/1.40,)
+                                dcanvas.coords("back_btn",dwidth/13,dheight/1.20,)
                                 dcanvas.coords("name_lbl",dwidth/2,dheight/4.10,)
                                 dcanvas.coords("name_lbl_entry",dwidth/2,dheight/3.50,)
                                 dcanvas.coords("description_lbl",dwidth/2,dheight/3,)
@@ -24419,12 +24425,15 @@ def main_sign_in():
                                 fbcursor.execute(sql,val)
                                 finsysdb.commit()
                                 messagebox.showinfo("Update","Update successfully")
+                                acc_treeview.delete(*acc_treeview.get_children())
+                                displayaccounttab()
                             global acc_canvas4 , acctypvari,dettypvari,name_vari,descri_vari,sub_Account_variable,defcode_variable, bal_vari
                             acctypvari=StringVar()
                             dettypvari=StringVar()
                             name_vari=StringVar()
                             descri_vari=StringVar()
                             bal_vari=StringVar()
+                            global acc_canvas4,acc_sr_Scroll4
                             acc_canvas4 = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,3000))
                             acc_sr_Scroll4 = Scrollbar(accou_fr,orient=VERTICAL)
                             acc_sr_Scroll4.pack(fill=Y,side="right")
@@ -24449,6 +24458,9 @@ def main_sign_in():
                             edit_pg_scroll.insert(1.0,'Use Cash and Cash Equivalents to track cash or assets that can be converted into cash immediately. For example, marketable securities and Treasury bills.')
                             updatee_btn=Button(acc_canvas4,text='Update',fg='white',bg="#213b52",command=update)
                             update_btn_place=acc_canvas4.create_window(0, 0, anchor="nw", window=updatee_btn, tag=("updatee_btn"))
+                            back_btn=Button(acc_canvas4,text='Back',fg='white',bg="#213b52",command=edit_rnrpt_back)
+                            back_btn_place=acc_canvas4.create_window(0, 0, anchor="nw", window=back_btn, tag=("back_btn"))
+                            
                             name_lbl=Label(acc_canvas4,text="*Name",fg='white',bg="#213b52")
                             name_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=name_lbl, tag=("name_lbl"))
                             name_val=acc_treeview.item(acc_treeview.focus())["values"][0]
@@ -24726,6 +24738,7 @@ def main_sign_in():
                             dcanvas.coords("display_date_lbl",dwidth/2.6,dheight/4,)                    
                             dcanvas.coords("edit_info_btn",dwidth/2,dheight/4,)                    
                             dcanvas.coords("save_for_later_btn",dwidth/1.70,dheight/4,) 
+                            # dcanvas.coords("back_btn",dwidth/1.70,dheight/3.50,) 
                             
 
                             r1 = 25
@@ -24761,6 +24774,7 @@ def main_sign_in():
                             dcanvas.coords("recon_treeview",dwidth/22,dheight/1.60,)                   
                         rcon_canvas.pack_forget()
                         rcon_sr_Scroll.pack_forget()
+                        global strt_rcon_canvas,strt_rcon_Scroll
                         strt_rcon_canvas = Canvas(recon_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
                         strt_rcon_Scroll = Scrollbar(recon_fr,orient=VERTICAL)
                         strt_rcon_Scroll.pack(fill=Y,side="right")
@@ -24855,8 +24869,7 @@ def main_sign_in():
                                     pass
                             
                             # Edit_info_backend  
-                            def update_reconsile():
-                                
+                            def update_reconsile():    
                                 begining_balance_va=str({}).format(beg_bal_entry.get())
                                 ending_balance_va=str({}).format(end_bal_entry.get())
                                 servise_charge_va=str({}).format(servise_chrg_entry.get())
@@ -25014,6 +25027,10 @@ def main_sign_in():
                         save_for_later_btn=Button(strt_rcon_canvas,bg="#213b52",text="Save for later",fg="white",width=15,)
                         save_for_later_btn_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=save_for_later_btn, tag=("save_for_later_btn"))
                         strt_rcon_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("strt_recon_polygen_pr2"),smooth=True,)  #213b52"
+
+                        # back_btn=Button(strt_rcon_canvas,bg="#213b52",text="Back",fg="white",width=15,command=back_home)
+                        # back_btn_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=back_btn, tag=("back_btn"))
+                        strt_rcon_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("strt_recon_polygen_pr2"),smooth=True,)
 
                         global recon_treeview 
                         recon_treeview=ttk.Treeview(strt_rcon_canvas,columns=(1,2,3,4,5,6,7,8),)
