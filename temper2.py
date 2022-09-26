@@ -246,3 +246,12 @@
                         logo_label = Label(acc_canvas3, image=photo,)
                         logo_label.photo = photo
                         logo_label_place=acc_canvas3.create_window(0, 0, anchor="nw", window=logo_label, tag=("logo_label"))
+
+
+    account_payble_treeview=ttk.Treeview(acc_canvas3,height=4,columns=(1,2,),style='mystyle115.Treeview')
+    account_payble_treeview.column("#0",width=0,stretch=NO)
+    account_payble_treeview.column("#1",anchor=CENTER,width=220)
+    account_payble_treeview.column('#2',anchor=CENTER,width=220)
+    account_payble_treeview.heading("#0",text='',anchor=CENTER)
+    account_payble_treeview.heading('1',text='Particulars')
+    account_payble_treeview.heading('2',text='Amount')
