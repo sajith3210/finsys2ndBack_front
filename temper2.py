@@ -302,6 +302,21 @@ p=fbcursor.execute(sql,val)
 rows=fbcursor.fetchall()
 
 
+#account recivable sum
+total_equity_sum="select sum(Equity) as ba from app1_accounts1 WHERE acctype=%s"                   
+tem='Equity'
+val=(tem,)
+fbcursor.execute(total_acc_pay_sum,val)
+total_eqi_sum=fbcursor.fetchone()
+
+
+total_asset_sum_lbl=Label(acc_canvas3, text=TA_sum, fg="black", anchor="nw",font=('Calibri 10 '))
+total_asset_sum_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_asset_sum_lbl, tag=("total_asset_sum_lbl")) 
+
+sum_equity_and_liabili=total_current_lia_sum[0]+total_eqi_sum[0]
+total_liabi_equity_lbl=Label(acc_canvas3, text=sum_equity_and_liabili, fg="black", anchor="nw",font=('Calibri 10 '))
+total_asset_sum_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_liabi_equity_lbl, tag=("total_liabi_equity_lbl"))
+
 
 
 

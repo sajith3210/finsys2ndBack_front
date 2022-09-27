@@ -24022,6 +24022,8 @@ def main_sign_in():
                             dcanvas.coords("bsheetline6",dwidth/21,dheight/1.90,dwidth/1.055,dheight/1.90,)
                             dcanvas.coords("total_asset_lbl",dwidth/21,dheight/2,)
                             dcanvas.coords("total_asset_sum_lbl",dwidth/3,dheight/2,)
+                            
+                            
                             dcanvas.coords("liability_eq_lbl",dwidth/21,dheight/1.80,)
                             dcanvas.coords("bsheetline7",dwidth/21,dheight/1.73,dwidth/1.055,dheight/1.73,)
                             
@@ -24030,19 +24032,24 @@ def main_sign_in():
                             dcanvas.coords("account_payb_lbl",dwidth/9,dheight/1.31,) 
                             dcanvas.coords("bsheetline8",dwidth/21,dheight/1.28,dwidth/1.055,dheight/1.28,)
                             dcanvas.coords("account_payble_treeview",dwidth/9,dheight/1.27,)
-                            dcanvas.coords("bsheetline9",dwidth/21,dheight/1.21,dwidth/1.055,dheight/1.21,)                           
+                            dcanvas.coords("bsheetline9",dwidth/21,dheight/1.21,dwidth/1.055,dheight/1.21,)  
                             dcanvas.coords("total_account_payb_lbl",dwidth/9,dheight/1.18,)
+                            dcanvas.coords("total_account_payb_lbl_sum",dwidth/3,dheight/1.18,)
                             dcanvas.coords("bsheetline10",dwidth/21,dheight/1.16,dwidth/1.055,dheight/1.16,) 
                             
                             dcanvas.coords("total_current_liabi_lbl",dwidth/9.60,dheight/1.15,)
+                            dcanvas.coords("total_current_liabi_sum",dwidth/3,dheight/1.15,)
+                            
                             dcanvas.coords("bsheetline11",dwidth/21,dheight/1.12,dwidth/1.055,dheight/1.12,) 
                             dcanvas.coords("equity_lbl",dwidth/9.60,dheight/1.11,)
                             dcanvas.coords("equity_treeview",dwidth/9.60,dheight/1.10,)
                             # dcanvas.coords("profit_for_yr_lbl",dwidth/9,dheight/1.68,)
                             dcanvas.coords("bsheetline12",dwidth/21,dheight/1.04,dwidth/1.055,dheight/1.04,) 
                             dcanvas.coords("total_equity_lbl",dwidth/9.60,dheight/1.03,)
+                            dcanvas.coords("total_equity_sum_lbl",dwidth/3,dheight/1.03,)
                             dcanvas.coords("bsheetline13",dwidth/21,dheight/1.02,dwidth/1.055,dheight/1.02,) 
                             
+                            dcanvas.coords("total_liabi_equity_lbl_sum",dwidth/3,dheight/1.01,)
                             dcanvas.coords("total_liabilities_eqity_lbl",dwidth/9.60,dheight/1.01,)
 
 
@@ -24212,11 +24219,30 @@ def main_sign_in():
 
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline9"))
                         total_account_payb_lbl=Label(acc_canvas3, text="Total Account Payable(Creditors)", fg="black", anchor="nw",font=('Calibri 10 '))
-                        total_account_pay_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_account_payb_lbl, tag=("total_account_payb_lbl")) 
+                        total_account_pay_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_account_payb_lbl, tag=("total_account_payb_lbl"))
+                        total_account_pay_sum="select sum(balance) as ba from app1_accounts1 WHERE acctype=%s" #account recivable sum
+                        tem='Account payble'
+                        val=(tem,)
+                        fbcursor.execute(total_account_pay_sum,val)
+                        total_acc_pay_sum=fbcursor.fetchone()
+                        total_account_payb_lbl_sum=Label(acc_canvas3, text=total_acc_pay_sum, fg="black", anchor="nw",font=('Calibri 10 '))   
+                        total_account_payb_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_account_payb_lbl_sum, tag=("total_account_payb_lbl_sum"))
+
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline10"))  
-                          
+                        
+                        total_current_liabi_sum="select sum(balance) as ba from app1_accounts1 WHERE acctype=%s" #account recivable sum
+                        tem='Current Liabilities'
+                        val=(tem,)
+                        fbcursor.execute(total_account_pay_sum,val)
+                        total_current_lia_sum=fbcursor.fetchone()
+                        tl_lia=total_acc_pay_sum[0]+total_current_lia_sum[0] #Sum of current liabilit
+
                         total_current_liabi_lbl=Label(acc_canvas3, text="Total Current Liabilities", fg="black", anchor="nw",font=('Calibri 10 '))
                         total_current_liabi_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_current_liabi_lbl, tag=("total_current_liabi_lbl")) 
+
+                        total_current_liabi_sum=Label(acc_canvas3, text=tl_lia, fg="black", anchor="nw",font=('Calibri 10 '))
+                        total_current_liabi_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_current_liabi_sum, tag=("total_current_liabi_sum"))
+
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline11"))  
                         equity_lbl=Label(acc_canvas3, text="Equity", fg="black", anchor="nw",font=('Calibri 10 '))
                         equity_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=equity_lbl, tag=("equity_lbl")) 
@@ -24244,6 +24270,20 @@ def main_sign_in():
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline13")) 
                         total_equity_lbl=Label(acc_canvas3, text="Total Equity", fg="black", anchor="nw",font=('Calibri 10 '))
                         total_equity_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_equity_lbl, tag=("total_equity_lbl")) 
+
+                        total_equity_sum="select sum(balance) as ba from app1_accounts1 WHERE acctype=%s"                   
+                        tem='Equity'
+                        val=(tem,)
+                        fbcursor.execute(total_equity_sum,val)
+                        total_eqi_sum=fbcursor.fetchone()
+
+                        total_equity_sum_lbl=Label(acc_canvas3, text=total_eqi_sum, fg="black", anchor="nw",font=('Calibri 10 '))
+                        total_equity_sum_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_equity_sum_lbl, tag=("total_equity_sum_lbl"))
+
+                        sum_equity_and_liabili=total_current_lia_sum[0]+total_eqi_sum[0]
+                        total_liabi_equity_lbl_sum=Label(acc_canvas3, text=sum_equity_and_liabili, fg="black", anchor="nw",font=('Calibri 10 '))
+                        total_asset_sum_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_liabi_equity_lbl_sum, tag=("total_liabi_equity_lbl_sum"))
+
                         total_liabilities_eqity_lbl=Label(acc_canvas3, text="Total Liabilities and Equity", fg="black", anchor="nw",font=('Calibri 10 '))
                         total_liabilities_eqity_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_liabilities_eqity_lbl, tag=("total_liabilities_eqity_lbl")) 
 
