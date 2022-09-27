@@ -24022,23 +24022,23 @@ def main_sign_in():
                             
                             dcanvas.coords("current_liability_lbl",dwidth/9.60,dheight/1.63,)
                             dcanvas.coords("current_liabilities_treeview",dwidth/9.60,dheight/1.53,)
-                            dcanvas.coords("account_payb_lbl",dwidth/9,dheight/1.33,) 
+                            dcanvas.coords("account_payb_lbl",dwidth/9,dheight/1.31,) 
                             dcanvas.coords("bsheetline8",dwidth/21,dheight/1.28,dwidth/1.055,dheight/1.28,)
                             dcanvas.coords("account_payble_treeview",dwidth/9,dheight/1.27,)
-                            dcanvas.coords("bsheetline9",dwidth/21,dheight/1.15,dwidth/1.055,dheight/1.15,)                           
-                            dcanvas.coords("total_account_payb_lbl",dwidth/9,dheight/1.14,)
-                            dcanvas.coords("bsheetline10",dwidth/21,dheight/1.12,dwidth/1.055,dheight/1.12,) 
+                            dcanvas.coords("bsheetline9",dwidth/21,dheight/1.21,dwidth/1.055,dheight/1.21,)                           
+                            dcanvas.coords("total_account_payb_lbl",dwidth/9,dheight/1.18,)
+                            dcanvas.coords("bsheetline10",dwidth/21,dheight/1.16,dwidth/1.055,dheight/1.16,) 
                             
-                            dcanvas.coords("total_current_liabi_lbl",dwidth/9.60,dheight/1.11,)
-                            dcanvas.coords("bsheetline11",dwidth/21,dheight/1.09,dwidth/1.055,dheight/1.09,) 
-                            dcanvas.coords("equity_lbl",dwidth/9.60,dheight/1.08,)
-                            dcanvas.coords("equity_treeview",dwidth/9.60,dheight/1.07,)
+                            dcanvas.coords("total_current_liabi_lbl",dwidth/9.60,dheight/1.15,)
+                            dcanvas.coords("bsheetline11",dwidth/21,dheight/1.12,dwidth/1.055,dheight/1.12,) 
+                            dcanvas.coords("equity_lbl",dwidth/9.60,dheight/1.11,)
+                            dcanvas.coords("equity_treeview",dwidth/9.60,dheight/1.10,)
                             # dcanvas.coords("profit_for_yr_lbl",dwidth/9,dheight/1.68,)
-                            dcanvas.coords("bsheetline12",dwidth/21,dheight/1.02,dwidth/1.055,dheight/1.02,) 
-                            dcanvas.coords("total_equity_lbl",dwidth/9.60,dheight/1.01,)
-                            # dcanvas.coords("bsheetline13",dwidth/21,dheight/1.02,dwidth/1.055,dheight/1,) 
+                            dcanvas.coords("bsheetline12",dwidth/21,dheight/1.04,dwidth/1.055,dheight/1.04,) 
+                            dcanvas.coords("total_equity_lbl",dwidth/9.60,dheight/1.03,)
+                            dcanvas.coords("bsheetline13",dwidth/21,dheight/1.02,dwidth/1.055,dheight/1.02,) 
                             
-                            dcanvas.coords("total_liabilities_eqity_lbl",dwidth/9.60,dheight/0.99,)
+                            dcanvas.coords("total_liabilities_eqity_lbl",dwidth/9.60,dheight/1.01,)
 
 
                         acc_sr_Scroll3 = Scrollbar(accou_fr,orient=VERTICAL)
@@ -24079,15 +24079,15 @@ def main_sign_in():
                         
                         btreestyle=ttk.Style()
                         btreestyle.theme_use("default")
-                        btreestyle.configure('mystyle115.Treeview',background='white',state='DISABLE',foreground='black',font=(None,11))
-
-                        current_asset_treeview=ttk.Treeview(acc_canvas3,height=4,columns=(1,2,),style='mystyle115.Treeview')
+                        btreestyle.configure('mystyle115.Treeview',background='white',state='DISABLE',foreground='black',fieldbackground='white',font=(None,11))
+                        btreestyle.configure('mystyle115.Treeview.Heading',background='white',state='DISABLE',foreground='black',fieldbackground='white',font=(None,11))
+                        current_asset_treeview=ttk.Treeview(acc_canvas3,height=8,columns=(1,2,),style='mystyle115.Treeview')
                         
                         # currnt_asset_frame_place=acc_canvas3.create_window(0, 0, anchor="nw", window=currnt_asset_frame, tag=("currnt_asset_frame"))
                     # format column  
                         current_asset_treeview.column("#0",width=0,stretch=NO)
-                        current_asset_treeview.column("#1",anchor=CENTER,width=220)
-                        current_asset_treeview.column('#2',anchor=CENTER,width=220)
+                        current_asset_treeview.column("#1",anchor=CENTER,width=430)
+                        current_asset_treeview.column('#2',anchor=CENTER,width=430)
 
                         current_asset_treeview.heading("#0",text='',anchor=CENTER)
                         current_asset_treeview.heading('1',text='Particulars')
@@ -24100,10 +24100,10 @@ def main_sign_in():
 
                         account_reci_lbl=Label(acc_canvas3, text="Account Receivable (Debtors)", fg="black", anchor="nw",font=('Calibri 11 bold'))
                         account_reci_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=account_reci_lbl, tag=("account_reci_lbl"))
-                        account_reci__treeview=ttk.Treeview(acc_canvas3,height=4,columns=(1,2,),style='mystyle115.Treeview')
+                        account_reci__treeview=ttk.Treeview(acc_canvas3,height=8,columns=(1,2,),style='mystyle115.Treeview')
                         account_reci__treeview.column("#0",width=0,stretch=NO)
-                        account_reci__treeview.column("#1",anchor=CENTER,width=220)
-                        account_reci__treeview.column('#2',anchor=CENTER,width=220)
+                        account_reci__treeview.column("#1",anchor=CENTER,width=430)
+                        account_reci__treeview.column('#2',anchor=CENTER,width=430)
 
                         account_reci__treeview.heading("#0",text='',anchor=CENTER)
                         account_reci__treeview.heading('1',text='Particulars')
@@ -24129,10 +24129,10 @@ def main_sign_in():
 
                         current_liability_lbl=Label(acc_canvas3, text="Current Liabilities", fg="black", anchor="nw",font=('Calibri 10 '))
                         current_liability_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=current_liability_lbl, tag=("current_liability_lbl"))  
-                        current_liabilities_treeview=ttk.Treeview(acc_canvas3,height=4,columns=(1,2,),style='mystyle115.Treeview')
+                        current_liabilities_treeview=ttk.Treeview(acc_canvas3,height=8,columns=(1,2,),style='mystyle115.Treeview')
                         current_liabilities_treeview.column("#0",width=0,stretch=NO)
-                        current_liabilities_treeview.column("#1",anchor=CENTER,width=220)
-                        current_liabilities_treeview.column('#2',anchor=CENTER,width=220)
+                        current_liabilities_treeview.column("#1",anchor=CENTER,width=430)
+                        current_liabilities_treeview.column('#2',anchor=CENTER,width=430)
                         current_liabilities_treeview.heading("#0",text='',anchor=CENTER)
                         current_liabilities_treeview.heading('1',text='Particulars')
                         current_liabilities_treeview.heading('2',text='Amount')
@@ -24143,8 +24143,8 @@ def main_sign_in():
 
                         account_payble_treeview=ttk.Treeview(acc_canvas3,height=4,columns=(1,2,),style='mystyle115.Treeview')
                         account_payble_treeview.column("#0",width=0,stretch=NO)
-                        account_payble_treeview.column("#1",anchor=CENTER,width=220)
-                        account_payble_treeview.column('#2',anchor=CENTER,width=220)
+                        account_payble_treeview.column("#1",anchor=CENTER,width=430)
+                        account_payble_treeview.column('#2',anchor=CENTER,width=430)
                         account_payble_treeview.heading("#0",text='',anchor=CENTER)
                         account_payble_treeview.heading('1',text='Particulars')
                         account_payble_treeview.heading('2',text='Amount') 
@@ -24162,8 +24162,8 @@ def main_sign_in():
 
                         equity_treeview=ttk.Treeview(acc_canvas3,height=4,columns=(1,2,),style='mystyle115.Treeview')
                         equity_treeview.column("#0",width=0,stretch=NO)
-                        equity_treeview.column("#1",anchor=CENTER,width=220)
-                        equity_treeview.column('#2',anchor=CENTER,width=220)
+                        equity_treeview.column("#1",anchor=CENTER,width=430)
+                        equity_treeview.column('#2',anchor=CENTER,width=430)
                         equity_treeview.heading("#0",text='',anchor=CENTER)
                         equity_treeview.heading('1',text='Particulars')
                         equity_treeview.heading('2',text='Amount') 

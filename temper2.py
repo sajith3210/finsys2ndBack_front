@@ -255,3 +255,18 @@
     account_payble_treeview.heading("#0",text='',anchor=CENTER)
     account_payble_treeview.heading('1',text='Particulars')
     account_payble_treeview.heading('2',text='Amount')
+
+
+     def display_currentasset():
+            p=fbcursor.execute("select * from app1_accounts1")
+            rows=fbcursor.fetchall()
+            for row in rows():
+                            # acc_treeview.insert("",END,values=row)
+            acc_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+                            
+                    # New category tab add tax button function 
+    def accounttablefetch():
+        p=fbcursor.execute("select * from app1_accounts1")
+        rows=fbcursor.fetchall()
+                        # print(rows)
+        return rows
