@@ -322,6 +322,52 @@ total_asset_sum_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=to
 
 
 
+def edit_rnrpt_back():
+    acc_canvas4.pack_forget()
+    acc_sr_Scroll4.pack_forget()
+    acc_canvas.pack(fill=X)
+    if edit_rnrpt_combo.get()=="Edit":
+    print("dropdown work")
+    acc_canvas.pack_forget()
+    acc_sr_Scroll.pack_forget()
+
+edit_rnrpt_combo=ttk.Combobox(acc_canvas,font=('arial 10'),background="#213b52",foreground='white')
+edit_rnrpt_combo['values']=('Edit','Make Inactive','Run Report')
+edit_rnrpt_combo.current(0)
+
+
+
+
+ OptionList2=['All dates','Custom','Today','This month','This financial year']
+variable2 = StringVar()
+variable2.set(OptionList2[0])
+opt_men2 = OptionMenu(acc_canvas2,variable2, *OptionList2)
+opt_men2.config(bg="#213b52",width=30)
+opt_men2_place=acc_canvas2.create_window(0, 0, anchor="nw", window=opt_men2, tag=("opt_men2"))
+
+if OptionMenu.get()=="All dates"
+
+current_asset_treeview
+current_liabilities_treeview
+account_reci__treeview
+account_payble_treeview
+equity_treeview
+
+opt_men2=ttk.Combobox(acc_canvas2,font=('arial 10'),background="#213b52",foreground='white')
+opt_men2.['values']=('All dates','Custom','Today','This month','This financial year')
+opt_men2.current(0)
+opt_men2.bind("<<ComboboxSelected>>",filter_date)
+
+edit_rnrpt_combo=ttk.Combobox(acc_canvas,font=('arial 10'),background="#213b52",foreground='white')
+edit_rnrpt_combo['values']=('Edit','Make Inactive','Run Report')
+edit_rnrpt_combo.current(0)
+
+edit_rnrpt_combo.bind("<<ComboboxSelected>>",edit_rnrpt)
+edit_menn_place=acc_canvas.create_window(0, 0, anchor="nw", window=edit_rnrpt_combo, tag=("edit_rnrpt_combo"))
+
+
+
+
 
 
 

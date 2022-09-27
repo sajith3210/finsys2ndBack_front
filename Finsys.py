@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from datefilter import all_dates, this_month 
 from calendar import c
 from cgitb import enable, reset, text
 from distutils import command
@@ -23936,13 +23937,68 @@ def main_sign_in():
                         acc_canvas2.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("bsheet_polygen_pr2"),smooth=True,)
                         run_rpt_lbl=Label(acc_canvas2, text="Report period",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
                         run_rpt_lbl_place=acc_canvas2.create_window(0, 0, anchor="nw", window=run_rpt_lbl, tag=("run_rpt_lbl"))
-                        OptionList2=['All dates','Custom','Today','This month','This financial year']
-                        variable2 = StringVar()
-                        variable2.set(OptionList2[0])
-                        opt_men2 = OptionMenu(acc_canvas2,variable2, *OptionList2)
-                        opt_men2.config(bg="#213b52",width=30)
+                       
+                        def filter_date():
+                            if opt_men2.get()=="All dates":
+                                all_dates()
+                            if opt_men2.get()=="This month":
+                                print("This work perfect")
+                                current_asset_treeview.delete(*current_asset_treeview.get_children())
+                                sql="select *  from app1_accounts1 where acctype=%s  and  MONTH(asof)=MONTH(now())"
+                                current_as='Current Assets'
+                                val=(current_as,)
+                                p=fbcursor.execute(sql,val)
+                                rows=fbcursor.fetchall()
+                                for row in rows:              
+                                    current_asset_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+
+                                account_reci__treeview.delete(*account_reci__treeview.get_children())
+                                sql="select *  from app1_accounts1 where acctype=%s  and  MONTH(asof)=MONTH(now())"
+                                account_reci='Account Receivable(Debtors)'
+                                val=(account_reci,)
+                                p=fbcursor.execute(sql,val)
+                                rows=fbcursor.fetchall()
+                                for row in rows:              
+                                    account_reci__treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+
+                                current_liabilities_treeview.delete(*current_liabilities_treeview.get_children())
+                                sql="select *  from app1_accounts1 where acctype=%s  and  MONTH(asof)=MONTH(now())"
+                                current_li='Current Liabilities'
+                                val=(current_li,)
+                                p=fbcursor.execute(sql,val)
+                                rows=fbcursor.fetchall()
+                                for row in rows:              
+                                    current_liabilities_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+                                
+
+                                account_payble_treeview.delete(*account_payble_treeview.get_children())
+                                sql="select * from app1_accounts1 where acctype=%s and  MONTH(asof)=MONTH(now())"
+                                account_payb='Account Payble'
+                                val=(account_payb,)
+                                p=fbcursor.execute(sql,val)
+                                rows=fbcursor.fetchall()
+                                for row in rows:              
+                                    account_payble_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+
+                                equity_treeview.delete(*equity_treeview.get_children())
+                                sql="select * from app1_accounts1 where acctype=%s and  MONTH(asof)=MONTH(now())"
+                                eqi='Equity'
+                                val=(eqi,)
+                                p=fbcursor.execute(sql,val)
+                                rows=fbcursor.fetchall()
+                                for row in rows:              
+                                    equity_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+
+                        global opt_men2 ,current_asset_treeview,current_liabilities_treeview,account_reci__treeview,account_payble_treeview,equity_treeview
+                        opt_men2=ttk.Combobox(acc_canvas2,font=('arial 10'),background="#213b52",foreground='white')
+                        opt_men2['values']=('All dates','Custom','Today','This month','This financial year')
+                        opt_men2.current(0)
+                        # opt_men2.bind("<<ComboboxSelected>>",filter_date)
                         opt_men2_place=acc_canvas2.create_window(0, 0, anchor="nw", window=opt_men2, tag=("opt_men2"))
-                        run_rpt_btn=Button(acc_canvas2,bg="#213b52",text="Run Report",fg="white",width=15,)
+
+                        
+
+                        run_rpt_btn=Button(acc_canvas2,bg="#213b52",text="Run Report",fg="white",width=15,command=filter_date)
                         run_rpt_place=acc_canvas2.create_window(0, 0, anchor="nw", window=run_rpt_btn, tag=("run_rpt_btn"))
                         def bsheet_back():
                            acc_canvas2.pack_forget()
@@ -24287,6 +24343,7 @@ def main_sign_in():
                         total_liabilities_eqity_lbl=Label(acc_canvas3, text="Total Liabilities and Equity", fg="black", anchor="nw",font=('Calibri 10 '))
                         total_liabilities_eqity_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_liabilities_eqity_lbl, tag=("total_liabilities_eqity_lbl")) 
 
+                        
                         # acc_canvas3
                     def filter_tb():
                         acc_treeview.delete(*acc_treeview.get_children())
