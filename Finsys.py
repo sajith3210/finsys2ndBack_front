@@ -24012,11 +24012,16 @@ def main_sign_in():
                             dcanvas.coords("bsheetline3",dwidth/21,dheight/2.42,dwidth/1.055,dheight/2.42,)
                             dcanvas.coords("bsheetline4",dwidth/21,dheight/2.25,dwidth/1.055,dheight/2.25,)
                             dcanvas.coords("total_account_reci_lbl",dwidth/9,dheight/2.33,)
+                            dcanvas.coords("sum_account_reci_lbl",dwidth/3,dheight/2.33,)
+                            
 
                             dcanvas.coords("bsheetline5",dwidth/21,dheight/2.08,dwidth/1.055,dheight/2.08,)
                             dcanvas.coords("total_current_asset_lbl",dwidth/9,dheight/2.15,)
+                            dcanvas.coords("total_current_asset_sum_lbl",dwidth/3,dheight/2.15,)
+                            
                             dcanvas.coords("bsheetline6",dwidth/21,dheight/1.90,dwidth/1.055,dheight/1.90,)
                             dcanvas.coords("total_asset_lbl",dwidth/21,dheight/2,)
+                            dcanvas.coords("total_asset_sum_lbl",dwidth/3,dheight/2,)
                             dcanvas.coords("liability_eq_lbl",dwidth/21,dheight/1.80,)
                             dcanvas.coords("bsheetline7",dwidth/21,dheight/1.73,dwidth/1.055,dheight/1.73,)
                             
@@ -24119,24 +24124,44 @@ def main_sign_in():
                         account_reci__treeview_place=acc_canvas3.create_window(0, 0, anchor="nw", window=account_reci__treeview, tag=("account_reci__treeview"))
                         
                         # Display account receivable 
-                        p=fbcursor.execute("select *  from app1_accounts1 where acctype=%s")
+                        sql="select *  from app1_accounts1 where acctype=%s"
                         account_reci='Account Receivable(Debtors)'
                         val=(account_reci,)
-                        rows=fbcursor.fetchall(p,val)
+                        p=fbcursor.execute(sql,val)
+                        rows=fbcursor.fetchall()
                         for row in rows:              
                             account_reci__treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+
+                        account_reci_sum="select sum(balance) as ba from app1_accounts1 WHERE acctype=%s" #account recivable sum
+                        tem='Account Receivable(Debtors)'
+                        val=(tem,)
+                        fbcursor.execute(account_reci_sum,val)
+                        acc_reci_sum=fbcursor.fetchone()
 
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline3"))                        
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline4")) 
                         total_account_reci_lbl=Label(acc_canvas3, text="Total Account Receivable (Debtors)", fg="black", anchor="nw",font=('Calibri 10 '))
                         total_account_reci_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_account_reci_lbl, tag=("total_account_reci_lbl")) 
+                        sum_account_reci_lbl=Label(acc_canvas3, text=acc_reci_sum, fg="black", anchor="nw",font=('Calibri 10 '))
+                        sum_account_reci_lbl_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=sum_account_reci_lbl, tag=("sum_account_reci_lbl")) 
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline5"))
+
+                        total_ca_sum="select sum(balance) as ba from app1_accounts1 WHERE acctype=%s" #account recivable sum
+                        tem='Current Assets'
+                        val=(tem,)
+                        fbcursor.execute(account_reci_sum,val)
+                        total_current_as_sum=fbcursor.fetchone()
                         total_current_asset_lbl=Label(acc_canvas3, text="Total Current Asset", fg="black", anchor="nw",font=('Calibri 10 '))
-                    
-                        total_current_asset_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_current_asset_lbl, tag=("total_current_asset_lbl"))  
+                        total_current_asset_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_current_asset_lbl, tag=("total_current_asset_lbl"))
+                        total_current_asset_sum_lbl=Label(acc_canvas3, text=total_current_as_sum, fg="black", anchor="nw",font=('Calibri 10 '))
+                        total_current_asset_sum_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_current_asset_sum_lbl, tag=("total_current_asset_sum_lbl")) 
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline6")) 
                         total_asset_lbl=Label(acc_canvas3, text="Total  Assets", fg="black", anchor="nw",font=('Calibri 10 '))
-                        total_asset_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_asset_lbl, tag=("total_asset_lbl"))    
+                        total_asset_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_asset_lbl, tag=("total_asset_lbl")) 
+
+                        TA_sum=acc_reci_sum[0]+total_current_as_sum[0]
+                        total_asset_sum_lbl=Label(acc_canvas3, text=TA_sum, fg="black", anchor="nw",font=('Calibri 10 '))
+                        total_asset_sum_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_asset_sum_lbl, tag=("total_asset_sum_lbl"))   
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline7")) 
                          
                         liability_eq_lbl=Label(acc_canvas3, text="Liabilities and Equity", fg="black", anchor="nw",font=('Calibri 10 '))
@@ -24154,10 +24179,11 @@ def main_sign_in():
                         current_liabilities_treeview_place=acc_canvas3.create_window(0, 0, anchor="nw", window=current_liabilities_treeview, tag=("current_liabilities_treeview"))
 
                         # display current liabilities 
-                        p=fbcursor.execute("select *  from app1_accounts1 where acctype=%s")
+                        sql="select *  from app1_accounts1 where acctype=%s"
                         current_li='Current Liabilities'
                         val=(current_li,)
-                        rows=fbcursor.fetchall(p,val)
+                        p=fbcursor.execute(sql,val)
+                        rows=fbcursor.fetchall()
                         for row in rows:              
                             current_liabilities_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
 
@@ -24175,10 +24201,12 @@ def main_sign_in():
                         account_payble_treeview.heading('2',text='Amount') 
                         account_payble_treeview_place=acc_canvas3.create_window(0, 0, anchor="nw", window=account_payble_treeview, tag=("account_payble_treeview"))  
                         # display Account payble
-                        p=fbcursor.execute("select *  from app1_accounts1 where acctype=%s")
+                        sql="select *  from app1_accounts1 where acctype=%s"
+                        
                         account_payb='Account Payble'
                         val=(account_payb,)
-                        rows=fbcursor.fetchall(p,val)
+                        p=fbcursor.execute(sql,val)
+                        rows=fbcursor.fetchall()
                         for row in rows:              
                             account_payble_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
 
@@ -24204,12 +24232,13 @@ def main_sign_in():
                         # profit_for_yr_lbl=Label(acc_canvas3, text="Profit for the year", fg="black", anchor="nw",font=('Calibri 10 '))
                         # profit_for_yr_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=profit_for_yr_lbl, tag=("profit_for_yr_lbl")) 
                          # display eqity payble
-                        p=fbcursor.execute("select * from app1_accounts1 where acctype=%s")
-                        eqi='Eqity'
+                        sql="select * from app1_accounts1 where acctype=%s"
+                        eqi='Equity'
                         val=(eqi,)
-                        rows=fbcursor.fetchall(p,val)
+                        p=fbcursor.execute(sql,val)
+                        rows=fbcursor.fetchall()
                         for row in rows:              
-                            equity_treeview_place.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+                            equity_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
 
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline12")) 
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline13")) 

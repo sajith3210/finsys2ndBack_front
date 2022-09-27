@@ -289,13 +289,17 @@ rows=fbcursor.fetchall(p,val)
 sql="select *  from app1_accounts1 where acctype=%s"
 current_as='Current Assets'
 
+ p=fbcursor.execute(sql,val)
+ rows=fbcursor.fetchall()
 
 
 
 
-
-
-
+sql="select *  from app1_accounts1 where acctype=%s"
+current_as='Current Assets'
+val=(current_as,)
+p=fbcursor.execute(sql,val)
+rows=fbcursor.fetchall()
 
 
 
