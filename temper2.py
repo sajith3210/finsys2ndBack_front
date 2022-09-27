@@ -260,13 +260,64 @@
      def display_currentasset():
             p=fbcursor.execute("select * from app1_accounts1")
             rows=fbcursor.fetchall()
-            for row in rows():
-                            # acc_treeview.insert("",END,values=row)
-            acc_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+            for row in rows:              
+            current_asset_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
                             
+ 
+
+
+
                     # New category tab add tax button function 
     def accounttablefetch():
         p=fbcursor.execute("select * from app1_accounts1")
         rows=fbcursor.fetchall()
                         # print(rows)
         return rows
+
+p=fbcursor.execute("select name ,balance from app1_accounts1 where acctype=%s")
+val=('Account Payble',)
+rows=fbcursor.fetchall(p,val)
+
+
+
+
+
+
+
+
+
+sql="select *  from app1_accounts1 where acctype=%s"
+current_as='Current Assets'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      def filter_tb():
+                        acc_treeview.delete(*acc_treeview.get_children())
+                        fil_val=acc_filter_entry.get()
+                        sq_str='"%{}%"'.format(fil_val)
+                        if fil_val=="":
+                            displayaccounttab()
+                        else:
+                            sql="select * from app1_accounts1 where name Like {}".format(sq_str)
+                            # fbcursor.execute("select * from app1_accounts1 where name Like '% %'".format(fil_val))
+                            fbcursor.execute(sql)
+                            fech=fbcursor.fetchall()
+                            print("fech isdf is isi si si si s",fech)
+                            for row in fech:
+                                acc_treeview.insert(parent='', index='end',iid=row,text='', values=(row[3],row[1],row[2],row[6],row[7],''))

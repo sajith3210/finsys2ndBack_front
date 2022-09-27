@@ -24094,6 +24094,14 @@ def main_sign_in():
                         current_asset_treeview.heading('2',text='Amount')
                         current_asset_treeview_place=acc_canvas3.create_window(0, 0, anchor="nw", window=current_asset_treeview, tag=("current_asset_treeview"))
 
+                        # display current asset 
+                        sql="select *  from app1_accounts1 where acctype=%s"
+                        current_as='Current Assets'
+                        val=(current_as,)
+                        p=fbcursor.execute(sql,val)
+                        rows=fbcursor.fetchall()
+                        for row in rows:              
+                            current_asset_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
 
                         # bank_lbl=Label(acc_canvas3, text="Bank", fg="black", anchor="nw",font=('Calibri 10 '))
                         # bank_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=bank_lbl, tag=("bank_lbl"))
@@ -24109,7 +24117,14 @@ def main_sign_in():
                         account_reci__treeview.heading('1',text='Particulars')
                         account_reci__treeview.heading('2',text='Amount')
                         account_reci__treeview_place=acc_canvas3.create_window(0, 0, anchor="nw", window=account_reci__treeview, tag=("account_reci__treeview"))
-
+                        
+                        # Display account receivable 
+                        p=fbcursor.execute("select *  from app1_accounts1 where acctype=%s")
+                        account_reci='Account Receivable(Debtors)'
+                        val=(account_reci,)
+                        rows=fbcursor.fetchall(p,val)
+                        for row in rows:              
+                            account_reci__treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
 
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline3"))                        
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline4")) 
@@ -24137,6 +24152,16 @@ def main_sign_in():
                         current_liabilities_treeview.heading('1',text='Particulars')
                         current_liabilities_treeview.heading('2',text='Amount')
                         current_liabilities_treeview_place=acc_canvas3.create_window(0, 0, anchor="nw", window=current_liabilities_treeview, tag=("current_liabilities_treeview"))
+
+                        # display current liabilities 
+                        p=fbcursor.execute("select *  from app1_accounts1 where acctype=%s")
+                        current_li='Current Liabilities'
+                        val=(current_li,)
+                        rows=fbcursor.fetchall(p,val)
+                        for row in rows:              
+                            current_liabilities_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+
+
                         account_payb_lbl=Label(acc_canvas3, text="Accounts Payable(Creditors)", fg="black", anchor="nw",font=('Calibri 10 '))
                         account_payb_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=account_payb_lbl, tag=("account_payb_lbl"))  
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline8"))
@@ -24148,7 +24173,15 @@ def main_sign_in():
                         account_payble_treeview.heading("#0",text='',anchor=CENTER)
                         account_payble_treeview.heading('1',text='Particulars')
                         account_payble_treeview.heading('2',text='Amount') 
-                        account_payble_treeview_place=acc_canvas3.create_window(0, 0, anchor="nw", window=account_payble_treeview, tag=("account_payble_treeview"))       
+                        account_payble_treeview_place=acc_canvas3.create_window(0, 0, anchor="nw", window=account_payble_treeview, tag=("account_payble_treeview"))  
+                        # display Account payble
+                        p=fbcursor.execute("select *  from app1_accounts1 where acctype=%s")
+                        account_payb='Account Payble'
+                        val=(account_payb,)
+                        rows=fbcursor.fetchall(p,val)
+                        for row in rows:              
+                            account_payble_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline9"))
                         total_account_payb_lbl=Label(acc_canvas3, text="Total Account Payable(Creditors)", fg="black", anchor="nw",font=('Calibri 10 '))
                         total_account_pay_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_account_payb_lbl, tag=("total_account_payb_lbl")) 
@@ -24170,7 +24203,14 @@ def main_sign_in():
                         equity_treeview_place=acc_canvas3.create_window(0, 0, anchor="nw", window=equity_treeview, tag=("equity_treeview")) 
                         # profit_for_yr_lbl=Label(acc_canvas3, text="Profit for the year", fg="black", anchor="nw",font=('Calibri 10 '))
                         # profit_for_yr_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=profit_for_yr_lbl, tag=("profit_for_yr_lbl")) 
-                        
+                         # display eqity payble
+                        p=fbcursor.execute("select * from app1_accounts1 where acctype=%s")
+                        eqi='Eqity'
+                        val=(eqi,)
+                        rows=fbcursor.fetchall(p,val)
+                        for row in rows:              
+                            equity_treeview_place.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline12")) 
                         acc_canvas3.create_line(0, 0, 0, 0, fill='gray',width=1, tags=("bsheetline13")) 
                         total_equity_lbl=Label(acc_canvas3, text="Total Equity", fg="black", anchor="nw",font=('Calibri 10 '))
