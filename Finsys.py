@@ -24019,7 +24019,7 @@ def main_sign_in():
                                 account_payble_treeview.delete(*account_payble_treeview.get_children())
                                 sql="select * from app1_accounts1 where acctype=%s and  MONTH(asof)=MONTH(now())"
                                 account_payb='Account Payble'
-                                val=(account_payb,)
+                                Fval=(account_payb,)
                                 p=fbcursor.execute(sql,val)
                                 rows=fbcursor.fetchall()
                                 for row in rows:              
@@ -24939,6 +24939,7 @@ def main_sign_in():
                                 dcanvas.coords("Balance_lbl",dwidth/2,dheight/1.30)
                                 dcanvas.coords("Balance_lbl_entry",dwidth/2,dheight/1.20)
                             def update():
+                                                              
                                 acc_typ=acctypvari.get()
                                 det_typ_var=dettypvari.get()
                                 nam_vari=name_vari.get()
@@ -25404,7 +25405,8 @@ def main_sign_in():
                                     pass
                             
                             # Edit_info_backend  
-                            def update_reconsile():    
+                            def update_reconsile(): 
+                                # import pdb;pdb.set_trace()    
                                 begining_balance_va=str({}).format(beg_bal_entry.get())
                                 ending_balance_va=str({}).format(end_bal_entry.get())
                                 servise_charge_va=str({}).format(servise_chrg_entry.get())
@@ -25427,13 +25429,13 @@ def main_sign_in():
 
                                 print("Print company id is ",cid[0],"Acct type id is ",actypid[0],"Expense id is",exp_id[0])
                                 sql="update app1_expenseaccount set account=%s,begbal=%s,endbal=%s,enddate=%s,dat=%s,serchar=%s,expacc=%s,cid_id=%s,expaccountypid_id=%s where expenseid=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
-                                val=(Accnt_variable,begining_balance_va,ending_balance_va,end_dt_variable,date_variable,servise_charge_va,exp_acc_variable,cid[0],actypid[0],exp_id[0])
-                                fbcursor.executemany(sql,val)
+                                val=(Accnt_variable.get(),begining_balance_va,ending_balance_va,end_dt_variable.get(),date_variable.get(),servise_charge_va,exp_acc_variable.get(),cid[0],actypid[0],exp_id[0])
+                                fbcursor.execute(sql,val)
                                 finsysdb.commit()
 
-                                sql="update app1_incomeaccount set dat1=%s,intear=%s,incacc=%s,cid_id=%s,expenceincomeid_id=%s, where incomeid=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
-                                val=(incom_ac_date_variable,interest_earn_va,income_acc_variable,cid[0],exp_id[0],incom_id[0])
-                                fbcursor.executemany(sql,val)
+                                sql="update app1_incomeaccount set dat1=%s,intear=%s,incacc=%s,cid_id=%s,expenceincomeid_id=%s where incomeid=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
+                                val=(incom_ac_date_variable.get(),interest_earn_va,income_acc_variable.get(),cid[0],exp_id[0],incom_id[0])
+                                fbcursor.execute(sql,val)
                                 finsysdb.commit()
                                 messagebox.showinfo("Update","Update successfully")
 
