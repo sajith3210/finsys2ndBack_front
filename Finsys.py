@@ -23938,19 +23938,7 @@ def main_sign_in():
                         run_rpt_lbl=Label(acc_canvas2, text="Report period",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
                         run_rpt_lbl_place=acc_canvas2.create_window(0, 0, anchor="nw", window=run_rpt_lbl, tag=("run_rpt_lbl"))
                        
-                        def filter_date():
-                            def responsive_wid(event):
-                                dwidth = event.width
-                                dheight = event.height
-                                dcanvas = event.widget
-
-                                r1 = 0
-                                x1 = dwidth/63
-                                x2 = dwidth/1.021
-                                y1 = dheight/145  
-                                y2 = dheight/12      
-                                dcanvas.coords("total_current_asset_sum_lbl_month_fil",dwidth/3,dheight/2.15,)   
-                               
+                        def filter_date():  
                             acc_canvas3.bind("<Configure>", responsive_wid)    
                             if opt_men2.get()=="All dates":
                                 current_asset_treeview.delete(*current_asset_treeview.get_children())
@@ -24008,14 +23996,7 @@ def main_sign_in():
                                 rows=fbcursor.fetchall()
                                 for row in rows:              
                                     current_asset_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
-
-                                total_ca_sum="select sum(balance) as ba from app1_accounts1 WHERE acctype=%s and MONTH(asof)=MONTH(now())" #account recivable sum
-                                tem='Current Assets'
-                                val=(tem,)
-                                fbcursor.execute(account_reci_sum,val)
-                                total_current_as_sum=fbcursor.fetchone()
-                                total_current_asset_sum_lbl_month_fil=Label(acc_canvas3, text=total_current_as_sum, fg="black", anchor="nw",font=('Calibri 10 '))
-                                total_current_asset_sum_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=total_current_asset_sum_lbl_month_fil, tag=("total_current_asset_sum_lbl_month_fil")) 
+    
                                 account_reci__treeview.delete(*account_reci__treeview.get_children())
                                 sql="select *  from app1_accounts1 where acctype=%s  and  MONTH(asof)=MONTH(now())"
                                 account_reci='Account Receivable(Debtors)'
@@ -24241,6 +24222,7 @@ def main_sign_in():
                         total_current_as_sum=0.0
                         for child in current_asset_treeview.get_children():
                             total_current_as_sum=total_current_as_sum+float(current_asset_treeview.item(child,'values')[1])
+                       
                         total_current_asset_sum_lbl['text']='{}'.format(total_current_as_sum)        
                         # bank_lbl=Label(acc_canvas3, text="Bank", fg="black", anchor="nw",font=('Calibri 10 '))
                         # bank_lbl_place=acc_canvas3.create_window(0, 0, anchor="nw", window=bank_lbl, tag=("bank_lbl"))
