@@ -262,7 +262,21 @@
             rows=fbcursor.fetchall()
             for row in rows:              
             current_asset_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
-                            
+
+
+
+
+ def responsive_wid(event):
+        dwidth = event.width
+        dheight = event.height
+        dcanvas = event.widget
+
+        r1 = 0
+        x1 = dwidth/63
+        x2 = dwidth/1.021
+        y1 = dheight/145  
+        y2 = dheight/12         
+        dcanvas.coords("total_current_asset_lbl",dwidth/9,dheight/2.15,)                    
  
 
 
@@ -386,3 +400,26 @@ edit_menn_place=acc_canvas.create_window(0, 0, anchor="nw", window=edit_rnrpt_co
                             print("fech isdf is isi si si si s",fech)
                             for row in fech:
                                 acc_treeview.insert(parent='', index='end',iid=row,text='', values=(row[3],row[1],row[2],row[6],row[7],''))
+
+
+
+
+
+total_ca_sum="select sum(balance) as ba from app1_accounts1 WHERE acctype=%s and MONTH(asof)=MONTH(now())" #account recivable sum
+tem='Current Assets'
+val=(tem,)
+fbcursor.execute(account_reci_sum,val)
+total_current_as_sum=fbcursor.fetchone()
+total_current_asset_sum_lbl=Label(acc_canvas3, text=total_current_as_sum, fg="black", anchor="nw",font=('Calibri 10 '))
+
+
+total_current_as_sum=0.0
+for child in current_asset_treeview.get_children():
+    total_current_as_sum=total_current_as_sum+float(current_asset_treeview.item(child,'values')[1])
+total_current_asset_sum_lbl['text']='{}'.format(total_current_as_sum) 
+
+ total_current_as_sum+acc_reci_sum
+
+ total_cl=total_current_liabi_sum + total_acc_pay_sum
+
+liabiliti_equity_sum=total_cl+total_eqi_sum

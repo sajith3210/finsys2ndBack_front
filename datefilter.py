@@ -1,5 +1,5 @@
 def all_dates():
-    current_asset_treeview.delete(*tv.get_children())
+    current_asset_treeview.delete(*current_asset_treeview.get_children())
     sql="select *  from app1_accounts1 where acctype=%s"
     current_as='Current Assets'
     val=(current_as,)
@@ -8,7 +8,7 @@ def all_dates():
     for row in rows:              
         current_asset_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
 
-    account_reci__treeview.delete(*tv.get_children())
+    account_reci__treeview.delete(*account_reci__treeview.get_children())
     sql="select *  from app1_accounts1 where acctype=%s"
     account_reci='Account Receivable(Debtors)'
     val=(account_reci,)
@@ -17,7 +17,7 @@ def all_dates():
     for row in rows:              
         account_reci__treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
 
-    current_liabilities_treeview.delete(*tv.get_children())
+    current_liabilities_treeview.delete(*tv.current_liabilities_treeview())
     sql="select *  from app1_accounts1 where acctype=%s"
     current_li='Current Liabilities'
     val=(current_li,)
@@ -26,7 +26,7 @@ def all_dates():
     for row in rows:              
         current_liabilities_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
 
-    account_payble_treeview.delete(*tv.get_children())
+    account_payble_treeview.delete(*tv.account_payble_treeview())
     sql="select * from app1_accounts1 where acctype=%s"
     account_payb='Account Payble'
     val=(account_payb,)
@@ -35,7 +35,7 @@ def all_dates():
     for row in rows:              
         account_payble_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
 
-    equity_treeview.delete(*tv.get_children())
+    equity_treeview.delete(*equity_treeview.get_children())
     sql="select * from app1_accounts1 where acctype=%s"
     eqi='Equity'
     val=(eqi,)
