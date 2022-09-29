@@ -387,6 +387,17 @@ edit_menn_place=acc_canvas.create_window(0, 0, anchor="nw", window=edit_rnrpt_co
 
 
       def filter_tb():
+
+
+
+
+
+
+
+
+
+
+
                         acc_treeview.delete(*acc_treeview.get_children())
                         fil_val=acc_filter_entry.get()
                         sq_str='"%{}%"'.format(fil_val)
@@ -423,3 +434,62 @@ total_current_asset_sum_lbl['text']='{}'.format(total_current_as_sum)
  total_cl=total_current_liabi_sum + total_acc_pay_sum
 
 liabiliti_equity_sum=total_cl+total_eqi_sum
+
+
+total_current_as_sum=0.0
+for child in current_asset_treeview.get_children():
+    total_current_as_sum=total_current_as_sum+float(current_asset_treeview.item(child,'values')[1])
+
+total_current_asset_sum_lbl['text']='{}'.format(total_current_as_sum)
+
+
+acc_reci_sum=0.0
+for child in account_reci__treeview.get_children():
+    acc_reci_sum=acc_reci_sum+float(account_reci__treeview.item(child,'values')[1])
+sum_account_reci_lbl['text']='{}'.format(acc_reci_sum) 
+
+TA_sum=total_current_as_sum+acc_reci_sum
+total_asset_sum_lbl['text']='{}'.format(TA_sum)
+
+current_liabi_sum=0.0
+for child in current_liabilities_treeview.get_children():
+    current_liabi_sum=current_liabi_sum+float(current_liabilities_treeview.item(child,'values')[1]) 
+
+total_acc_pay_sum=0.0
+for child in account_payble_treeview.get_children():
+    total_acc_pay_sum=total_acc_pay_sum+float(account_payble_treeview.item(child,'values')[1])
+total_account_payb_lbl_sum['text']='{}'.format(total_acc_pay_sum) 
+
+
+total_cl=current_liabi_sum + total_acc_pay_sum
+total_current_liabi_sum['text']="{}".format(total_cl)
+
+
+total_eqi_sum=0.0
+for child in equity_treeview.get_children():
+    total_eqi_sum=total_eqi_sum+float(equity_treeview.item(child,'values')[1])
+total_equity_sum_lbl['text']='{}'.format(total_eqi_sum)
+
+liabiliti_equity_sum=total_cl+total_eqi_sum
+total_liabi_equity_lbl_sum['text']='{}'.format(liabiliti_equity_sum)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
