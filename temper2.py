@@ -473,7 +473,7 @@ total_equity_sum_lbl['text']='{}'.format(total_eqi_sum)
 liabiliti_equity_sum=total_cl+total_eqi_sum
 total_liabi_equity_lbl_sum['text']='{}'.format(liabiliti_equity_sum)
 
-
+"select * from app1_accounts1 where acctype=%s"
 
 
 
