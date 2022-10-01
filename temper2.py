@@ -473,10 +473,16 @@ total_equity_sum_lbl['text']='{}'.format(total_eqi_sum)
 liabiliti_equity_sum=total_cl+total_eqi_sum
 total_liabi_equity_lbl_sum['text']='{}'.format(liabiliti_equity_sum)
 
+
+
+
 "select * from app1_accounts1 where acctype=%s"
+as_of_date_entry=DateEntry(acc_canvas5,selectmode='day',textvariable=as_of_date_variab)
+as_of_date_entry_place=acc_canvas5.create_window(0, 0, anchor="nw", window=as_of_date_entry, tag=("as_of_date_entry"))
 
 
-
+acc_typ_val=acc_treeview.item(acc_treeview.focus())["values"][1]
+bal_val=acc_treeview.item(acc_treeview.focus())["values"][4]
 
 
 

@@ -24287,7 +24287,7 @@ def main_sign_in():
                             dwidth = event.width
                             dheight = event.height
                             dcanvas = event.widget
-
+                            
                             r1 = 0
                             x1 = dwidth/63
                             x2 = dwidth/1.021
@@ -25072,6 +25072,7 @@ def main_sign_in():
                                 )      
                                 dcanvas.coords("company_name_lbl",dwidth/3,dheight/23,)
                                 dcanvas.coords("logo_label",dwidth/10,dheight/17,)
+                                dcanvas.coords("logo_label",dwidth/10,dheight/14,)
 
                             spcl_rnpt__Scroll2 = Scrollbar(accou_fr,orient=VERTICAL)
                             spcl_rnpt__Scroll2.pack(fill=Y,side="right")
@@ -25099,7 +25100,35 @@ def main_sign_in():
                             logo_label = Label(spcl_rnpt_canvas2, image=photo,)
                             logo_label.photo = photo
                             logo_label_place=spcl_rnpt_canvas2.create_window(0, 0, anchor="nw", window=logo_label, tag=("logo_label"))
-
+                            btreestyle=ttk.Style()
+                            btreestyle.theme_use("default")
+                            btreestyle.configure('mystyle115.Treeview',background='white',state='DISABLE',foreground='black',fieldbackground='white',font=(None,11))
+                            btreestyle.configure('mystyle115.Treeview.Heading',background='white',state='DISABLE',foreground='black',fieldbackground='white',font=(None,11))
+                            run_report_treeview=ttk.Treeview(spcl_rnpt_canvas2,height=300,columns=(1,2,3,4,5,6,7),style='mystyle115.Treeview')
+                    
+                        # format column  
+                        
+                            run_report_treeview.column("#0",width=0,stretch=NO)
+                            run_report_treeview.column("#1",anchor=CENTER,width=150)
+                            run_report_treeview.column('#2',anchor=CENTER,width=150)
+                            run_report_treeview.column('#3',anchor=CENTER,width=150)
+                            run_report_treeview.column('#4',anchor=CENTER,width=150)
+                            run_report_treeview.column('#5',anchor=CENTER,width=150)
+                            run_report_treeview.column('#6',anchor=CENTER,width=150)
+                            run_report_treeview.column('#7',anchor=CENTER,width=150)
+                            # acc_treeview.column('#7',anchor=CENTER,width=165)
+                            # format heading 
+                            run_report_treeview.heading("#0",text='',anchor=CENTER)
+                            run_report_treeview.heading('1',text='Date')
+                            run_report_treeview.heading('2',text='TRANSACTION TYPE')
+                            run_report_treeview.heading('3',text='NO')
+                            run_report_treeview.heading('4',text='NAME')
+                            run_report_treeview.heading('5',text='ACCOUNT')
+                            run_report_treeview.heading('6',text='CLR')
+                            run_report_treeview.heading('7',text='AMOUNT')
+                            # acc_treeview.heading('7',text='ACTION')
+                            # my_tree.insert(parent='',index='end',iid=0,text='',values=('','','','','','','open'))
+                            run_report_treeview_place=spcl_rnpt_canvas2.create_window(0, 0, anchor="nw", window=run_report_treeview, tag=("run_report_treeview"))
 
                         def edit_rnrpt_back():
                            acc_canvas4.pack_forget()
