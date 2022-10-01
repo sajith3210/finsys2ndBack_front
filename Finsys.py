@@ -25072,7 +25072,7 @@ def main_sign_in():
                                 )      
                                 dcanvas.coords("company_name_lbl",dwidth/3,dheight/23,)
                                 dcanvas.coords("logo_label",dwidth/10,dheight/17,)
-                                dcanvas.coords("logo_label",dwidth/10,dheight/14,)
+                                dcanvas.coords("run_report_treeview",dwidth/29,dheight/6,)
 
                             spcl_rnpt__Scroll2 = Scrollbar(accou_fr,orient=VERTICAL)
                             spcl_rnpt__Scroll2.pack(fill=Y,side="right")
@@ -25104,18 +25104,18 @@ def main_sign_in():
                             btreestyle.theme_use("default")
                             btreestyle.configure('mystyle115.Treeview',background='white',state='DISABLE',foreground='black',fieldbackground='white',font=(None,11))
                             btreestyle.configure('mystyle115.Treeview.Heading',background='white',state='DISABLE',foreground='black',fieldbackground='white',font=(None,11))
-                            run_report_treeview=ttk.Treeview(spcl_rnpt_canvas2,height=300,columns=(1,2,3,4,5,6,7),style='mystyle115.Treeview')
+                            run_report_treeview=ttk.Treeview(spcl_rnpt_canvas2,height=190,columns=(1,2,3,4,5,6,7),style='mystyle115.Treeview')
                     
                         # format column  
                         
                             run_report_treeview.column("#0",width=0,stretch=NO)
-                            run_report_treeview.column("#1",anchor=CENTER,width=150)
-                            run_report_treeview.column('#2',anchor=CENTER,width=150)
-                            run_report_treeview.column('#3',anchor=CENTER,width=150)
-                            run_report_treeview.column('#4',anchor=CENTER,width=150)
-                            run_report_treeview.column('#5',anchor=CENTER,width=150)
-                            run_report_treeview.column('#6',anchor=CENTER,width=150)
-                            run_report_treeview.column('#7',anchor=CENTER,width=150)
+                            run_report_treeview.column("#1",anchor=CENTER,width=165)
+                            run_report_treeview.column('#2',anchor=CENTER,width=165)
+                            run_report_treeview.column('#3',anchor=CENTER,width=165)
+                            run_report_treeview.column('#4',anchor=CENTER,width=165)
+                            run_report_treeview.column('#5',anchor=CENTER,width=165)
+                            run_report_treeview.column('#6',anchor=CENTER,width=165)
+                            run_report_treeview.column('#7',anchor=CENTER,width=165)
                             # acc_treeview.column('#7',anchor=CENTER,width=165)
                             # format heading 
                             run_report_treeview.heading("#0",text='',anchor=CENTER)
@@ -25129,6 +25129,14 @@ def main_sign_in():
                             # acc_treeview.heading('7',text='ACTION')
                             # my_tree.insert(parent='',index='end',iid=0,text='',values=('','','','','','','open'))
                             run_report_treeview_place=spcl_rnpt_canvas2.create_window(0, 0, anchor="nw", window=run_report_treeview, tag=("run_report_treeview"))
+                            acc_typ_val=acc_treeview.item(acc_treeview.focus())["values"][1]
+                            sql = 'select * from app1_accounts1 where acctype=%s'
+                            val = (acc_typ_val,)
+                            fbcursor.execute(sql,val)
+                            acctypevalrows=fbcursor.fetchall()
+                            for row in  acctypevalrows:
+                                    print("rows is df ",row)
+                                    run_report_treeview.insert(parent='',index='end',iid=row,text='',values=(row[8],'','','',row[1],'',row[7] ))   
 
                         def edit_rnrpt_back():
                            acc_canvas4.pack_forget()
