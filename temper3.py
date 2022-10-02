@@ -87,3 +87,50 @@ if opt_men2.get()=="Today":
                                 rows=fbcursor.fetchall()
                                 for row in rows:              
                                     current_asset_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+
+
+
+
+
+
+
+
+          def date_filter_2():                                
+                if opt_men4.get()=="All dates":
+                    run_report_treeview.delete(*run_report_treeview.get_children()) 
+                    for row in  acctypevalrows:
+                        run_report_treeview.insert(parent='',index='end',iid=row,text='',values=(row[8],'','','',row[1],'',row[7] )) 
+                if opt_men4.get()=="Today":
+                    run_report_treeview.delete(*run_report_treeview.get_children()) 
+                    acc_typ_val=acc_treeview.item(acc_treeview.focus())["values"][1]
+                    sql="SELECT * from app1_accounts1 where acctype=%s and asof=CURRENT_DATE()"
+                    val = (acc_typ_val,)
+                    fbcursor.execute(sql,val)
+                    acctypevalrows=fbcursor.fetchall()
+                    for row in  acctypevalrows:
+                        run_report_treeview.insert(parent='',index='end',iid=row,text='',values=(row[8],'','','',row[1],'',row[7] )) 
+
+
+                if opt_men4.get()=="This month":
+                        print("This work perfect")
+                        run_report_treeview.delete(*run_report_treeview.get_children()) 
+                        acc_typ_val=acc_treeview.item(acc_treeview.focus())["values"][1]
+                        sql="select *  from app1_accounts1 where acctype=%s  and  MONTH(asof)=MONTH(now())"  
+                        val=(acc_typ_val,)
+                        p=fbcursor.execute(sql,val)
+                        acctypevalrows=fbcursor.fetchall()
+                        for row in acctypevalrows:              
+                            run_report_treeview.insert(parent='',index='end',iid=row,text='',values=(row[8],'','','',row[1],'',row[7] ))
+
+
+
+                  if opt_men4.get()=="This financial year":
+                                print("This work perfect")
+                                run_report_treeview.delete(*run_report_treeview.get_children()) 
+                                acc_typ_val=acc_treeview.item(acc_treeview.focus())["values"][1]
+                                sql="select *  from app1_accounts1 where acctype=%s  and  YEAR(asof)=YEAR(CURRENT_DATE)"
+                                val=(acc_typ_val,)
+                                p=fbcursor.execute(sql,val)
+                                acctypevalrows=fbcursor.fetchall()
+                                for row in rows:              
+                                    run_report_treeview.insert(parent='',index='end',iid=row,text='',values=(row[8],'','','',row[1],'',row[7] ))
