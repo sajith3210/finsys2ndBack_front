@@ -24892,6 +24892,8 @@ def main_sign_in():
                         if edit_rnrpt_combo.get()=="Run Report":
                             acc_canvas.pack_forget()
                             acc_sr_Scroll.pack_forget()
+                            if opt_men2.get()=="All dates":
+                                run_report_treeview.delete(*run_report_treeview.get_children()) 
                             def responsive_wid(event):
                                 try:
                                     dwidth = event.width
@@ -24962,7 +24964,7 @@ def main_sign_in():
                                     dcanvas.coords("rpt_period_lbl",dwidth/12,dheight/3.86,)
                                     dcanvas.coords("from_date_lbl",dwidth/2.90,dheight/3.86,)
                                     dcanvas.coords("to_date_lbl",dwidth/1.90,dheight/3.86,)
-                                    dcanvas.coords("opt_men2",dwidth/12,dheight/3.36,)
+                                    dcanvas.coords("opt_men3",dwidth/12,dheight/3.36,)
                                     
                                     dcanvas.coords("run_rpt_btn",dwidth/1.30,dheight/2,)  
                                     dcanvas.coords("back_btn",dwidth/1.15,dheight/2,) 
@@ -25027,17 +25029,17 @@ def main_sign_in():
                             to_date_lbl=Label(spcl_rnpt_canvas,state=DISABLED , text="To",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
                             To_date_lbl_place=spcl_rnpt_canvas.create_window(0, 0, anchor="nw", window=to_date_lbl, tag=("to_date_lbl"))
 
-                            opt_men2=ttk.Combobox(spcl_rnpt_canvas,font=('arial 10'),background="#213b52",foreground='white')
-                            opt_men2['values']=('All dates','Custom','Today','This month','This financial year')
-                            opt_men2.current(0)
+                            opt_men3=ttk.Combobox(spcl_rnpt_canvas,font=('arial 10'),background="#213b52",foreground='white')
+                            opt_men3['values']=('All dates','Custom','Today','This month','This financial year')
+                            opt_men3.current(0)
 
                             # OptionList2=['All dates','Custom','Today','This month','This financial year']
                             # variable2 = StringVar()
                             # variable2.set(OptionList2[0])
                             # opt_men2 = OptionMenu(spcl_rnpt_canvas,variable2, *OptionList2)
                             # opt_men2.config(bg="#213b52",width=30)
-                            opt_men2_place=spcl_rnpt_canvas.create_window(0, 0, anchor="nw", window=opt_men2, tag=("opt_men2"))
-                            run_rpt_btn=Button(spcl_rnpt_canvas,bg="#213b52",text="Run Report",fg="white",width=15,)
+                            opt_men3_place=spcl_rnpt_canvas.create_window(0, 0, anchor="nw", window=opt_men3, tag=("opt_men3"))
+                            run_rpt_btn=Button(spcl_rnpt_canvas,bg="#213b52",text="Run Report",fg="white",width=15,,command=date_filter_2)
                             run_rpt_place=spcl_rnpt_canvas.create_window(0, 0, anchor="nw", window=run_rpt_btn, tag=("run_rpt_btn"))
                             global from_date_variable,to_date_variable
                             from_date_variable=StringVar()
@@ -25135,6 +25137,7 @@ def main_sign_in():
                             btreestyle.theme_use("default")
                             btreestyle.configure('mystyle115.Treeview',background='white',state='DISABLE',foreground='black',fieldbackground='white',font=(None,11))
                             btreestyle.configure('mystyle115.Treeview.Heading',background='white',state='DISABLE',foreground='black',fieldbackground='white',font=(None,11))
+                            global run_report_treeview
                             run_report_treeview=ttk.Treeview(spcl_rnpt_canvas2,height=190,columns=(1,2,3,4,5,6,7),style='mystyle115.Treeview')
                     
                         # format column  
