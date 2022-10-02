@@ -24888,11 +24888,51 @@ def main_sign_in():
                     opt_men_place=acc_canvas.create_window(0, 0, anchor="nw", window=opt_men, tag=("opt_men"))
 
                     # combobox_select_edit_and_runreport 
-                    def edit_rnrpt(event):    
+                    def edit_rnrpt(event): 
+                        
                         if edit_rnrpt_combo.get()=="Run Report":
                             acc_canvas.pack_forget()
                             acc_sr_Scroll.pack_forget()
+                            def custom_dt(event): 
+                                if opt_men4.get()=="Custom":   
+                                    from_date_entry['state']=NORMAL
+                                    to_date_entry['state']=NORMAL 
+
+                                if opt_men4.get()=="This financial year":
+                                    from_date_entry['state']=DISABLED
+                                    to_date_entry['state']=DISABLED
+
+                                if opt_men4.get()=="This month":
+                                    from_date_entry['state']=DISABLED
+                                    to_date_entry['state']=DISABLED
+
+                                if opt_men4.get()=="All dates":
+                                    from_date_entry['state']=DISABLED
+                                    to_date_entry['state']=DISABLED 
+
+                                if opt_men4.get()=="Today":
+                                    from_date_entry['state']=DISABLED
+                                    to_date_entry['state']=DISABLED
+                            
                             def date_filter_2():  
+                                if opt_men4.get()=="Custom":
+                                    from_d=from_date_entry.get_date()
+                                    to_d=to_date_entry.get_date()
+                                    # from_d=from_date_variable.get()
+                                    # to_d=to_date_variable.get()
+                                    fr=from_d.strftime("%Y-%m-%d")
+                                    to=to_d.strftime("%Y-%m-%d")
+                                    # print("from date is ",from_d)
+                                    # print("to date is",to_d)
+                                    run_report_treeview.delete(*run_report_treeview.get_children()) 
+                                    acc_typ_val=acc_treeview.item(acc_treeview.focus())["values"][1]
+                                    sql="select *  from app1_accounts1 where asof BETWEEN %s AND %s AND acctype=%s"
+                                    val=(fr,to,acc_typ_val)
+                                    p=fbcursor.execute(sql,val)
+                                    acctypevalrows=fbcursor.fetchall()
+                                    for row in acctypevalrows:              
+                                        run_report_treeview.insert(parent='',index='end',iid=row,text='',values=(row[8],'','','',row[1],'',row[7] ))
+                                    
                                 if opt_men4.get()=="This financial year":
                                     print("This work perfect")
                                     run_report_treeview.delete(*run_report_treeview.get_children()) 
@@ -25060,15 +25100,16 @@ def main_sign_in():
                             rpt_period_lbl=Label(spcl_rnpt_canvas, text="Report period",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
                             rpt_period_lbl_place=spcl_rnpt_canvas.create_window(0, 0, anchor="nw", window=rpt_period_lbl, tag=("rpt_period_lbl"))
 
-                            from_date_lbl=Label(spcl_rnpt_canvas,state=DISABLED , text="From",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
+                            from_date_lbl=Label(spcl_rnpt_canvas, text="From",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
                             from_date_lbl_place=spcl_rnpt_canvas.create_window(0, 0, anchor="nw", window=from_date_lbl, tag=("from_date_lbl"))
 
-                            to_date_lbl=Label(spcl_rnpt_canvas,state=DISABLED , text="To",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
+                            to_date_lbl=Label(spcl_rnpt_canvas, text="To",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
                             To_date_lbl_place=spcl_rnpt_canvas.create_window(0, 0, anchor="nw", window=to_date_lbl, tag=("to_date_lbl"))
                             
                             opt_men4=ttk.Combobox(spcl_rnpt_canvas,font=('arial 10'),background="#213b52",foreground='white')
                             opt_men4['values']=('All dates','Custom','Today','This month','This financial year')
                             opt_men4.current(0)
+                            opt_men4.bind("<<ComboboxSelected>>",custom_dt)
 
                             # OptionList2=['All dates','Custom','Today','This month','This financial year']
                             # variable2 = StringVar()

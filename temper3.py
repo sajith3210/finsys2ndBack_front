@@ -134,3 +134,11 @@ if opt_men2.get()=="Today":
                                 acctypevalrows=fbcursor.fetchall()
                                 for row in rows:              
                                     run_report_treeview.insert(parent='',index='end',iid=row,text='',values=(row[8],'','','',row[1],'',row[7] ))
+
+
+
+
+                            from_date_variable
+                            to_date_variable
+                            from_date_entry
+                            to_date_entry
