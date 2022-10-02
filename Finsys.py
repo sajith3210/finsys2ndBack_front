@@ -24894,6 +24894,15 @@ def main_sign_in():
                             acc_sr_Scroll.pack_forget()
                             if opt_men2.get()=="All dates":
                                 run_report_treeview.delete(*run_report_treeview.get_children()) 
+                                for row in  acctypevalrows:
+                                    run_report_treeview.insert(parent='',index='end',iid=row,text='',values=(row[8],'','','',row[1],'',row[7] )) 
+                            if opt_men2.get()=="Today":
+                                run_report_treeview.delete(*run_report_treeview.get_children()) 
+                                acc_typ_val=acc_treeview.item(acc_treeview.focus())["values"][1]
+                                sql="SELECT * from app1_accounts1 where acctype=%s and asof=CURRENT_DATE()"
+                                val = (acc_typ_val,)
+                                fbcursor.execute(sql,val)
+                                acctypevalrows=fbcursor.fetchall()
                             def responsive_wid(event):
                                 try:
                                     dwidth = event.width
@@ -25167,6 +25176,7 @@ def main_sign_in():
                             sql = 'select * from app1_accounts1 where acctype=%s'
                             val = (acc_typ_val,)
                             fbcursor.execute(sql,val)
+                            global acctypevalrows
                             acctypevalrows=fbcursor.fetchall()
                             for row in  acctypevalrows:
                                     print("rows is df ",row)
