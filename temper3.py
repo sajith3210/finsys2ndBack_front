@@ -211,3 +211,27 @@ from_date_entry_place=spcl_rnpt_canvas.create_window(0, 0, anchor="nw", window=f
 
 to_date_entry=DateEntry(spcl_rnpt_canvas,state=DISABLED ,selectmode='day',textvariable=to_date_variable)
 to_date_entry_place=spcl_rnpt_canvas.create_window(0, 0, anchor="nw", window=to_date_entry, tag=("to_date_entry"))
+
+
+
+
+
+                        payment_sum_lbl=Label(strt_rcon_canvas, text=ser_chr_var,bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
+                        payment_sum_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=payment_sum_lbl, tag=("payment_sum_lbl"))
+                        deposit_sum_lbl=Label(strt_rcon_canvas, text=interest_ear_var,bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
+                        deposit_sum_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=deposit_sum_lbl, tag=("deposit_sum_lbl"))
+                        diffrence_sum_lbl=Label(strt_rcon_canvas, text=diffrence_bal,bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
+                        diffrence_sum_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=diffrence_sum_lbl, tag=("diffrence_sum_lbl"))
+
+
+
+
+payment_lbl=Label(strt_rcon_canvas, text="PAYMENTS",bg="#213b52", fg="White", anchor="nw",font=('Calibri 11 bold'))
+                        payment_sum_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=payment_lbl, tag=("payment_lbl"))
+
+
+deposit_lbl=Label(strt_rcon_canvas, text='DEPOSITS',bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
+deposit_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=deposit_lbl, tag=("deposit_lbl"))
+
+diffrence_lbl=Label(strt_rcon_canvas, text='DIFFRENCE',bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
+                        diffrence_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=diffrence_lbl, tag=("diffrence_lbl"))

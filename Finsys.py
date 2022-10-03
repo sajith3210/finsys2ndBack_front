@@ -25701,6 +25701,10 @@ def main_sign_in():
                         val=(nm_ent.get(),)
                         fbcursor.execute(sql,val)
                         u_id=fbcursor.fetchone()
+                        
+                        diff_beg_bal_end_bal=float(end_bal_var)-float(beg_bal_var)
+                        diff_interest_servi=float(interest_ear_var)-float(ser_chr_var)
+                        diffrence_bal=diff_beg_bal_end_bal-diff_interest_servi
 
                         sql="select * from app1_company where id_id=%s"
                         val=(u_id[0],)
@@ -25769,7 +25773,14 @@ def main_sign_in():
                             dcanvas.coords("rcon_lbl2",dwidth/2.8,dheight/11,)                    
                             dcanvas.coords("Acc_display_lbl",dwidth/3,dheight/7,)                    
                             dcanvas.coords("statemnt_end_lbl",dwidth/2.8,dheight/4.60,)                    
+                            dcanvas.coords("payment_sum_lbl",dwidth/15,dheight/4.60,) 
+                            dcanvas.coords("payment_lbl",dwidth/15,dheight/4,)                    
+                            dcanvas.coords("deposit_sum_lbl",dwidth/6,dheight/4.60,)                    
+                            dcanvas.coords("deposit_lbl",dwidth/6,dheight/4,)                    
+                            dcanvas.coords("diffrence_sum_lbl",dwidth/4,dheight/4.60,)                    
+                            dcanvas.coords("diffrence_lbl",dwidth/4,dheight/4,)                    
                             dcanvas.coords("display_date_lbl",dwidth/2.6,dheight/4,)                    
+                                               
                             dcanvas.coords("edit_info_btn",dwidth/2,dheight/4,)                    
                             dcanvas.coords("save_for_later_btn",dwidth/1.70,dheight/4,) 
                             # dcanvas.coords("back_btn",dwidth/1.70,dheight/3.50,) 
@@ -25825,7 +25836,24 @@ def main_sign_in():
                         statemnt_end_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=statemnt_end_lbl, tag=("statemnt_end_lbl"))
                         display_date_lbl=Label(strt_rcon_canvas, text=end_dt_var,bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
                         display_date_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=display_date_lbl, tag=("display_date_lbl"))
+                        
+                        payment_sum_lbl=Label(strt_rcon_canvas, text=ser_chr_var,bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
+                        payment_sum_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=payment_sum_lbl, tag=("payment_sum_lbl"))
 
+                        payment_lbl=Label(strt_rcon_canvas, text="PAYMENTS",bg="#213b52", fg="White", anchor="nw",font=('Calibri 11 bold'))
+                        payment_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=payment_lbl, tag=("payment_lbl"))
+
+                        deposit_sum_lbl=Label(strt_rcon_canvas, text=interest_ear_var,bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
+                        deposit_sum_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=deposit_sum_lbl, tag=("deposit_sum_lbl"))
+
+                        deposit_lbl=Label(strt_rcon_canvas, text='DEPOSITS',bg="#213b52", fg="White", anchor="nw",font=('Calibri 11 bold'))
+                        deposit_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=deposit_lbl, tag=("deposit_lbl"))
+
+                        diffrence_sum_lbl=Label(strt_rcon_canvas, text=diffrence_bal,bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
+                        diffrence_sum_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=diffrence_sum_lbl, tag=("diffrence_sum_lbl"))
+
+                        diffrence_lbl=Label(strt_rcon_canvas, text='DIFFRENCE',bg="#213b52", fg="White", anchor="nw",font=('Calibri 11 bold'))
+                        diffrence_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=diffrence_lbl, tag=("diffrence_lbl"))
                         def edit_reconcile_statement():
                             # edit_inc_exp= recon_treeview.item(recon_treeview.focus())["values"][1]
                             # edit_incc_expp= recon_treeview.item(recon_treeview.focus())["values"][3]
