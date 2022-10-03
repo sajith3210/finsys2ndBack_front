@@ -23811,113 +23811,121 @@ def main_sign_in():
                     # Balance sheet page run report 
                     def rnrpt():
                         def responsive_wid(event):
-                            dwidth = event.width
-                            dheight = event.height
-                            dcanvas = event.widget
+                            try:
+                                dwidth = event.width
+                                dheight = event.height
+                                dcanvas = event.widget
 
-                            r1 = 25
-                            x1 = dwidth/63
-                            x2 = dwidth/1.021
-                            y1 = dheight/13
-                            y2 = dheight/5            
+                                r1 = 25
+                                x1 = dwidth/63
+                                x2 = dwidth/1.021
+                                y1 = dheight/13
+                                y2 = dheight/5            
 
-                            dcanvas.coords("bsheet_polygen_pr",x1 +r1,y1,
-                            x1 + r1,y1,
-                            x2 - r1,y1,
-                            x2 - r1,y1,     
-                            x2,y1,     
-                            #--------------------
-                            x2,y1 + r1,     
-                            x2,y1 + r1,     
-                            x2,y2 - r1,     
-                            x2,y2 - r1,     
-                            x2,y2,
-                            #--------------------
-                            x2 - r1,y2,     
-                            x2 - r1,y2,     
-                            x1 + r1,y2,
-                            x1 + r1,y2,
-                            x1,y2,
-                            #--------------------
-                            x1,y2 - r1,
-                            x1,y2 - r1,
-                            x1,y1 + r1,
-                            x1,y1 + r1,
-                            x1,y1,
-                            )                    
-                            dcanvas.coords("bsheet_llb",dwidth/2.8,dheight/11,)
-                            
+                                dcanvas.coords("bsheet_polygen_pr",x1 +r1,y1,
+                                x1 + r1,y1,
+                                x2 - r1,y1,
+                                x2 - r1,y1,     
+                                x2,y1,     
+                                #--------------------
+                                x2,y1 + r1,     
+                                x2,y1 + r1,     
+                                x2,y2 - r1,     
+                                x2,y2 - r1,     
+                                x2,y2,
+                                #--------------------
+                                x2 - r1,y2,     
+                                x2 - r1,y2,     
+                                x1 + r1,y2,
+                                x1 + r1,y2,
+                                x1,y2,
+                                #--------------------
+                                x1,y2 - r1,
+                                x1,y2 - r1,
+                                x1,y1 + r1,
+                                x1,y1 + r1,
+                                x1,y1,
+                                )                    
+                                dcanvas.coords("bsheet_llb",dwidth/2.8,dheight/11,)
+                                
 
-                            # bsheet_polygen_pr2  start 
-                            r1 = 25
-                            x1 = dwidth/63
-                            x2 = dwidth/1.021
-                            y1 = dheight/1.78
-                            y2 = dheight/4
+                                # bsheet_polygen_pr2  start 
+                                r1 = 25
+                                x1 = dwidth/63
+                                x2 = dwidth/1.021
+                                y1 = dheight/1.78
+                                y2 = dheight/4
 
-                            dcanvas.coords("bsheet_polygen_pr2",x1 +r1,y1,
-                            x1 + r1,y1,
-                            x2 - r1,y1,
-                            x2 - r1,y1,     
-                            x2,y1,     
-                            #--------------------
-                            x2,y1 + r1,     
-                            x2,y1 + r1,     
-                            x2,y2 - r1,     
-                            x2,y2 - r1,     
-                            x2,y2,
-                            #--------------------
-                            x2 - r1,y2,     
-                            x2 - r1,y2,     
-                            x1 + r1,y2,
-                            x1 + r1,y2,
-                            x1,y2,
-                            #--------------------
-                            x1,y2 - r1,
-                            x1,y2 - r1,
-                            x1,y1 + r1,
-                            x1,y1 + r1,
-                            x1,y1,
-                            )               
-                            dcanvas.coords("run_rpt_lbl",dwidth/12,dheight/3.86,)  
-                            dcanvas.coords("opt_men2",dwidth/12,dheight/3.36,)  
-                            dcanvas.coords("run_rpt_btn",dwidth/1.30,dheight/2,)  
-                            dcanvas.coords("back_btn",dwidth/1.15,dheight/2,)  
-                             
+                                dcanvas.coords("bsheet_polygen_pr2",x1 +r1,y1,
+                                x1 + r1,y1,
+                                x2 - r1,y1,
+                                x2 - r1,y1,     
+                                x2,y1,     
+                                #--------------------
+                                x2,y1 + r1,     
+                                x2,y1 + r1,     
+                                x2,y2 - r1,     
+                                x2,y2 - r1,     
+                                x2,y2,
+                                #--------------------
+                                x2 - r1,y2,     
+                                x2 - r1,y2,     
+                                x1 + r1,y2,
+                                x1 + r1,y2,
+                                x1,y2,
+                                #--------------------
+                                x1,y2 - r1,
+                                x1,y2 - r1,
+                                x1,y1 + r1,
+                                x1,y1 + r1,
+                                x1,y1,
+                                )               
+                                dcanvas.coords("run_rpt_lbl",dwidth/12,dheight/3.86,)  
+                                dcanvas.coords("opt_men2",dwidth/12,dheight/3.36,)  
+                                dcanvas.coords("run_rpt_btn",dwidth/1.30,dheight/2,)  
+                                dcanvas.coords("back_btn",dwidth/1.15,dheight/2,)  
+                                dcanvas.coords("from_date_lbl",dwidth/2.90,dheight/3.86,)
+                                dcanvas.coords("to_date_lbl",dwidth/1.90,dheight/3.86,) 
 
-                            # bsheet_polygen_pr3  start 
-                            r1 = 25
-                            x1 = dwidth/63
-                            x2 = dwidth/1.021
-                            y1 = dheight/0.10
-                            y2 = dheight/1.68
+                                # bsheet_polygen_pr3  start 
+                                r1 = 25
+                                x1 = dwidth/63
+                                x2 = dwidth/1.021
+                                y1 = dheight/0.10
+                                y2 = dheight/1.68
 
-                            dcanvas.coords("bsheet_polygen_pr3",x1 +r1,y1,
-                            x1 + r1,y1,
-                            x2 - r1,y1,
-                            x2 - r1,y1,     
-                            x2,y1,     
-                            #--------------------
-                            x2,y1 + r1,     
-                            x2,y1 + r1,     
-                            x2,y2 - r1,     
-                            x2,y2 - r1,     
-                            x2,y2,
-                            #--------------------
-                            x2 - r1,y2,     
-                            x2 - r1,y2,     
-                            x1 + r1,y2,
-                            x1 + r1,y2,
-                            x1,y2,
-                            #--------------------
-                            x1,y2 - r1,
-                            x1,y2 - r1,
-                            x1,y1 + r1,
-                            x1,y1 + r1,
-                            x1,y1,
-                            ) 
-                            dcanvas.coords("acc_canvas3",dwidth/20,dheight/1.65,) 
-                    
+                                dcanvas.coords("bsheet_polygen_pr3",x1 +r1,y1,
+                                x1 + r1,y1,
+                                x2 - r1,y1,
+                                x2 - r1,y1,     
+                                x2,y1,     
+                                #--------------------
+                                x2,y1 + r1,     
+                                x2,y1 + r1,     
+                                x2,y2 - r1,     
+                                x2,y2 - r1,     
+                                x2,y2,
+                                #--------------------
+                                x2 - r1,y2,     
+                                x2 - r1,y2,     
+                                x1 + r1,y2,
+                                x1 + r1,y2,
+                                x1,y2,
+                                #--------------------
+                                x1,y2 - r1,
+                                x1,y2 - r1,
+                                x1,y1 + r1,
+                                x1,y1 + r1,
+                                x1,y1,
+                                ) 
+                                dcanvas.coords("acc_canvas3",dwidth/20,dheight/1.65,) 
+                            except:
+                                pass
+                            try:
+                                dcanvas.coords("from_date_entry",dwidth/2.90,dheight/3.36,)
+                                dcanvas.coords("to_date_entry",dwidth/1.90,dheight/3.36,)
+                            except:
+                                pass
                             
                         # acc_canvas forget widget
                          
@@ -23937,9 +23945,113 @@ def main_sign_in():
                         acc_canvas2.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("bsheet_polygen_pr2"),smooth=True,)
                         run_rpt_lbl=Label(acc_canvas2, text="Report period",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
                         run_rpt_lbl_place=acc_canvas2.create_window(0, 0, anchor="nw", window=run_rpt_lbl, tag=("run_rpt_lbl"))
-                       
+                       #Custom_date
+                        def custom_date(event):
+                            if opt_men2.get()=="Custom":   
+                                    from_date_entry['state']=NORMAL
+                                    to_date_entry['state']=NORMAL 
+
+                            if opt_men2.get()=="This financial year":
+                                from_date_entry['state']=DISABLED
+                                to_date_entry['state']=DISABLED
+
+                            if opt_men2.get()=="This month":
+                                from_date_entry['state']=DISABLED
+                                to_date_entry['state']=DISABLED
+
+                            if opt_men2.get()=="All dates":
+                                from_date_entry['state']=DISABLED
+                                to_date_entry['state']=DISABLED 
+
+                            if opt_men2.get()=="Today":
+                                from_date_entry['state']=DISABLED
+                                to_date_entry['state']=DISABLED
+
                         def filter_date():  
                             # acc_canvas3.bind("<Configure>", responsive_wid)  
+                            if opt_men2.get()=="Custom":
+                                print("This work perfect")
+                                from_d=from_date_entry.get_date()
+                                to_d=to_date_entry.get_date()   
+                                fr=from_d.strftime("%Y-%m-%d")
+                                to=to_d.strftime("%Y-%m-%d")
+
+                                current_asset_treeview.delete(*current_asset_treeview.get_children())
+                                sql="select *  from app1_accounts1 where asof BETWEEN %s AND %s AND acctype=%s"
+                                current_as='Current Assets'
+                                val=(fr,to,current_as,)
+                                p=fbcursor.execute(sql,val)
+                                rows=fbcursor.fetchall()
+                                for row in rows:              
+                                    current_asset_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+
+                                total_current_as_sum=0.0
+                                for child in current_asset_treeview.get_children():
+                                    total_current_as_sum=total_current_as_sum+float(current_asset_treeview.item(child,'values')[1])
+                                total_current_asset_sum_lbl['text']='{}'.format(total_current_as_sum)
+
+                                account_reci__treeview.delete(*account_reci__treeview.get_children())
+                                sql="select *  from app1_accounts1 where asof BETWEEN %s AND %s AND acctype=%s"
+                                account_reci='Account Receivable(Debtors)'
+                                val=(fr,to,account_reci,)
+                                p=fbcursor.execute(sql,val)
+                                rows=fbcursor.fetchall()
+                                for row in rows:              
+                                    account_reci__treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+
+                                acc_reci_sum=0.0
+                                for child in account_reci__treeview.get_children():
+                                    acc_reci_sum=acc_reci_sum+float(account_reci__treeview.item(child,'values')[1])
+                                sum_account_reci_lbl['text']='{}'.format(acc_reci_sum) 
+                                TA_sum=total_current_as_sum+acc_reci_sum
+                                total_asset_sum_lbl['text']='{}'.format(TA_sum)
+
+                                current_liabilities_treeview.delete(*current_liabilities_treeview.get_children())
+                                sql="select *  from app1_accounts1 where asof BETWEEN %s AND %s AND acctype=%s"
+                                current_li='Current Liabilities'
+                                val=(fr,to,current_li,)
+                                p=fbcursor.execute(sql,val)
+                                rows=fbcursor.fetchall()
+
+                                for row in rows:              
+                                    current_liabilities_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+                                
+                                current_liabi_sum=0.0
+                                for child in current_liabilities_treeview.get_children():
+                                    current_liabi_sum=current_liabi_sum+float(current_liabilities_treeview.item(child,'values')[1])
+
+                                account_payble_treeview.delete(*account_payble_treeview.get_children())
+                                sql="select *  from app1_accounts1 where asof BETWEEN %s AND %s AND acctype=%s"
+                                account_payb='Account Payble'
+                                val=(fr,to,account_payb,)
+                                p=fbcursor.execute(sql,val)
+                                rows=fbcursor.fetchall()
+                                for row in rows:              
+                                    account_payble_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+
+                                total_acc_pay_sum=0.0
+                                for child in account_payble_treeview.get_children():
+                                    total_acc_pay_sum=total_acc_pay_sum+float(account_payble_treeview.item(child,'values')[1])
+                                total_account_payb_lbl_sum['text']='{}'.format(total_acc_pay_sum)
+
+                                total_cl=current_liabi_sum + total_acc_pay_sum
+                                total_current_liabi_sum['text']="{}".format(total_cl)
+
+                                equity_treeview.delete(*equity_treeview.get_children())
+                                sql="select *  from app1_accounts1 where asof BETWEEN %s AND %s AND acctype=%s"
+                                eqi='Equity'
+                                val=(fr,to,eqi,)
+                                p=fbcursor.execute(sql,val)
+                                rows=fbcursor.fetchall()
+                                for row in rows:              
+                                    equity_treeview.insert(parent='', index='end',iid=row,text='', values=(row[1],row[7],))
+
+                                total_eqi_sum=0.0
+                                for child in equity_treeview.get_children():
+                                    total_eqi_sum=total_eqi_sum+float(equity_treeview.item(child,'values')[1])
+                                total_equity_sum_lbl['text']='{}'.format(total_eqi_sum)
+                                liabiliti_equity_sum=total_cl+total_eqi_sum
+                                total_liabi_equity_lbl_sum['text']='{}'.format(liabiliti_equity_sum)    
                             if opt_men2.get()=="Today":
                                 print("This work perfect")
                                 current_asset_treeview.delete(*current_asset_treeview.get_children())
@@ -24260,13 +24372,26 @@ def main_sign_in():
                         opt_men2=ttk.Combobox(acc_canvas2,font=('arial 10'),background="#213b52",foreground='white')
                         opt_men2['values']=('All dates','Custom','Today','This month','This financial year')
                         opt_men2.current(0)
-                        # opt_men2.bind("<<ComboboxSelected>>",filter_date)
+                        opt_men2.bind("<<ComboboxSelected>>",custom_date)
                         opt_men2_place=acc_canvas2.create_window(0, 0, anchor="nw", window=opt_men2, tag=("opt_men2"))
 
                         
 
                         run_rpt_btn=Button(acc_canvas2,bg="#213b52",text="Run Report",fg="white",width=15,command=filter_date)
                         run_rpt_place=acc_canvas2.create_window(0, 0, anchor="nw", window=run_rpt_btn, tag=("run_rpt_btn"))
+                        from_date_lbl=Label(acc_canvas2, text="From",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
+                        from_date_lbl_place=acc_canvas2.create_window(0, 0, anchor="nw", window=from_date_lbl, tag=("from_date_lbl"))
+
+                        to_date_lbl=Label(acc_canvas2, text="To",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
+                        To_date_lbl_place=acc_canvas2.create_window(0, 0, anchor="nw", window=to_date_lbl, tag=("to_date_lbl"))
+                        from_date_variable=StringVar()
+                        to_date_variable=StringVar()
+
+                        from_date_entry=DateEntry(acc_canvas2,state=DISABLED , selectmode='day',textvariable=from_date_variable)
+                        from_date_entry_place=acc_canvas2.create_window(0, 0, anchor="nw", window=from_date_entry, tag=("from_date_entry"))
+
+                        to_date_entry=DateEntry(acc_canvas2,state=DISABLED ,selectmode='day',textvariable=to_date_variable)
+                        to_date_entry_place=acc_canvas2.create_window(0, 0, anchor="nw", window=to_date_entry, tag=("to_date_entry"))
                         def bsheet_back():
                            acc_canvas2.pack_forget()
                            acc_sr_Scroll3.pack_forget()
@@ -25119,7 +25244,7 @@ def main_sign_in():
                             opt_men3_place=spcl_rnpt_canvas.create_window(0, 0, anchor="nw", window=opt_men4, tag=("opt_men4"))
                             run_rpt_btn=Button(spcl_rnpt_canvas,bg="#213b52",text="Run Report",fg="white",width=15,command=date_filter_2)
                             run_rpt_place=spcl_rnpt_canvas.create_window(0, 0, anchor="nw", window=run_rpt_btn, tag=("run_rpt_btn"))
-                            global from_date_variable,to_date_variable
+                            # global from_date_variable,to_date_variable
                             from_date_variable=StringVar()
                             to_date_variable=StringVar()
                             from_date_entry=DateEntry(spcl_rnpt_canvas,state=DISABLED , selectmode='day',textvariable=from_date_variable)

@@ -142,3 +142,72 @@ if opt_men2.get()=="Today":
                             to_date_variable
                             from_date_entry
                             to_date_entry
+
+
+
+
+                            def date_filter_2():  
+                                if opt_men4.get()=="Custom":
+                                    from_d=from_date_entry.get_date()
+                                    to_d=to_date_entry.get_date()
+                                    # from_d=from_date_variable.get()
+                                    # to_d=to_date_variable.get()
+                                    fr=from_d.strftime("%Y-%m-%d")
+                                    to=to_d.strftime("%Y-%m-%d")
+                                    # print("from date is ",from_d)
+                                    # print("to date is",to_d)
+                                    run_report_treeview.delete(*run_report_treeview.get_children()) 
+                                    acc_typ_val=acc_treeview.item(acc_treeview.focus())["values"][1]
+                                    sql="select *  from app1_accounts1 where asof BETWEEN %s AND %s AND acctype=%s"
+                                    val=(fr,to,acc_typ_val)
+                                    p=fbcursor.execute(sql,val)
+                                    acctypevalrows=fbcursor.fetchall()
+                                    for row in acctypevalrows:              
+                                        run_report_treeview.insert(parent='',index='end',iid=row,text='',values=(row[8],'','','',row[1],'',row[7] ))
+
+
+
+ def custom_dt(event): 
+                                if opt_men4.get()=="Custom":   
+                                    from_date_entry['state']=NORMAL
+                                    to_date_entry['state']=NORMAL 
+
+                                if opt_men4.get()=="This financial year":
+                                    from_date_entry['state']=DISABLED
+                                    to_date_entry['state']=DISABLED
+
+                                if opt_men4.get()=="This month":
+                                    from_date_entry['state']=DISABLED
+                                    to_date_entry['state']=DISABLED
+
+                                if opt_men4.get()=="All dates":
+                                    from_date_entry['state']=DISABLED
+                                    to_date_entry['state']=DISABLED 
+
+                                if opt_men4.get()=="Today":
+                                    from_date_entry['state']=DISABLED
+                                    to_date_entry['state']=DISABLED
+
+
+
+dcanvas.coords("from_date_lbl",dwidth/2.90,dheight/3.86,)
+dcanvas.coords("to_date_lbl",dwidth/1.90,dheight/3.86,)
+
+dcanvas.coords("from_date_entry",dwidth/2.90,dheight/3.36,)
+dcanvas.coords("to_date_entry",dwidth/1.90,dheight/3.36,)
+
+
+from_date_lbl=Label(spcl_rnpt_canvas, text="From",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
+from_date_lbl_place=spcl_rnpt_canvas.create_window(0, 0, anchor="nw", window=from_date_lbl, tag=("from_date_lbl"))
+
+to_date_lbl=Label(spcl_rnpt_canvas, text="To",bg="#213b52", fg="White", anchor="nw",font=('Calibri 12'))
+To_date_lbl_place=spcl_rnpt_canvas.create_window(0, 0, anchor="nw", window=to_date_lbl, tag=("to_date_lbl"))
+
+from_date_variable=StringVar()
+to_date_variable=StringVar()
+
+from_date_entry=DateEntry(spcl_rnpt_canvas,state=DISABLED , selectmode='day',textvariable=from_date_variable)
+from_date_entry_place=spcl_rnpt_canvas.create_window(0, 0, anchor="nw", window=from_date_entry, tag=("from_date_entry"))
+
+to_date_entry=DateEntry(spcl_rnpt_canvas,state=DISABLED ,selectmode='day',textvariable=to_date_variable)
+to_date_entry_place=spcl_rnpt_canvas.create_window(0, 0, anchor="nw", window=to_date_entry, tag=("to_date_entry"))
