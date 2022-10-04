@@ -25718,10 +25718,14 @@ def main_sign_in():
                         actypid=fbcursor.fetchone() ##Account type variable fetch specific row 
 
                         sql="INSERT INTO app1_expenseaccount (account,begbal,endbal,enddate,dat,serchar,expacc,cid_id,expaccountypid_id) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                        print("Acc var is",acc_var,"beg bal is",beg_bal_var,"en bal",end_bal_var,'end date',end_dt_var,"date ",date_var,"servise ch",ser_chr_var,"exp ac var",exp_ac_var,"cid",cid[0],"acty id",actypid[0])
                         val=(acc_var,beg_bal_var,end_bal_var,end_dt_var,date_var,ser_chr_var,exp_ac_var,cid[0],actypid[0])
                         fbcursor.execute(sql,val)
+                        
                         # expense_account_id_fetch=fbcursor.fetchone()
                         finsysdb.commit()
+                        # fe=fbcursor.fetchone()
+                        # print("expense table data",fe)
 
                         sql="select *from app1_expenseaccount ORDER BY expenseid DESC LIMIT 1" #Expense account last row fetch
                         fbcursor.execute(sql)

@@ -235,3 +235,25 @@ deposit_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=depos
 
 diffrence_lbl=Label(strt_rcon_canvas, text='DIFFRENCE',bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
                         diffrence_lbl_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=diffrence_lbl, tag=("diffrence_lbl"))
+
+
+
+
+
+
+
+print("Print company id is ",cid[0],"Acct type id is ",actypid[0],"Expense id is",exp_id[0])
+sql="update app1_expenseaccount set account=%s,begbal=%s,endbal=%s,enddate=%s,dat=%s,serchar=%s,expacc=%s,cid_id=%s,expaccountypid_id=%s where expenseid=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
+val=(Accnt_variable.get(),begining_balance_va,ending_balance_va,end_dt_variable.get(),date_variable.get(),servise_charge_va,exp_acc_variable.get(),cid[0],actypid[0],exp_id[0])
+fbcursor.execute(sql,val)
+finsysdb.commit()
+
+sql="update app1_incomeaccount set dat1=%s,intear=%s,incacc=%s,cid_id=%s,expenceincomeid_id=%s where incomeid=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
+val=(incom_ac_date_variable.get(),interest_earn_va,income_acc_variable.get(),cid[0],exp_id[0],incom_id[0])
+
+
+
+
+
+
+
