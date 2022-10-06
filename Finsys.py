@@ -23773,7 +23773,7 @@ def main_sign_in():
                         x1 = dwidth/63
                         x2 = dwidth/1.021
                         y1 = dheight/4
-                        y2 = dheight/0.59            
+                        y2 = dheight/0.29            
 
                         dcanvas.coords("acc_polygen_pr2",x1 +r1,y1,
                         x1 + r1,y1,
@@ -24983,7 +24983,7 @@ def main_sign_in():
                         as_of_date_entry_place=acc_canvas5.create_window(0, 0, anchor="nw", window=as_of_date_entry, tag=("as_of_date_entry"))
                     #Accouts_tab_canvas
                     global acc_canvas,acc_sr_Scroll
-                    acc_canvas = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
+                    acc_canvas = Canvas(accou_fr,height=700,bg="#386491",scrollregion=(0,0,700,3200))
                     acc_sr_Scroll = Scrollbar(accou_fr,orient=VERTICAL)
                     acc_sr_Scroll.pack(fill=Y,side="right")
                     acc_sr_Scroll.config(command=acc_canvas.yview)
@@ -25554,7 +25554,7 @@ def main_sign_in():
                     edit_rnrpt_combo.bind("<<ComboboxSelected>>",edit_rnrpt)
                     edit_menn_place=acc_canvas.create_window(0, 0, anchor="nw", window=edit_rnrpt_combo, tag=("edit_rnrpt_combo"))
 
-                    acc_treeview=ttk.Treeview(acc_canvas,height=300,columns=(1,2,3,4,5,6,),)
+                    acc_treeview=ttk.Treeview(acc_canvas,height=700,columns=(1,2,3,4,5,6,),)
                     
                     # format column  
                     
@@ -25901,7 +25901,9 @@ def main_sign_in():
                                     x1,y1,
                                     )
                                     # dcanvas.coords("open_st_lbl",dwidth/2.75,dheight/3,)
+                                    dcanvas.coords("back_btn_edit_info",dwidth/9,dheight/2.60,)
                                     dcanvas.coords("edit_info_state",dwidth/4,dheight/2.60,)
+                                    
                                     dcanvas.coords("Account_lbl",dwidth/4,dheight/2.30,)
                                     dcanvas.coords("Account_men",dwidth/4,dheight/1.97,)
                                     dcanvas.coords("ad_follow_info_lbl",dwidth/4,dheight/1.74,)
@@ -25935,7 +25937,8 @@ def main_sign_in():
                                     pass
                             
                             # Edit_info_backend  
-                            def update_reconsile(): 
+                            def update_reconsile():
+                                global servise_charge_va,interest_earn_va ,begining_balance_va,ending_balance_va
                                 # import pdb;pdb.set_trace()    
                                 begining_balance_va=str({}).format(beg_bal_entry.get())
                                 ending_balance_va=str({}).format(end_bal_entry.get())
@@ -25968,6 +25971,23 @@ def main_sign_in():
                                 fbcursor.execute(sql,val)
                                 finsysdb.commit()
                                 messagebox.showinfo("Update","Update successfully")
+                               
+
+                            def back_edit_info():
+                                diff_beg_bal_end_bal=float(ending_balance_va)-float(begining_balance_va)
+                                diff_interest_servi=float(interest_earn_va)-float(servise_charge_va)
+                                diffrence_bal=diff_beg_bal_end_bal-diff_interest_servi
+
+                                edit_recon_canvas.pack_forget()
+                                strt_rcon_canvas.pack(fill=X,)
+                                payment_sum_lbl['text']=servise_charge_va
+                                deposit_sum_lbl['text']=interest_earn_va
+                                diffrence_sum_lbl['text']=diffrence_bal
+                                recon_treeview.delete(*recon_treeview.get_children())
+                                for i in range(0,1):
+                                    recon_treeview.insert(parent='',index='end',iid=0,text='',values=(date_variable.get(),'Journal','',exp_acc_variable.get(),'','Service Charge','',servise_charge_va))
+                                    recon_treeview.insert(parent='',index='end',iid=1,text='',values=(incom_ac_date_variable.get(),'Deposit','',income_acc_variable.get(),'','Interest Earned',interest_earn_va,''))
+
 
                             strt_rcon_canvas.pack_forget()
                             strt_rcon_Scroll.pack_forget()
@@ -25982,9 +26002,12 @@ def main_sign_in():
                             edit_recon_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("rcn_polygen_pr"),smooth=True,)
                             
                             edit_recon_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("rcn_polygen_pr2"),smooth=True,)
+                            back_btn_edit_info=Button(edit_recon_canvas,bg="#213b52",text="Back",fg="white",width=15,command=back_edit_info)
+                            back_btn_edit_info_place=edit_recon_canvas.create_window(0, 0, anchor="nw", window=back_btn_edit_info, tag=("back_btn_edit_info"))
                             edit_info_state=Label(edit_recon_canvas, text="Edit the information from your statement",bg="#213b52", fg="White", anchor="nw",font=('Calibri 15 bold'))
 
                             edit_info_state_place=edit_recon_canvas.create_window(0, 0, anchor="nw", window=edit_info_state, tag=("edit_info_state"))
+
                             Account_lbl=Label(edit_recon_canvas, text="Account",bg="#213b52", fg="White", anchor="nw",font=('Calibri 11'))
                             Account_lbl_place=edit_recon_canvas.create_window(0, 0, anchor="nw", window=Account_lbl, tag=("Account_lbl"))
 
@@ -26125,7 +26148,7 @@ def main_sign_in():
                             recon_treeview.insert(parent='',index='end',iid=0,text='',values=(date_var,'Journal','',exp_ac_var,'','Service Charge','',ser_chr_var))
                             recon_treeview.insert(parent='',index='end',iid=1,text='',values=(incom_ac_date_var,'Deposit','',income_acc_var,'','Interest Earned',interest_ear_var,''))
 
-                        recon_treeview=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=recon_treeview, tag=("recon_treeview"))
+                        recon_treeview_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=recon_treeview, tag=("recon_treeview"))
                     #Reconciled_tab_canvas
                     rcon_canvas = Canvas(recon_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
                     rcon_sr_Scroll = Scrollbar(recon_fr,orient=VERTICAL)

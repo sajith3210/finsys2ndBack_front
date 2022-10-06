@@ -251,9 +251,17 @@ finsysdb.commit()
 sql="update app1_incomeaccount set dat1=%s,intear=%s,incacc=%s,cid_id=%s,expenceincomeid_id=%s where incomeid=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
 val=(incom_ac_date_variable.get(),interest_earn_va,income_acc_variable.get(),cid[0],exp_id[0],incom_id[0])
 
+back_btn_edit_info
+ for i in range(0,1):
+    recon_treeview.insert(parent='',index='end',iid=0,text='',values=(date_var,'Journal','',exp_ac_var,'','Service Charge','',ser_chr_var))
+    recon_treeview.insert(parent='',index='end',iid=1,text='',values=(incom_ac_date_var,'Deposit','',income_acc_var,'','Interest Earned',interest_ear_var,''))
 
+diff_beg_bal_end_bal=float(end_bal_var)-float(beg_bal_var)
+diff_interest_servi=float(interest_ear_var)-float(ser_chr_var)
+diffrence_bal=diff_beg_bal_end_bal-diff_interest_servi
 
-
-
+payment_sum_lbl
+deposit_sum_lbl
+deposit_sum_lbl
 
 
