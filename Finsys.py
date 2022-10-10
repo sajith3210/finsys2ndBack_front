@@ -24396,6 +24396,7 @@ def main_sign_in():
                            acc_canvas2.pack_forget()
                            acc_sr_Scroll3.pack_forget()
                            acc_sr_Scroll2.pack_forget()
+                           acc_sr_Scroll.pack(fill=Y,side=RIGHT)
                            acc_canvas.pack(fill=X)
                         #    acc_sr_Scroll.pack(fill=Y,side="right")
                         back_btn=Button(acc_canvas2,bg="#213b52",text="←Back",fg="white",width=15,command=bsheet_back)
@@ -24460,16 +24461,16 @@ def main_sign_in():
                             dcanvas.coords("bsheetline3",dwidth/21,dheight/2.42,dwidth/1.055,dheight/2.42,)
                             dcanvas.coords("bsheetline4",dwidth/21,dheight/2.25,dwidth/1.055,dheight/2.25,)
                             dcanvas.coords("total_account_reci_lbl",dwidth/9,dheight/2.33,)
-                            dcanvas.coords("sum_account_reci_lbl",dwidth/3,dheight/2.33,)
+                            dcanvas.coords("sum_account_reci_lbl",dwidth/1.58,dheight/2.33,)
                             
 
                             dcanvas.coords("bsheetline5",dwidth/21,dheight/2.08,dwidth/1.055,dheight/2.08,)
                             dcanvas.coords("total_current_asset_lbl",dwidth/9,dheight/2.15,)
-                            dcanvas.coords("total_current_asset_sum_lbl",dwidth/3,dheight/2.15,)
+                            dcanvas.coords("total_current_asset_sum_lbl",dwidth/1.58,dheight/2.15,)
                             
                             dcanvas.coords("bsheetline6",dwidth/21,dheight/1.90,dwidth/1.055,dheight/1.90,)
                             dcanvas.coords("total_asset_lbl",dwidth/21,dheight/2,)
-                            dcanvas.coords("total_asset_sum_lbl",dwidth/3,dheight/2,)
+                            dcanvas.coords("total_asset_sum_lbl",dwidth/1.58,dheight/2,)
                             
                             
                             dcanvas.coords("liability_eq_lbl",dwidth/21,dheight/1.80,)
@@ -24482,11 +24483,11 @@ def main_sign_in():
                             dcanvas.coords("account_payble_treeview",dwidth/9,dheight/1.27,)
                             dcanvas.coords("bsheetline9",dwidth/21,dheight/1.21,dwidth/1.055,dheight/1.21,)  
                             dcanvas.coords("total_account_payb_lbl",dwidth/9,dheight/1.18,)
-                            dcanvas.coords("total_account_payb_lbl_sum",dwidth/3,dheight/1.18,)
+                            dcanvas.coords("total_account_payb_lbl_sum",dwidth/1.58,dheight/1.18,)
                             dcanvas.coords("bsheetline10",dwidth/21,dheight/1.16,dwidth/1.055,dheight/1.16,) 
                             
                             dcanvas.coords("total_current_liabi_lbl",dwidth/9.60,dheight/1.15,)
-                            dcanvas.coords("total_current_liabi_sum",dwidth/3,dheight/1.15,)
+                            dcanvas.coords("total_current_liabi_sum",dwidth/1.58,dheight/1.15,)
                             
                             dcanvas.coords("bsheetline11",dwidth/21,dheight/1.12,dwidth/1.055,dheight/1.12,) 
                             dcanvas.coords("equity_lbl",dwidth/9.60,dheight/1.11,)
@@ -24494,10 +24495,10 @@ def main_sign_in():
                             # dcanvas.coords("profit_for_yr_lbl",dwidth/9,dheight/1.68,)
                             dcanvas.coords("bsheetline12",dwidth/21,dheight/1.04,dwidth/1.055,dheight/1.04,) 
                             dcanvas.coords("total_equity_lbl",dwidth/9.60,dheight/1.03,)
-                            dcanvas.coords("total_equity_sum_lbl",dwidth/3,dheight/1.03,)
+                            dcanvas.coords("total_equity_sum_lbl",dwidth/1.58,dheight/1.03,)
                             dcanvas.coords("bsheetline13",dwidth/21,dheight/1.02,dwidth/1.055,dheight/1.02,) 
                             
-                            dcanvas.coords("total_liabi_equity_lbl_sum",dwidth/3,dheight/1.01,)
+                            dcanvas.coords("total_liabi_equity_lbl_sum",dwidth/1.58,dheight/1.01,)
                             dcanvas.coords("total_liabilities_eqity_lbl",dwidth/9.60,dheight/1.01,)
 
 
@@ -24883,7 +24884,7 @@ def main_sign_in():
                             sb_ac_var=sub_Account_variab.get()
                             def_var=defcode_variab .get()
                             ba_var=bal_variab.get()
-                            as_of_date_variab=bal_variab.get()
+                            as_of_date_var=as_of_date_variab.get()
                             sql = 'select * from auth_user where username=%s'
                             val = (nm_ent.get(),)
                             fbcursor.execute(sql,val)
@@ -24895,7 +24896,7 @@ def main_sign_in():
                             c_id = fbcursor.fetchone()
                             # print(txname,des,c_id)
                             sql="INSERT INTO app1_accounts1 (acctype,detype,name,description,gst,deftaxcode,balance,asof,cid_id) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)" #ADDING VALUE 
-                            val=(acc_typ,det_typ_var,nam_vari,de_vari,sb_ac_var,def_var,ba_var,as_of_date_variab,c_id[0])
+                            val=(acc_typ,det_typ_var,nam_vari,de_vari,sb_ac_var,def_var,ba_var,as_of_date_var,c_id[0])
                             fbcursor.execute(sql,val)
                             finsysdb.commit()
                             messagebox.showinfo("Save","Save successfully")
@@ -24929,7 +24930,13 @@ def main_sign_in():
                         edit_pg_scroll.insert(1.0,'Use Cash and Cash Equivalents to track cash or assets that can be converted into cash immediately. For example, marketable securities and Treasury bills.')
                         save_btn=Button(acc_canvas5,text='Save',fg='white',bg="#213b52",command=save)
                         save_btn_place=acc_canvas5.create_window(0, 0, anchor="nw", window=save_btn, tag=("save_btn"))
-                        back_btn=Button(acc_canvas5,text='Update',fg='white',bg="#213b52",)
+                        def back():
+                            acc_canvas5.pack_forget()
+                            acc_sr_Scroll5.pack_forget()
+                            acc_sr_Scroll.pack(fill=Y,side="right")
+                            acc_canvas.pack(fill=X)
+                        
+                        back_btn=Button(acc_canvas5,text='Back',fg='white',bg="#213b52",command=back)
                         back_btn_place=acc_canvas5.create_window(0, 0, anchor="nw", window=back_btn, tag=("back_btn"))
                         name_lbl=Label(acc_canvas5,text="*Name",fg='white',bg="#213b52")
                         name_lbl_place=acc_canvas5.create_window(0, 0, anchor="nw", window=name_lbl, tag=("name_lbl"))
@@ -25257,11 +25264,9 @@ def main_sign_in():
                                 spcl_rnpt_canvas.pack_forget()
                                 spcl_rnpt__Scroll.pack_forget()
                                 spcl_rnpt__Scroll2.pack_forget()
-                                acc_canvas.pack(fill=X)
-                                acc_sr_Scroll = Scrollbar(accou_fr,orient=VERTICAL)
                                 acc_sr_Scroll.pack(fill=Y,side="right")
-                                acc_sr_Scroll.config(command=acc_canvas.yview)
-                                acc_canvas.config(yscrollcommand=acc_sr_Scroll.set)
+                                acc_canvas.pack(fill=X)
+                                
                                 # acc_sr_Scroll.pack(fill=Y,side="right")
                         #    acc_sr_Scroll.pack(fill=Y,side="right")
                             back_btn=Button(spcl_rnpt_canvas,bg="#213b52",text="←Back",fg="white",width=15,command=speci_rnpt_back)
@@ -25376,9 +25381,11 @@ def main_sign_in():
                                     print("rows is df ",row)
                                     run_report_treeview.insert(parent='',index='end',iid=row,text='',values=(row[8],'','','',row[1],'',row[7] ))   
 
+                        #Back button
                         def edit_rnrpt_back():
                            acc_canvas4.pack_forget()
                            acc_sr_Scroll4.pack_forget()
+                           acc_sr_Scroll.pack(fill=Y,side=RIGHT)
                            acc_canvas.pack(fill=X)
                         if edit_rnrpt_combo.get()=="Edit":
                             print("dropdown work")
@@ -26101,7 +26108,13 @@ def main_sign_in():
                             interest_earn_lbl_entry.insert(0,int_ear_varia.get())
                             interest_earn_lbl_entry_place=edit_recon_canvas.create_window(0, 0, anchor="nw", window=interest_earn_lbl_entry, tag=("interest_earn_lbl_entry"))
                             income_account_list=['Finance Charge Income','Insurance Proceeds Received','Interest Income','Proceeds From Sale of Asset','Shipping and Delivery Income','Billable Expense Income',
-                            'Consulting Income',
+                            'Consulting Income','Product Sales','Sales','Sales-Hardware','Sales-Software','Sales-Support and Maintenance','Sales Discounts','Sales of Product Income','Uncategorised Income','Deferred GST Input Credit',
+                            'Deferred IGST','Deferred Krishi Kalyan Cess Input Credit','Deferred Service Tax Input Credit','Deferred SGST','Deferred VAT Input Credit','GST Refund',
+                            'Inventory Asset','Krishi Kalyan Cess Refund','Prepaid Insurance','Service Tax Refund','TDS Receivable','Uncategorised Asset','Accumulated Depreciation','Building and Improvements',
+                            'Furniture and Equipments','Land','Leasehold Improvements','Vehicles','CGST Payable','CST Payable','CST Suspense','GST Payable','GST Suspense','IGST Payable','Input CGST','Input CGST Tax RCM','Input IGST','Input IGST Tax RCM','Input Krishi Kalyan Cess',
+                            'Input Krishi Kalyan Cess RCM','Input Service Tax','Input Service Tax RCM','Input SGST','Input SGST Tax RCM','Input VAT 14%','Input VAT 4%','Input VAT 5%','Krishi Kalyan Cess Payable','Krishi Kalyan Cess Suspense','Output CGST','Output CSGT Tax RCM','Output IGST','Output IGST Tax RCM','Output Krishi Kalyan Cess','Output Krishi Kalyan Cess RCM','Output Service Tax','Output Service Tax RCM',
+                            'Output SGST','Output SGST Tax RCM','Output VAT 14%','Output VAT 4%','Output VAT 5%','Service Tax Payable','Service Tax Suspense','SGST Payable','Swachh Bharat Cess Payable','Swachh Bharat Cess Suspense','TDS Payable','VAT Payable','Retained Earnings',
+                            'VAT Suspense'
                             ]
                             income_acc_variable = StringVar()
                             income_acc_variable.set(income_account_list[0])

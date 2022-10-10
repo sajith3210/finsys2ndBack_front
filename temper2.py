@@ -349,6 +349,14 @@ edit_rnrpt_combo=ttk.Combobox(acc_canvas,font=('arial 10'),background="#213b52",
 edit_rnrpt_combo['values']=('Edit','Make Inactive','Run Report')
 edit_rnrpt_combo.current(0)
 
+acc_typ=acctypvariab.get()
+det_typ_var=dettypvariab.get()
+nam_vari=name_variab.get()
+de_vari=descri_variab.get()
+sb_ac_var=sub_Account_variab.get()
+def_var=defcode_variab .get()
+ba_var=bal_variab.get()
+as_of_date_var=as_of_date_variab.get()
 
 
 
