@@ -24795,7 +24795,7 @@ def main_sign_in():
                             fech=fbcursor.fetchall()
                             print("fech isdf is isi si si si s",fech)
                             for row in fech:
-                                acc_treeview.insert(parent='', index='end',iid=row,text='', values=(row[3],row[1],row[2],row[6],row[7],''))
+                                acc_treeview.insert(parent='', index='end',iid=row,text='', values=(row[3],row[1],row[2],row[6],row[7],'',row[0]))
 
                        
                         
@@ -24803,7 +24803,7 @@ def main_sign_in():
                     def displayaccounttab():
                         for row in accounttablefetch():
                             # acc_treeview.insert("",END,values=row)
-                            acc_treeview.insert(parent='', index='end',iid=row,text='', values=(row[3],row[1],row[2],row[6],row[7],''))
+                            acc_treeview.insert(parent='', index='end',iid=row,text='', values=(row[3],row[1],row[2],row[6],row[7],'',row[0]))
                             
                     # New category tab add tax button function 
                     def accounttablefetch():
@@ -25461,14 +25461,16 @@ def main_sign_in():
                                 fbcursor.execute(sql,val)
                                 c_id = fbcursor.fetchone()
                                 # print(txname,des,c_id)
-                                sql="update app1_accounts1 set acctype=%s,detype=%s,name=%s,description=%s,gst=%s,deftaxcode=%s,balance=%s,cid_id=%s where acctype=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
-                                val=(acc_typ,det_typ_var,nam_vari,de_vari,sb_ac_var,def_var,ba_var,c_id[0],acc_typ)
+                                sql="update app1_accounts1 set acctype=%s,detype=%s,name=%s,description=%s,gst=%s,deftaxcode=%s,balance=%s,cid_id=%s where accounts1id=%s" #ADDING VALUE INT APP1_ADDTAX1 TABLE
+                                val=(acc_typ,det_typ_var,nam_vari,de_vari,sb_ac_var,def_var,ba_var,c_id[0],idd)
                                 fbcursor.execute(sql,val)
                                 finsysdb.commit()
                                 messagebox.showinfo("Update","Update successfully")
                                 acc_treeview.delete(*acc_treeview.get_children())
                                 displayaccounttab()
-                            global acc_canvas4 , acctypvari,dettypvari,name_vari,descri_vari,sub_Account_variable,defcode_variable, bal_vari
+                            global acc_canvas4 ,idd, acctypvari,dettypvari,name_vari,descri_vari,sub_Account_variable,defcode_variable, bal_vari
+                            idd=acc_typ_val=acc_treeview.item(acc_treeview.focus())["values"][6]
+                            print("id value is",idd)
                             acctypvari=StringVar()
                             dettypvari=StringVar()
                             name_vari=StringVar()
@@ -25561,17 +25563,18 @@ def main_sign_in():
                     edit_rnrpt_combo.bind("<<ComboboxSelected>>",edit_rnrpt)
                     edit_menn_place=acc_canvas.create_window(0, 0, anchor="nw", window=edit_rnrpt_combo, tag=("edit_rnrpt_combo"))
 
-                    acc_treeview=ttk.Treeview(acc_canvas,height=700,columns=(1,2,3,4,5,6,),)
+                    acc_treeview=ttk.Treeview(acc_canvas,height=700,columns=(1,2,3,4,5,6,7),)
                     
                     # format column  
                     
                     acc_treeview.column("#0",width=0,stretch=NO)
-                    acc_treeview.column("#1",anchor=CENTER,width=200)
-                    acc_treeview.column('#2',anchor=CENTER,width=200)
-                    acc_treeview.column('#3',anchor=CENTER,width=200)
-                    acc_treeview.column('#4',anchor=CENTER,width=200)
-                    acc_treeview.column('#5',anchor=CENTER,width=200)
-                    acc_treeview.column('#6',anchor=CENTER,width=200)
+                    acc_treeview.column("#1",anchor=CENTER,width=175)
+                    acc_treeview.column('#2',anchor=CENTER,width=165)
+                    acc_treeview.column('#3',anchor=CENTER,width=165)
+                    acc_treeview.column('#4',anchor=CENTER,width=165)
+                    acc_treeview.column('#5',anchor=CENTER,width=165)
+                    acc_treeview.column('#6',anchor=CENTER,width=165)
+                    acc_treeview.column('#7',anchor=CENTER,width=165)
                     # acc_treeview.column('#7',anchor=CENTER,width=165)
                     # format heading 
                     acc_treeview.heading("#0",text='',anchor=CENTER)
@@ -25581,7 +25584,8 @@ def main_sign_in():
                     acc_treeview.heading('4',text='TAX RATE')
                     acc_treeview.heading('5',text='FINSYS BALANCE')
                     acc_treeview.heading('6',text='BANK BALANCE')
-                    # acc_treeview.heading('7',text='ACTION')
+                    acc_treeview.heading('7',text='ID')
+
                     # my_tree.insert(parent='',index='end',iid=0,text='',values=('','','','','','','open'))
                     acc_treeview_place=acc_canvas.create_window(0, 0, anchor="nw", window=acc_treeview, tag=("acc_treeview"))
                     
