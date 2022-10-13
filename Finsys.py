@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from datefilter import all_dates, this_month 
+# from datefilter import all_dates, this_month 
 from calendar import c
 from cgitb import enable, reset, text
 from distutils import command
@@ -39,7 +39,7 @@ import json
 from tkPDFViewer import tkPDFViewer as pdf
 from tkinter import Tk, Canvas
 
-import customtkinter
+# import customtkinter
 import PIL.Image
 from PIL import ImageGrab
 from PIL import ImageTk, Image, ImageFile
@@ -23092,6 +23092,80 @@ def main_sign_in():
                         description=StringVar()
                         gst_canvas.pack_forget()
                         gst_sr_Scroll.pack_forget()
+
+                        def responsive_wid(event):
+                            dwidth = event.width
+                            dheight = event.height
+                            dcanvas = event.widget
+                            r1 = 25
+                            x1 = dwidth/63
+                            x2 = dwidth/1.021
+                            y1 = dheight/13
+                            y2 = dheight/4 
+                            dcanvas.coords("tax_bg_polygen_pr3",x1 +r1,y1,
+                            x1 + r1,y1,
+                            x2 - r1,y1,
+                            x2 - r1,y1,     
+                            x2,y1,     
+                            #--------------------
+                            x2,y1 + r1,     
+                            x2,y1 + r1,     
+                            x2,y2 - r1,     
+                            x2,y2 - r1,     
+                            x2,y2,
+                            #--------------------
+                            x2 - r1,y2,     
+                            x2 - r1,y2,     
+                            x1 + r1,y2,
+                            x1 + r1,y2,
+                            x1,y2,
+                            #--------------------
+                            x1,y2 - r1,
+                            x1,y2 - r1,
+                            x1,y1 + r1,
+                            x1,y1 + r1,
+                            x1,y1,
+                            ) 
+                            dcanvas.coords("add_new_tax_lbl",dwidth/2.3,dheight/9,)
+
+                             # tax_bg_polygen_pr4 start 
+                            r1 = 25
+                            x1 = dwidth/63
+                            x2 = dwidth/1.02
+                            y1 = dheight/3.51
+                            y2 = dheight/1
+
+                            dcanvas.coords("tax_bg_polygen_pr4",x1 +r1,y1,
+                            x1 + r1,y1,
+                            x2 - r1,y1,
+                            x2 - r1,y1,     
+                            x2,y1,     
+                            #--------------------
+                            x2,y1 + r1,     
+                            x2,y1 + r1,     
+                            x2,y2 - r1,     
+                            x2,y2 - r1,     
+                            x2,y2,
+                            #--------------------
+                            x2 - r1,y2,     
+                            x2 - r1,y2,     
+                            x1 + r1,y2,
+                            x1 + r1,y2,
+                            x1,y2,
+                            #--------------------
+                            x1,y2 - r1,
+                            x1,y2 - r1,
+                            x1,y1 + r1,
+                            x1,y1 + r1,
+                            x1,y1,
+                            )
+                            dcanvas.coords("tax_nme_lbl",dwidth/2.3,dheight/1.9,)
+                            dcanvas.coords("tax_nme_entry",dwidth/2.3,dheight/1.7,)
+                            dcanvas.coords("description_lbl",dwidth/2.3,dheight/1.5,)
+                            dcanvas.coords("description_lbl_entry",dwidth/2.3,dheight/1.4,)
+                            dcanvas.coords("save_btn",dwidth/2.3,dheight/1.2,)
+                            dcanvas.coords("img_label",dwidth/26,dheight/2.5,)
+
                         new_canvas3 = Canvas(gs,height=700,bg="#2f516f",scrollregion=(0,0,700,1200))
                         sr_Scroll3 = Scrollbar(gs,orient=VERTICAL)
                         sr_Scroll3.pack(fill=Y,side="right")
@@ -23525,78 +23599,7 @@ def main_sign_in():
                         dcanvas.coords("tax_treeview",dwidth/30,dheight/2.5,)
                         dcanvas.coords("addtxbutton2",dwidth/1.3,dheight/3,)
                     
-                    # tax_bg_polygen_pr3 start 
-                        r1 = 25
-                        x1 = dwidth/63
-                        x2 = dwidth/1.021
-                        y1 = dheight/13
-                        y2 = dheight/4 
-
-                        dcanvas.coords("tax_bg_polygen_pr3",x1 +r1,y1,
-                        x1 + r1,y1,
-                        x2 - r1,y1,
-                        x2 - r1,y1,     
-                        x2,y1,     
-                        #--------------------
-                        x2,y1 + r1,     
-                        x2,y1 + r1,     
-                        x2,y2 - r1,     
-                        x2,y2 - r1,     
-                        x2,y2,
-                        #--------------------
-                        x2 - r1,y2,     
-                        x2 - r1,y2,     
-                        x1 + r1,y2,
-                        x1 + r1,y2,
-                        x1,y2,
-                        #--------------------
-                        x1,y2 - r1,
-                        x1,y2 - r1,
-                        x1,y1 + r1,
-                        x1,y1 + r1,
-                        x1,y1,
-                        ) 
-                        dcanvas.coords("add_new_tax_lbl",dwidth/2.3,dheight/9,)
-                        
-
-                        # tax_bg_polygen_pr4 start 
-                        r1 = 25
-                        x1 = dwidth/63
-                        x2 = dwidth/1.02
-                        y1 = dheight/3.51
-                        y2 = dheight/1
-
-                        dcanvas.coords("tax_bg_polygen_pr4",x1 +r1,y1,
-                        x1 + r1,y1,
-                        x2 - r1,y1,
-                        x2 - r1,y1,     
-                        x2,y1,     
-                        #--------------------
-                        x2,y1 + r1,     
-                        x2,y1 + r1,     
-                        x2,y2 - r1,     
-                        x2,y2 - r1,     
-                        x2,y2,
-                        #--------------------
-                        x2 - r1,y2,     
-                        x2 - r1,y2,     
-                        x1 + r1,y2,
-                        x1 + r1,y2,
-                        x1,y2,
-                        #--------------------
-                        x1,y2 - r1,
-                        x1,y2 - r1,
-                        x1,y1 + r1,
-                        x1,y1 + r1,
-                        x1,y1,
-                        )
-                        dcanvas.coords("tax_nme_lbl",dwidth/2.3,dheight/1.9,)
-                        dcanvas.coords("tax_nme_entry",dwidth/2.3,dheight/1.7,)
-                        dcanvas.coords("description_lbl",dwidth/2.3,dheight/1.5,)
-                        dcanvas.coords("description_lbl_entry",dwidth/2.3,dheight/1.4,)
-                        dcanvas.coords("save_btn",dwidth/2.3,dheight/1.2,)
-                        dcanvas.coords("img_label",dwidth/26,dheight/2.5,)
-                    #333333333333333333333333333333333333333333333333333333333333333333333333333333333333333{Accounting}
+                   
                     def displayaddtax():
                         for row in addtaxtablefetch():
                             tax_treeview.insert("",END,values=row)
@@ -23612,6 +23615,80 @@ def main_sign_in():
                         descri_var=StringVar()
                         new_canvas.pack_forget()
                         sr_Scroll.pack_forget()
+                        def responsive_wid(event):
+                            dwidth = event.width
+                            dheight = event.height
+                            dcanvas = event.widget
+                            r1 = 25
+                            x1 = dwidth/63
+                            x2 = dwidth/1.021
+                            y1 = dheight/13
+                            y2 = dheight/4 
+                            dcanvas.coords("tax_bg_polygen_pr3",x1 +r1,y1,
+                            x1 + r1,y1,
+                            x2 - r1,y1,
+                            x2 - r1,y1,     
+                            x2,y1,     
+                            #--------------------
+                            x2,y1 + r1,     
+                            x2,y1 + r1,     
+                            x2,y2 - r1,     
+                            x2,y2 - r1,     
+                            x2,y2,
+                            #--------------------
+                            x2 - r1,y2,     
+                            x2 - r1,y2,     
+                            x1 + r1,y2,
+                            x1 + r1,y2,
+                            x1,y2,
+                            #--------------------
+                            x1,y2 - r1,
+                            x1,y2 - r1,
+                            x1,y1 + r1,
+                            x1,y1 + r1,
+                            x1,y1,
+                            ) 
+                            dcanvas.coords("add_new_tax_lbl",dwidth/2.3,dheight/9,)
+
+
+                             # tax_bg_polygen_pr4 start 
+                            r1 = 25
+                            x1 = dwidth/63
+                            x2 = dwidth/1.02
+                            y1 = dheight/3.51
+                            y2 = dheight/1
+
+                            dcanvas.coords("tax_bg_polygen_pr4",x1 +r1,y1,
+                            x1 + r1,y1,
+                            x2 - r1,y1,
+                            x2 - r1,y1,     
+                            x2,y1,     
+                            #--------------------
+                            x2,y1 + r1,     
+                            x2,y1 + r1,     
+                            x2,y2 - r1,     
+                            x2,y2 - r1,     
+                            x2,y2,
+                            #--------------------
+                            x2 - r1,y2,     
+                            x2 - r1,y2,     
+                            x1 + r1,y2,
+                            x1 + r1,y2,
+                            x1,y2,
+                            #--------------------
+                            x1,y2 - r1,
+                            x1,y2 - r1,
+                            x1,y1 + r1,
+                            x1,y1 + r1,
+                            x1,y1,
+                            )
+                            dcanvas.coords("tax_nme_lbl",dwidth/2.3,dheight/1.9,)
+                            dcanvas.coords("tax_nme_entry",dwidth/2.3,dheight/1.7,)
+                            dcanvas.coords("description_lbl",dwidth/2.3,dheight/1.5,)
+                            dcanvas.coords("description_lbl_entry",dwidth/2.3,dheight/1.4,)
+                            dcanvas.coords("save_btn",dwidth/2.3,dheight/1.2,)
+                            dcanvas.coords("img_label",dwidth/26,dheight/2.5,)
+
                         new_canvas2 = Canvas(newfr,height=700,bg="#2f516f",scrollregion=(0,0,700,1200))
                         sr_Scroll2 = Scrollbar(newfr,orient=VERTICAL)
                         sr_Scroll2.pack(fill=Y,side="right")
@@ -27667,10 +27744,10 @@ def main_sign_in():
                 
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=dat_type, tag=("cmb_bx"))
 
-                    button15 = customtkinter.CTkButton(master=frm_analiz,command=main_sign_in,text="Run Report",bg="#213b52")
+                    button15 = Button(master=frm_analiz,command=main_sign_in,text="Run Report",bg="#213b52",width=15)
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=button15, tag=("button15"))
 
-                    button25 = customtkinter.CTkButton(master=frm_analiz,command=main_sign_in,text="Back",bg="#213b52")
+                    button25 = Button(master=frm_analiz,command=main_sign_in,text="Back",bg="#213b52",width=15)
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=button25, tag=("button25"))
 
                     
@@ -29756,7 +29833,7 @@ def main_sign_in():
                     win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=nm_nm241, tag=("nm_nm241"))
 
 
-                    but_gl = customtkinter.CTkButton(master=frm_flow,command=main_sign_in,text="Run",bg="#213b52")
+                    but_gl = Button(master=frm_flow,command=main_sign_in,text="Run",bg="#213b52",width=15)
                     win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=but_gl, tag=("btn_flow"))
 
 
@@ -29932,7 +30009,7 @@ def cmpny_crt2():
 
     # button_cmp2 = customtkinter.CTkButton(master=cmpny_dt_frm2,command=prev_funct,text="Previous",bg="#213b52")
     # win_inv1 = lf_cmpy2.create_window(0, 0, anchor="nw", window=button_cmp2, tag=("button_cmp2"))
-    button_cmp3 = customtkinter.CTkButton(master=cmpny_dt_frm2,command=fun_sign_in,text="Submit",bg="#213b52")
+    button_cmp3 = Button(master=cmpny_dt_frm2,command=fun_sign_in,text="Submit",bg="#213b52",width=15)
     win_inv1 = lf_cmpy2.create_window(0, 0, anchor="nw", window=button_cmp3, tag=("button_cmp3"))
 #-------------------------------------------------------------------------------------------------------------------company creation
 
@@ -30120,7 +30197,7 @@ def cmpny_crt1():
                 cmp_files.bind("<Button-1>",fil_ent)
                 win_inv1 = lf_cmpy1.create_window(0, 0, anchor="center", window=cmp_files, tag=("cmp_files"))
 
-                button_cmp = customtkinter.CTkButton(master=lf_cmpy1,command=cmpny_crt2,text="Next",bg="#213b52")
+                button_cmp = Button(master=lf_cmpy1,command=cmpny_crt2,text="Next",bg="#213b52",width=15)
                 win_inv1 = lf_cmpy1.create_window(0, 0, anchor="center", window=button_cmp, tag=("button_cmp"))
             else:
                 messagebox.showerror("Sign Up Failed","password and conform password does not match")
@@ -30257,7 +30334,7 @@ def cmpny_crt1():
                 cmp_files.bind("<Button-1>",fil_ent)
                 win_inv1 = lf_cmpy1.create_window(0, 0, anchor="center", window=cmp_files, tag=("cmp_files"))
 
-                button_cmp = customtkinter.CTkButton(master=lf_cmpy1,command=cmpny_crt2,text="Next",bg="#213b52")
+                button_cmp = Button(master=lf_cmpy1,command=cmpny_crt2,text="Next",bg="#213b52",width=15)
                 win_inv1 = lf_cmpy1.create_window(0, 0, anchor="center", window=button_cmp, tag=("button_cmp"))
         else:
                 messagebox.showerror("Sign Up Failed","password and conform password does not match")
@@ -30442,7 +30519,7 @@ def func_sign_up():
     sys_cf.bind("<Button-1>",nme5)
     win_inv1 = lf_signup.create_window(0, 0, anchor="nw", window=sys_cf, tag=("sys_cf"))
 
-    button_sign = customtkinter.CTkButton(master=lf_signup, command=cmpny_crt1,text="Sign Up",bg="#213b52")
+    button_sign = Button(master=lf_signup, command=cmpny_crt1,text="Sign Up",bg="#213b52",width=15)
     win_inv1 = lf_signup.create_window(0, 0, anchor="nw", window=button_sign, tag=("button_sign"))
 
     label_img = Label(lf_signup, image = sign_up,bg="#213b52", width=800,anchor="w")
@@ -30511,7 +30588,7 @@ pass_ent.insert(0,"********")
 pass_ent.bind("<Button-1>",sig_pass)
 win_inv1 = lf_signup.create_window(0, 0, anchor="nw", window=pass_ent, tag=("pass_ent"))
 
-button = customtkinter.CTkButton(master=main_frame_signin,command=main_sign_in,text="Log In",bg="#213b52")
+button = Button(master=main_frame_signin,command=main_sign_in,text="Log In",bg="#213b52",width=15)
 win_inv1 = lf_signup.create_window(0, 0, anchor="nw", window=button, tag=("button"))
 
 # #------------------------------------------------------------------------------------------------------------------------left canvas
