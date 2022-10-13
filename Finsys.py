@@ -23232,7 +23232,8 @@ def main_sign_in():
                         finsysdb.commit()
                         
                         messagebox.showinfo("Added","Added successfully")
-                        
+                        tax_treeview.delete(*tax_treeview.get_children())
+                        displayaddtax() 
                     #Addtx button
                     addtxbtn=Button(gst_canvas,text="Add tax",bg="#213b52",fg='white',width=10,command=addtx)
                     win_inv1 = gst_canvas.create_window(0, 0, anchor="nw", window=gslb1, tag=("gslb1"))
@@ -23801,6 +23802,7 @@ def main_sign_in():
 
                     # tAX TABLE   
                     # tax_treeview.tag_configure("treecolor",foreground="white",background="#2f516f")
+                    global tax_treeview
                     tax_treeview=ttk.Treeview(new_canvas,columns=(1,2,3),)
                     
                     # format column  
