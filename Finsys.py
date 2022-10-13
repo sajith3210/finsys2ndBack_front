@@ -23164,6 +23164,7 @@ def main_sign_in():
                             dcanvas.coords("description_lbl",dwidth/2.3,dheight/1.5,)
                             dcanvas.coords("description_lbl_entry",dwidth/2.3,dheight/1.4,)
                             dcanvas.coords("save_btn",dwidth/2.3,dheight/1.2,)
+                            dcanvas.coords("back_btn",dwidth/2.3,dheight/1.1,)
                             dcanvas.coords("img_label",dwidth/26,dheight/2.5,)
 
                         new_canvas3 = Canvas(gs,height=700,bg="#2f516f",scrollregion=(0,0,700,1200))
@@ -23194,6 +23195,14 @@ def main_sign_in():
 
                         save_btn=Button(new_canvas3,text="Save",bg="#213b52",fg='white',width=25,command=saveaddtx)
                         save_btn_place=new_canvas3.create_window(0, 0, anchor="nw", window=save_btn, tag=("save_btn"))
+                        def back():
+                            new_canvas3.pack_forget()
+                            sr_Scroll3.pack_forget() 
+                            gst_sr_Scroll.pack(fill=Y,side=RIGHT)
+                            gst_canvas.pack(fill=X)
+
+                        back_btn=Button(new_canvas3,text="Back",bg="#213b52",fg='white',width=25,command=back)
+                        back_btn_place=new_canvas3.create_window(0, 0, anchor="nw", window=back_btn, tag=("back_btn"))
                         my_pic=Image.open("TAX.png")
                         resize=my_pic.resize((490,330),Image.ANTIALIAS)
                         photo = ImageTk.PhotoImage(resize)
@@ -23430,6 +23439,7 @@ def main_sign_in():
                                 dcanvas.coords("memo_lbl",dwidth/2.3,dheight/1.3,)
                                 dcanvas.coords("memo_entry",dwidth/2.3,dheight/1.2,)
                                 dcanvas.coords("submit_frm_btn",dwidth/2.3,dheight/1,)
+                                dcanvas.coords("back_btn",dwidth/2.3,dheight/0.91,)
                                 dcanvas.coords("img_label",dwidth/26,dheight/2.5,)
                                 
                             except:
@@ -23484,7 +23494,14 @@ def main_sign_in():
 
                         submit_frm_btn=Button(new_canvas4,text="Submit Form",bg="#673ab7",fg='white',width=88,height=2,command=save_record_pav)
                         submit_frm_btn_place=new_canvas4.create_window(0, 0, anchor="nw", window=submit_frm_btn, tag=("submit_frm_btn"))
-
+                        def back_record_pay():
+                            new_canvas4.pack_forget()
+                            sr_Scroll4.pack_forget()
+                            gst_sr_Scroll.pack(fill=Y,side=RIGHT)
+                            gst_canvas.pack(fill=X)
+                            
+                        back_btn=Button(new_canvas4,text="Back",bg="#673ab7",fg='white',width=88,height=2,command=back_record_pay)
+                        back_btn_place=new_canvas4.create_window(0, 0, anchor="nw", window=back_btn, tag=("back_btn"))
                         # image 
                         my_pic=Image.open("creditcardbillpayment.png")
                         resize=my_pic.resize((490,460),Image.ANTIALIAS)
@@ -23687,6 +23704,7 @@ def main_sign_in():
                             dcanvas.coords("description_lbl",dwidth/2.3,dheight/1.5,)
                             dcanvas.coords("description_lbl_entry",dwidth/2.3,dheight/1.4,)
                             dcanvas.coords("save_btn",dwidth/2.3,dheight/1.2,)
+                            dcanvas.coords("back_btn",dwidth/2.3,dheight/1.1,)
                             dcanvas.coords("img_label",dwidth/26,dheight/2.5,)
 
                         new_canvas2 = Canvas(newfr,height=700,bg="#2f516f",scrollregion=(0,0,700,1200))
@@ -23712,9 +23730,45 @@ def main_sign_in():
 
                         description_lbl_entry=scrolledtext.ScrolledText(new_canvas2, width = 35, height = 4)
                         description_lbl_entry_place=new_canvas2.create_window(0, 0, anchor="nw", window=description_lbl_entry, tag=("description_lbl_entry"))
-                        descri_var= description_lbl_entry                     
+                        descri_var= description_lbl_entry 
+                                                 #Add tax page backend start
+                        def savetax():
+                            print("Save start")
+                            txnm=txname.get()
+                            des=descri_var.get('1.0','end')
+                            
+                            sql = 'select * from auth_user where username=%s'
+                            val = (nm_ent.get(),)
+                            fbcursor.execute(sql,val)
+                            u_id = fbcursor.fetchone()
+
+                            sql = 'select * from app1_company where id_id=%s'
+                            val = (u_id[0],)
+                            fbcursor.execute(sql,val)
+                            c_id = fbcursor.fetchone()
+                            # print(txname,des,c_id)
+                            sql="INSERT INTO app1_addtax1(taxname,description,cid_id) VALUES (%s,%s,%s)" #ADDING VALUE INT APP1_ADDTAX1 TABLE
+                            val=(txnm,des,c_id[0])
+                            fbcursor.execute(sql,val)
+                            finsysdb.commit()
+                            # messagebox.showinfo("Added","Added successfully")
+                            new_canvas2.pack_forget()
+                            sr_Scroll2.pack_forget()
+                            sr_Scroll.pack(fill=Y,side=RIGHT) 
+                            new_canvas.pack(fill=X)  
+                            tax_treeview.delete(*tax_treeview.get_children())
+                            displayaddtax() 
+
                         save_btn=Button(new_canvas2,text="Save",bg="#213b52",fg='white',width=25,command=savetax)
                         save_btn_place=new_canvas2.create_window(0, 0, anchor="nw", window=save_btn, tag=("save_btn"))
+                        def back():
+                            new_canvas2.pack_forget()
+                            sr_Scroll2.pack_forget()
+                            sr_Scroll.pack(fill=Y,side=RIGHT) 
+                            new_canvas.pack(fill=X)
+                            
+                        back_btn=Button(new_canvas2,text="Back",bg="#213b52",fg='white',width=25,command=back)
+                        back_btn_place=new_canvas2.create_window(0, 0, anchor="nw", window=back_btn, tag=("back_btn"))
 
                         # img_tax=ImageTk.PhotoImage(Image.open("TAX.PNG"))
                         # img_label=Label(new_canvas2,image=img_tax,width=300,height=300,)
@@ -23727,28 +23781,7 @@ def main_sign_in():
                         img_lbl_entry_place=new_canvas2.create_window(0, 0, anchor="nw", window=img_label, tag=("img_label"))
 
 
-                     #Add tax page backend start
-                    def savetax():
-                        print("Save start")
-                        txnm=txname.get()
-                        des=descri_var.get('1.0','end')
-                        
-                        sql = 'select * from auth_user where username=%s'
-                        val = (nm_ent.get(),)
-                        fbcursor.execute(sql,val)
-                        u_id = fbcursor.fetchone()
-
-                        sql = 'select * from app1_company where id_id=%s'
-                        val = (u_id[0],)
-                        fbcursor.execute(sql,val)
-                        c_id = fbcursor.fetchone()
-                        # print(txname,des,c_id)
-                        sql="INSERT INTO app1_addtax1(taxname,description,cid_id) VALUES (%s,%s,%s)" #ADDING VALUE INT APP1_ADDTAX1 TABLE
-                        val=(txnm,des,c_id[0])
-                        fbcursor.execute(sql,val)
-                        finsysdb.commit()
-                        messagebox.showinfo("Added","Added successfully")
-
+  
                     
                     new_canvas = Canvas(newfr,height=700,bg="#2f516f",scrollregion=(0,0,700,1200))
                     sr_Scroll = Scrollbar(newfr,orient=VERTICAL)
