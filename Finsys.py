@@ -24965,8 +24965,8 @@ def main_sign_in():
                                 )                    
                                 dcanvas.coords("acc_typ_lbl",dwidth/13,dheight/4.10,)
                                 dcanvas.coords("acc_typ_lbl_entry",dwidth/13,dheight/3.55,)
-                                dcanvas.coords("det_typ_lbl",dwidth/13,dheight/3.10,)
-                                dcanvas.coords("det_typ_lbl_entry",dwidth/13,dheight/2.80,)
+                                dcanvas.coords("det_typ_lbl",dwidth/13,dheight/3.06,)
+                                dcanvas.coords("det_typ_lbl_entry",dwidth/13,dheight/2.78,)
                                 dcanvas.coords("edit_pg_scroll",dwidth/13,dheight/2.40,)
                                 dcanvas.coords("save_btn",dwidth/13,dheight/1.40,)
                                 dcanvas.coords("back_btn",dwidth/8,dheight/1.40,)
@@ -25031,7 +25031,7 @@ def main_sign_in():
                         acc_typ_lbl_place=acc_canvas5.create_window(0, 0, anchor="nw", window=acc_typ_lbl, tag=("acc_typ_lbl"))
                         acc_typ_lbl_entry=Entry(acc_canvas5,fg='white',bg="#213b52",textvariable=acctypvariab)
                         acc_typ_lbl_entry_place=acc_canvas5.create_window(0, 0, anchor="nw",width=500,height=25, window=acc_typ_lbl_entry, tag=("acc_typ_lbl_entry"))
-                        det_typ_lbl=Label(acc_canvas5,text="*Detail Type",fg='white',bg="#213b52")
+                        det_typ_lbl=Label(acc_canvas5,text="*Detail Type",fg='white',bg="#213b52",borderwidth=0,font=('Calibri 9 '))
                         det_typ_lbl_place=acc_canvas5.create_window(0, 0, anchor="nw", window=det_typ_lbl, tag=("det_typ_lbl"))
                         
                         det_typ_lbl_entry=Entry(acc_canvas5,fg='white',bg="#213b52",textvariable=dettypvariab)
@@ -25540,8 +25540,8 @@ def main_sign_in():
                                 )                    
                                 dcanvas.coords("acc_typ_lbl",dwidth/13,dheight/4.10,)
                                 dcanvas.coords("acc_typ_lbl_entry",dwidth/13,dheight/3.55,)
-                                dcanvas.coords("det_typ_lbl",dwidth/13,dheight/3.10,)
-                                dcanvas.coords("det_typ_lbl_entry",dwidth/13,dheight/2.80,)
+                                dcanvas.coords("det_typ_lbl",dwidth/13,dheight/3.06,)
+                                dcanvas.coords("det_typ_lbl_entry",dwidth/13,dheight/2.78,)
                                 dcanvas.coords("edit_pg_scroll",dwidth/13,dheight/2.40,)
                                 dcanvas.coords("updatee_btn",dwidth/13,dheight/1.40,)
                                 dcanvas.coords("back_btn",dwidth/13,dheight/1.20,)
@@ -25602,7 +25602,7 @@ def main_sign_in():
                             acc_typ_val=acc_treeview.item(acc_treeview.focus())["values"][1]
                             acc_typ_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",textvariable=acctypvari)
                             acc_typ_lbl_entry_place=acc_canvas4.create_window(0, 0, anchor="nw",width=500,height=25, window=acc_typ_lbl_entry, tag=("acc_typ_lbl_entry"))
-                            det_typ_lbl=Label(acc_canvas4,text="*Detail Type",fg='white',bg="#213b52")
+                            det_typ_lbl=Label(acc_canvas4,text="*Detail Type",fg='white',bg="#213b52",borderwidth=0,font=('Calibri 9'))
                             det_typ_lbl_place=acc_canvas4.create_window(0, 0, anchor="nw", window=det_typ_lbl, tag=("det_typ_lbl"))
                             det_typ_val=acc_treeview.item(acc_treeview.focus())["values"][2]
                             det_typ_lbl_entry=Entry(acc_canvas4,fg='white',bg="#213b52",textvariable=dettypvari)
@@ -25910,7 +25910,7 @@ def main_sign_in():
                                                
                             dcanvas.coords("edit_info_btn",dwidth/2,dheight/4,)                    
                             dcanvas.coords("save_for_later_btn",dwidth/1.70,dheight/4,) 
-                            # dcanvas.coords("back_btn",dwidth/1.70,dheight/3.50,) 
+                            dcanvas.coords("back_btn",dwidth/1.40,dheight/4,) 
                             
 
                             r1 = 25
@@ -25943,7 +25943,11 @@ def main_sign_in():
                             x1,y1 + r1,
                             x1,y1,
                             ) 
-                            dcanvas.coords("recon_treeview",dwidth/22,dheight/1.60,)                   
+                            dcanvas.coords("payment_btn",dwidth/2,dheight/1.80,)                    
+                            dcanvas.coords("deposit_btn",dwidth/1.70,dheight/1.80,)
+                            dcanvas.coords("All_btn",dwidth/1.50,dheight/1.80,)
+                            dcanvas.coords("recon_treeview",dwidth/22,dheight/1.60,)  
+
                         rcon_canvas.pack_forget()
                         rcon_sr_Scroll.pack_forget()
                         global strt_rcon_canvas,strt_rcon_Scroll
@@ -26094,15 +26098,10 @@ def main_sign_in():
                                 fbcursor.execute(sql,val)
                                 finsysdb.commit()
                                 messagebox.showinfo("Update","Update successfully")
-                               
 
-                            def back_edit_info():
                                 diff_beg_bal_end_bal=float(ending_balance_va)-float(begining_balance_va)
                                 diff_interest_servi=float(interest_earn_va)-float(servise_charge_va)
                                 diffrence_bal=diff_beg_bal_end_bal-diff_interest_servi
-
-                                edit_recon_canvas.pack_forget()
-                                strt_rcon_canvas.pack(fill=X,)
                                 payment_sum_lbl['text']=servise_charge_va
                                 deposit_sum_lbl['text']=interest_earn_va
                                 diffrence_sum_lbl['text']=diffrence_bal
@@ -26111,7 +26110,12 @@ def main_sign_in():
                                     recon_treeview.insert(parent='',index='end',iid=0,text='',values=(date_variable.get(),'Journal','',exp_acc_variable.get(),'','Service Charge','',servise_charge_va))
                                     recon_treeview.insert(parent='',index='end',iid=1,text='',values=(incom_ac_date_variable.get(),'Deposit','',income_acc_variable.get(),'','Interest Earned',interest_earn_va,''))
 
-
+                            def back_edit_info():
+                                edit_recon_canvas.pack_forget()
+                                edit_recon_scroll.pack_forget()
+                                strt_rcon_Scroll.pack(fill=Y,side=RIGHT)
+                                strt_rcon_canvas.pack(fill=X,)
+ 
                             strt_rcon_canvas.pack_forget()
                             strt_rcon_Scroll.pack_forget()
                             edit_recon_canvas = Canvas(recon_fr,height=700,bg="#386491",scrollregion=(0,0,700,1200))
@@ -26243,13 +26247,31 @@ def main_sign_in():
 
                         edit_info_btn=Button(strt_rcon_canvas,bg="#213b52",text="Edit info",fg="white",width=15,command=edit_reconcile_statement)
                         edit_info_btn_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=edit_info_btn, tag=("edit_info_btn"))
-                        save_for_later_btn=Button(strt_rcon_canvas,bg="#213b52",text="Save for later",fg="white",width=15,)
+                        save_OptionList2=['Finish now','Save for later','Close without Saving']
+                        save_opt_variable=StringVar()
+                        save_opt_variable.set(save_OptionList2[1])
+
+                        save_for_later_btn=OptionMenu(strt_rcon_canvas,save_opt_variable,*save_OptionList2)
+                        save_for_later_btn.config(bg="#213b52",fg='white',width=10)
                         save_for_later_btn_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=save_for_later_btn, tag=("save_for_later_btn"))
                         strt_rcon_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("strt_recon_polygen_pr2"),smooth=True,)  #213b52"
 
-                        # back_btn=Button(strt_rcon_canvas,bg="#213b52",text="Back",fg="white",width=15,command=back_home)
-                        # back_btn_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=back_btn, tag=("back_btn"))
+                        def back_re():
+                            strt_rcon_canvas.pack_forget()
+                            strt_rcon_Scroll.pack_forget()
+                            rcon_sr_Scroll.pack(fill=Y,side=RIGHT)
+                            rcon_canvas.pack(fill=X)
+
+                        back_btn=Button(strt_rcon_canvas,bg="#213b52",text="Back",fg="white",width=15,command=back_re)
+                        back_btn_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=back_btn, tag=("back_btn"))
+                        
                         strt_rcon_canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("strt_recon_polygen_pr2"),smooth=True,)
+                        payment_btn=Button(strt_rcon_canvas,bg="#213b52",text="Payments",fg="white",width=15,)
+                        payment_btn_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=payment_btn, tag=("payment_btn"))
+                        deposit_btn=Button(strt_rcon_canvas,bg="#213b52",text="Deposits",fg="white",width=15,)
+                        deposit_btn_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=deposit_btn, tag=("deposit_btn"))
+                        All_btn=Button(strt_rcon_canvas,bg="#213b52",text="All",fg="white",width=15,)
+                        All_btn_place=strt_rcon_canvas.create_window(0, 0, anchor="nw", window=All_btn, tag=("All_btn"))
 
                         global recon_treeview 
                         recon_treeview=ttk.Treeview(strt_rcon_canvas,columns=(1,2,3,4,5,6,7,8),)
